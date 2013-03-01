@@ -43,7 +43,7 @@
  */
 
 
-require_once(MODX_CORE_PATH.'components/gmaps/includes/Gmaps.php');
+require_once(MODX_CORE_PATH.'components/gmaps/includes/Gmarker.class.php');
 
 $Gmarker = new Gmarker(); 
 $modx->lexicon->load('gmarker:default');

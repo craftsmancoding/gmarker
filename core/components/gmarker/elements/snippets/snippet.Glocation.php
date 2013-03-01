@@ -72,7 +72,7 @@
  * @package gmarker
  */
 
-require_once(MODX_CORE_PATH.'components/gmarkers/model/gmarker/Gmarker.php');
+require_once(MODX_CORE_PATH.'components/gmarkers/model/gmarker/Gmarker.class.php');
 
 $Gmarker = new Gmarker(); 
 $modx->lexicon->load('gmarker:default');

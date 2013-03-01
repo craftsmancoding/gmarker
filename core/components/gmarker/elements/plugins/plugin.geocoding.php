@@ -18,7 +18,7 @@
  * @package marker
  */
 
-require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.php');
+require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
 $Gmarker = new Gmarker();
 $modx->lexicon->load('gmarker:default');
 
@@ -32,7 +32,12 @@ if (!in_array($modx->event->name, $events)) {
 	$modx->log(xPDO::LOG_LEVEL_ERROR, "[Geocoding Plugin] attached to wrong event!");
 }
 
-$templates = explode(',',$modx->getOption('gmarker.templates'));
+$templates = $modx->getOption('gmarker.templates');
+if (empty($templates)) {
+	return;
+}
+
+$templates = explode(',',$templates);
 
 // We are only concerned with pages that use one of the special templates
 if (!in_array($resource->template, $templates)) {

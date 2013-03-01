@@ -47,7 +47,7 @@
 
 
 
-require_once(MODX_CORE_PATH.'components/gmarker/includes/Gmarker.php');
+require_once(MODX_CORE_PATH.'components/gmarker/includes/Gmarker.class.php');
 
 $cache_opts = array(xPDO::OPT_CACHE_KEY => 'gmarker');
 
