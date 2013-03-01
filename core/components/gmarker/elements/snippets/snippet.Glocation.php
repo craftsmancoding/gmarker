@@ -10,7 +10,7 @@
  * Snippet parameters are irrelevant and you must instead rely on the system settings. 
  * Any fields referenced in your gmarkers.formatting_string must be available as form fields
  * and accessible via the $hook->getValue() method.  After executing, the Glocation hook
- * will add 2 fields named after the gmarkers.lat_tv and gmarkers.lng_tv.  This is useful
+ * will add 2 fields named after the gmarker.lat_tv and gmarker.lng_tv.  This is useful
  * if another hook writes this data to the database.
  * 
  *

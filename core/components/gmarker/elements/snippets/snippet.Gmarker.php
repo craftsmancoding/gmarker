@@ -202,7 +202,7 @@ if (!empty($limit)) {
 	$criteria->limit($limit, $offset);
 }
 
-$pages = $modx->getCollectionGraph('modResource', '{"TemplateVarResources":{}}', $criteria);
+$pages = $modx->getCollectionGraph('modResource', '{"TemplateVarResources":{"TemplateVar":{}}}', $criteria);
 
 // Iterate over markers
 $idx = 1;
@@ -217,14 +217,14 @@ foreach ($pages as $p) {
 	
 	// Add all TVs
 	foreach ($p->TemplateVarResources as $tvr) {
-		$tv_name = $tvr->get('name');
+		$tv_name = $tvr->TemplateVar->get('name');
 		$val = $tvr->get('value');
 		$prps[$tvPrefix.$tv_name] = $val;
 		$raw_prps[$tv_name] = $val;
 	}
 	
 	if (!isset($raw_prps[$lat_tv]) || !isset($raw_prps[$lng_tv])) {
-		$modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('invalid_resource', array('id'=> $p->get('id'))));
+		$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] '.$modx->lexicon('invalid_resource', array('id'=> $p->get('id'))));
 		continue;
 	}
 	if ($shadow) {
@@ -267,10 +267,10 @@ foreach ($pages as $p) {
 		$json = $Gmarker->lookup($goog, $secure);
 		
 		if(!$p->setTVValue($lat_tv, $Gmarker->get('location.lat'))) {
-			$modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('problem_saving', array('id'=> $resource->get('id'))));
+			$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] '.$modx->lexicon('problem_saving', array('id'=> $resource->get('id'))));
 		}
 		if(!$p->setTVValue($lng_tv, $Gmarker->get('location.lng'))) {
-			$modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('problem_saving', array('id'=> $resource->get('id'))));
+			$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] '.$modx->lexicon('problem_saving', array('id'=> $resource->get('id'))));
 		}	
 	}
 
