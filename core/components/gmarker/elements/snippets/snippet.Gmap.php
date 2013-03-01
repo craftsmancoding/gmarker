@@ -47,11 +47,11 @@
 
 
 
-require_once(MODX_CORE_PATH.'components/gmarker/includes/Gmarker.class.php');
+require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
 
 $cache_opts = array(xPDO::OPT_CACHE_KEY => 'gmarker');
 
-$Gmaps = new Gmaps();
+$Gmarker = new Gmarker();
 $modx->lexicon->load('gmarker:default');
 
 
@@ -78,12 +78,12 @@ $props2['w'] = (int) $modx->getOption('width', $scriptProperties, $modx->getOpti
 $props2['id'] = $modx->getOption('id', $scriptProperties, 'map');
 $props2['zoom'] = $modx->getOption('zoom', $scriptProperties, 15);
 $props2['type'] = $modx->getOption('type', $scriptProperties, 'ROADMAP');
-$props2['gmaps_url'] = $Gmaps->get_maps_url(array('key'=>$modx->getOption('gmarker.apikey')), $secure);
+$props2['gmarker_url'] = $Gmarker->get_maps_url(array('key'=>$modx->getOption('gmarker.apikey')), $secure);
 
 // Verify inputs
 if (empty($address) && empty($latlng) && empty($components)) {
 	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmap] '. $modx->lexicon('missing_params'));
-	return $Gmaps->alert($modx->lexicon('missing_params'));
+	return $Gmarker->alert($modx->lexicon('missing_params'));
 }
 
 if (!$props2['h']) {
@@ -95,11 +95,11 @@ if (!$props2['w']) {
 
 // Handle lookups and caching
 // Fingerprint the lookup
-$json = $Gmaps->lookup($props);
+$json = $Gmarker->lookup($props);
 
 // Pull the coordinates out
-$props2['lat'] = $Gmaps->get('location.lat');
-$props2['lng'] = $Gmaps->get('location.lng');
+$props2['lat'] = $Gmarker->get('location.lat');
+$props2['lng'] = $Gmarker->get('location.lng');
 
 
 // Add the stuff to the head

@@ -8,18 +8,18 @@
  * It is centered centered by either by an address or by lat/lng coordinates.
  *
  * LICENSE:
- * See the core/components/gmaps/docs/license.txt for full licensing info.
+ * See the core/components/gmarker/docs/license.txt for full licensing info.
  *
  *
  * SNIPPET PARAMETERS:
  *
  * &address string (optional) what you might type into a Google Maps search. If not present,
- * 	the [[++gmaps.formatting_string]] will be used, which should in turn pull in relevant
+ * 	the [[++gmarker.formatting_string]] will be used, which should in turn pull in relevant
  *	address info from the page on which this snippet appears.
  * &lat long (optional) latitude.  Overrides &address.
  * &lng long (optional) longitude.  Overrides &address.
- * &height integer (optional) hieght of the map in pixels. Defaults to [[++gmaps.default_height]]
- * &width integer (optional) width of the map in pixels. Defaults to [[++gmaps.default_width]]
+ * &height integer (optional) hieght of the map in pixels. Defaults to [[++gmarker.default_height]]
+ * &width integer (optional) width of the map in pixels. Defaults to [[++gmarker.default_width]]
  * &static boolean 1|0 (option). If set, the map will be fixed, undraggable. Default: 0
  * &zoom integer (optional) A zoom factor for the map. default: 15.
  * &suppressLookup default 0.
@@ -43,7 +43,7 @@
  */
 
 
-require_once(MODX_CORE_PATH.'components/gmaps/includes/Gmarker.class.php');
+require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
 
 $Gmarker = new Gmarker(); 
 $modx->lexicon->load('gmarker:default');
@@ -127,7 +127,7 @@ $props['w'] = (int) $modx->getOption('width', $scriptProperties, $modx->getOptio
 $props['id'] = $modx->getOption('id', $scriptProperties, 'map');
 $props['class'] = $modx->getOption('class', $scriptProperties);
 $props['zoom'] = (int) $modx->getOption('zoom', $scriptProperties, 15);
-$props['gmaps_url'] = $Gmaps->get_maps_url(array('key'=>$modx->getOption('gmarker.apikey')), $secure);
+$props['gmarker_url'] = $Gmarker->get_maps_url(array('key'=>$modx->getOption('gmarker.apikey')), $secure);
 $props['type'] = $modx->getOption('type', $scriptProperties, 'ROADMAP');
 
 // Used for search results
@@ -264,12 +264,12 @@ foreach ($pages as $p) {
 		$goog['region'] = $modx->getOption('gmarker.region');
 		$goog['language'] = $modx->getOption('gmarker.language');	
 		
-		$json = $Gmaps->lookup($goog, $secure);
+		$json = $Gmarker->lookup($goog, $secure);
 		
-		if(!$p->setTVValue($lat_tv, $Gmaps->get('location.lat'))) {
+		if(!$p->setTVValue($lat_tv, $Gmarker->get('location.lat'))) {
 			$modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('problem_saving', array('id'=> $resource->get('id'))));
 		}
-		if(!$p->setTVValue($lng_tv, $Gmaps->get('location.lng'))) {
+		if(!$p->setTVValue($lng_tv, $Gmarker->get('location.lng'))) {
 			$modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('problem_saving', array('id'=> $resource->get('id'))));
 		}	
 	}
@@ -287,7 +287,7 @@ foreach ($pages as $p) {
 		}
 		$prps['group_json'] = json_encode($group_str);
 	}
-	$prps['marker_color'] = $Gmaps->get_color($p->getTVValue($group),$idx);
+	$prps['marker_color'] = $Gmarker->get_color($p->getTVValue($group),$idx);
 
 	if ($showResults) {
 		$prps['marker_center'] = $letter;
@@ -310,25 +310,25 @@ if($checkbox == 1 && $group != null) {
 	foreach ($cb_group as $g ) {
 		$props3 = array();
 		$props3['group'] = $g;
-		$props3['group_id'] = 'gmaps_group_'.$i;
+		$props3['group_id'] = 'gmarker_group_'.$i;
 
 		$group_str = trim($g);
 		if ($groupCallback) {
 			$group_json = $modx->runSnippet($groupCallback,array('group'=>$group_str));
 		}
 		$prps3['group_json'] = json_encode($group_str);
-		$props3['marker_color'] = $Gmaps->get_color($g,0);
+		$props3['marker_color'] = $Gmarker->get_color($g,0);
 		$checkboxes .= $modx->getChunk($checkboxTpl, $props3);
 		$i++;
 	};
 }
 
 // Look up the map center
-$json = $Gmaps->lookup($goog, $secure);
+$json = $Gmarker->lookup($goog, $secure);
 
 // Pull the coordinates out of the response
-$props['lat'] = $Gmaps->get('location.lat');
-$props['lng'] = $Gmaps->get('location.lng');
+$props['lat'] = $Gmarker->get('location.lat');
+$props['lng'] = $Gmarker->get('location.lng');
 
 // Add some styling to hide the info-window shadows
 $props['hide_shadow'] = '';

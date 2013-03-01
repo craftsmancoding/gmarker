@@ -32,6 +32,7 @@ if (!in_array($modx->event->name, $events)) {
 	$modx->log(xPDO::LOG_LEVEL_ERROR, "[Geocoding Plugin] attached to wrong event!");
 }
 
+$secure = (int) $modx->getOption('gmarker.secure');
 $templates = $modx->getOption('gmarker.templates');
 if (empty($templates)) {
 	return;
@@ -89,7 +90,7 @@ $goog['region'] = $modx->getOption('gmarker.region');
 $goog['language'] = $modx->getOption('gmarker.language');
 
 
-$json = $Gmarker->lookup($goog);
+$json = $Gmarker->lookup($goog,$secure);
 
 // Write lat/lng back to the page
 $modx->log(xPDO::LOG_LEVEL_DEBUG, "[Geocoding Plugin] setting lat:".$Gmarker->get('location.lat')." and lng:".$Gmarker->get('location.lng'));

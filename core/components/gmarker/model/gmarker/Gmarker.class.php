@@ -228,7 +228,7 @@ class Gmarker {
 	 * @props boolen $refresh 1 to ignore cache and force api query
 	 * @return string JSON data
 	 */
-	public function lookup($props, $secure, $refresh=false) {
+	public function lookup($props, $secure=1, $refresh=0) {
 		// Fingerprint the lookup
 		$fingerprint = $this->fingerprint($props);
 

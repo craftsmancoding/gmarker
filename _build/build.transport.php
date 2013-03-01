@@ -164,12 +164,35 @@ $attributes = array(
     xPDOTransport::RELATED_OBJECTS => true,
     xPDOTransport::RELATED_OBJECT_ATTRIBUTES => $cat_attributes
 );
+$Chunk = $modx->newObject('modChunk');
+$Chunk->fromArray(array(
+    'name' => 'g_out',
+    'description' => 'Output wrapper used by the Gmap and Gmarker Snippets.',
+    'snippet' => file_get_contents('../core/components/'.PKG_NAME_LOWER.'/elements/chunks/g_out.html'),
+));
+$Category->addMany($Chunk);
+
+$Chunk = $modx->newObject('modChunk');
+$Chunk->fromArray(array(
+    'name' => 'gcheckbox',
+    'description' => 'Used by the Gmarker Snippet: draws checkboxes that control hiding/showing of markers',
+    'snippet' => file_get_contents('../core/components/'.PKG_NAME_LOWER.'/elements/chunks/gcheckbox.html'),
+));
+$Category->addMany($Chunk);
+
+$Chunk = $modx->newObject('modChunk');
+$Chunk->fromArray(array(
+    'name' => 'ginfo',
+    'description' => 'Used by the Gmarker Snippet: use this Chunk (or a copy of it) to style the info boxes for each marker.',
+    'snippet' => file_get_contents('../core/components/'.PKG_NAME_LOWER.'/elements/chunks/ginfo.html'),
+));
+$Category->addMany($Chunk);
 
 $Chunk = $modx->newObject('modChunk');
 $Chunk->fromArray(array(
     'name' => 'gmapshead',
     'description' => 'Used by the Gmap Snippet: this contains Javascript and CSS styling info that controls the output.',
-    'snippet' => file_get_contents('../core/components/'.PKG_NAME_LOWER.'/elements/chunks/chunk.gmapshead.tpl'),
+    'snippet' => file_get_contents('../core/components/'.PKG_NAME_LOWER.'/elements/chunks/gmapshead.html'),
 ));
 $Category->addMany($Chunk);
 
@@ -177,7 +200,7 @@ $Chunk = $modx->newObject('modChunk');
 $Chunk->fromArray(array(
     'name' => 'gmarker',
     'description' => 'Used by the Gmarker Snippet: this contains Javascript that defines the look of the markers.',
-    'snippet' => file_get_contents('../core/components/'.PKG_NAME_LOWER.'/elements/chunks/chunk.gmarker.tpl'),
+    'snippet' => file_get_contents('../core/components/'.PKG_NAME_LOWER.'/elements/chunks/gmarker.html'),
 ));
 $Category->addMany($Chunk);
 
@@ -186,15 +209,15 @@ $Chunk = $modx->newObject('modChunk');
 $Chunk->fromArray(array(
     'name' => 'gmarkershead',
     'description' => 'Used by the Gmarker Snippet: this contains Javascript and CSS styling info that controls the output.',
-    'snippet' => file_get_contents('../core/components/'.PKG_NAME_LOWER.'/elements/chunks/chunk.gmarkershead.tpl'),
+    'snippet' => file_get_contents('../core/components/'.PKG_NAME_LOWER.'/elements/chunks/gmarkershead.html'),
 ));
 $Category->addMany($Chunk);
 
 $Chunk = $modx->newObject('modChunk');
 $Chunk->fromArray(array(
-    'name' => 'ginfo',
-    'description' => 'Used by the Gmarker Snippet: use this Chunk (or a copy of it) to style the info boxes for each marker.',
-    'snippet' => file_get_contents('../core/components/'.PKG_NAME_LOWER.'/elements/chunks/chunk.ginfo.tpl'),
+    'name' => 'gresult',
+    'description' => 'Used by the Gmarker Snippet: formats a list item corresponding to a marker.',
+    'snippet' => file_get_contents('../core/components/'.PKG_NAME_LOWER.'/elements/chunks/gresult.html'),
 ));
 $Category->addMany($Chunk);
 
@@ -298,7 +321,7 @@ $builder->putVehicle($vehicle);
 $Setting = $modx->newObject('modSystemSetting');
 $Setting->fromArray(array(
     'key' => 'gmarker.lat_tv',
-    'value' => '',
+    'value' => 'latitude',
     'xtype' => 'textfield',
     'namespace' => PKG_NAME_LOWER,
     'area' => 'default',
@@ -310,7 +333,7 @@ $builder->putVehicle($vehicle);
 $Setting = $modx->newObject('modSystemSetting');
 $Setting->fromArray(array(
     'key' => 'gmarker.lng_tv',
-    'value' => '',
+    'value' => 'longitude',
     'xtype' => 'textfield',
     'namespace' => PKG_NAME_LOWER,
     'area' => 'default',
