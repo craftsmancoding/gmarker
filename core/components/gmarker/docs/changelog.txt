@@ -1,0 +1,6 @@
+Changelog for Gmarker.
+
+Gmarker 1.0
+======================================
+Initial release: support for geocoding, basic map drawing, and 
+the ability to add markers to your maps.

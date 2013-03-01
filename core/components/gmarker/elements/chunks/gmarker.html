@@ -1,0 +1,14 @@
+var markerLatlng[[+idx]] = new google.maps.LatLng([[+[[++gmarkers.lat_tv]]]],[[+[[++gmarkers.lng_tv]]]]);
+var marker[[+idx]] = new google.maps.Marker({
+	"position": markerLatlng[[+idx]],
+	"map": myMap,
+	"draggable":false,
+	"title":"[[+pagetitle]]",
+	[[+drop]]
+	"icon": 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=[[+marker_center]]|[[+marker_color]]|000000',
+	[[+shadow]]
+});
+[[+info]]
+marker[[+idx]].mycategory = [[+group_json]]; 
+this.gmarkers.push(marker[[+idx]]);
+marker[[+idx]].setVisible(true);
