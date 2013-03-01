@@ -84,10 +84,31 @@ $templates = (!empty($templates)) ? explode(',', $templates) : array();
 array_walk($parents, 'trim');
 array_walk($templates, 'trim');
 
-$tvValues = array();
-if ($tvValue) {
+$tv_filters = array();
+
+// Trigger a query on the modTemplateVarResource for performance reasons.
+if ($tvName && $tvValue) {
+
+	$tvValues = array();
 	$tvValues = explode(',',$tvValue);
-	array_walk($tvValues, 'trim');	
+	array_walk($tvValues, 'trim');
+	
+	$tv = $modx->getObject('modTemplateVar', array('name'=>$tvName));
+	
+	if (!$tv) {
+		$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] '. $modx->lexicon('tv_not_found', array('tv'=> $tvName)));
+		return $modx->lexicon('tv_not_found', array('tv'=> $tvName));
+	}
+	
+	$criteria['tmplvarid'] = $tv->get('id');
+	$criteria['value:IN'] = $tvValues;
+
+	$criteria = $modx->newQuery('modTemplateVarResource', $criteria);
+	$tvrs = $modx->getCollection('modTemplateVarResource', $criteria);
+	$out = array();
+	foreach ($tvrs as $tvr) {
+		$out[] = $tvr->get('contentid');
+	}
 }
 
 // Props that influence the address fingerprint and the Lat/Lng cache
@@ -129,10 +150,10 @@ if (empty($goog['address']) && empty($goog['latlng'])) {
 // build query
 $criteria = array();
 if ($parents) {
-	$criteria = array("modResource.parent IN (" . implode(',', $parents) . ")");
+	$criteria['modResource.parent:IN'] = $parents;
 }
 if (!empty($templates)) {
-	$criteria = array('modResource.template IN ('. implode(',', $templates). ')');
+	$criteria['modResource.template:IN'] = $templates;
 }
 if (empty($showDeleted)) {
     $criteria['deleted'] = '0';
@@ -146,7 +167,9 @@ if (empty($showHidden)) {
 if (!empty($hideContainers)) {
     $criteria['isfolder'] = '0';
 }
-
+if (!empty($tv_filters)) {
+	$criteria['modResource.id:IN'] = $tv_filters;
+}
 
 
 $criteria = $modx->newQuery('modResource', $criteria);
@@ -175,8 +198,11 @@ if (!empty($resources)) {
     }
 }
 
-if (!empty($limit)) $criteria->limit($limit, $offset);
-$pages = $modx->getCollection('modResource', $criteria);
+if (!empty($limit)) {
+	$criteria->limit($limit, $offset);
+}
+
+$pages = $modx->getCollectionGraph('modResource', '{"TemplateVarResources":{}}', $criteria);
 
 // Iterate over markers
 $idx = 1;
@@ -190,10 +216,9 @@ foreach ($pages as $p) {
 	$prps['idx'] = $idx;
 	
 	// Add all TVs
-	$templateVars = $p->getMany('TemplateVars');
-	foreach ($templateVars as $tv) {
-		$tv_name = $tv->get('name');
-		$val = $p->getTVValue($tv_name);
+	foreach ($p->TemplateVarResources as $tvr) {
+		$tv_name = $tvr->get('name');
+		$val = $tvr->get('value');
 		$prps[$tvPrefix.$tv_name] = $val;
 		$raw_prps[$tv_name] = $val;
 	}
@@ -201,11 +226,6 @@ foreach ($pages as $p) {
 	if (!isset($raw_prps[$lat_tv]) || !isset($raw_prps[$lng_tv])) {
 		$modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('invalid_resource', array('id'=> $p->get('id'))));
 		continue;
-	}
-	if ($tvName && $tvValue) {
-		if (!isset($raw_prps[$tvName]) || !in_array($raw_prps[$tvName], $tvValues)) {
-			continue;
-		}
 	}
 	if ($shadow) {
 		$prps['shadow'] = '"shadow": pinShadow,';
