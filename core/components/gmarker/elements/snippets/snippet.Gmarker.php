@@ -76,17 +76,18 @@ $templates = $modx->getOption('templates',$scriptProperties);
 $tvName = $modx->getOption('tvName',$scriptProperties);
 $tvValue = $modx->getOption('tvValue',$scriptProperties);
 $groupCallback = $modx->getOption('groupCallback',$scriptProperties);
+$parents = $modx->getOption('parents',$scriptProperties);
 
 $marker_center = '%E2%80%A2';
 $distinct_groups = array(); // init
-$parents = (!empty($parents) || $parents === '0') ? explode(',', $parents) : array($modx->resource->get('id'));
+$parents = (!empty($parents)) ? explode(',', $parents) : array();
 $templates = (!empty($templates)) ? explode(',', $templates) : array();
 array_walk($parents, 'trim');
 array_walk($templates, 'trim');
 
 $tv_filters = array();
 
-// Trigger a query on the modTemplateVarResource for performance reasons.
+// Trigger a query on the modTemplateVarResource (for performance reasons).
 if ($tvName && $tvValue) {
 
 	$tvValues = array();
@@ -105,9 +106,8 @@ if ($tvName && $tvValue) {
 
 	$criteria = $modx->newQuery('modTemplateVarResource', $criteria);
 	$tvrs = $modx->getCollection('modTemplateVarResource', $criteria);
-	$out = array();
 	foreach ($tvrs as $tvr) {
-		$out[] = $tvr->get('contentid');
+		$tv_filters[] = $tvr->get('contentid');
 	}
 }
 
@@ -176,7 +176,8 @@ $criteria = $modx->newQuery('modResource', $criteria);
 
 
 
-
+// Handle resources that were specifically included, e.g. &resources=`1,2,3`
+// and resources that were specifically omitted, e.g. &resources=`-4,-5,-6`
 if (!empty($resources)) {
     $resources = explode(',',$resources);
     $include = array();
@@ -203,6 +204,8 @@ if (!empty($limit)) {
 }
 
 $pages = $modx->getCollectionGraph('modResource', '{"TemplateVarResources":{"TemplateVar":{}}}', $criteria);
+//$criteria->prepare();
+//return $criteria->toSQL();
 
 // Iterate over markers
 $idx = 1;
@@ -219,6 +222,9 @@ foreach ($pages as $p) {
 	foreach ($p->TemplateVarResources as $tvr) {
 		$tv_name = $tvr->TemplateVar->get('name');
 		$val = $tvr->get('value');
+		if ($tv_name == $lat_tv || $tv_name == $lng_tv) {
+			$val = json_encode($val); // do this to reduce the chance of use bombing out the javascript.
+		}
 		$prps[$tvPrefix.$tv_name] = $val;
 		$raw_prps[$tv_name] = $val;
 	}
