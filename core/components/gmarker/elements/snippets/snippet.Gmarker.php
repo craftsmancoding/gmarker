@@ -85,6 +85,19 @@ $templates = (!empty($templates)) ? explode(',', $templates) : array();
 array_walk($parents, 'trim');
 array_walk($templates, 'trim');
 
+$LatTV = $modx->getObject('modTemplateVar', array('name'=>$lat_tv));
+$LngTV = $modx->getObject('modTemplateVar', array('name'=>$lng_tv));
+if (!$LatTV) {
+	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] '. $modx->lexicon('tv_not_found', array('tv'=> $lat_tv)));
+	return $modx->lexicon('tv_not_found', array('tv'=> $lat_tv));
+}
+if (!$LngTV) {
+	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] '. $modx->lexicon('tv_not_found', array('tv'=> $lng_tv)));
+	return $modx->lexicon('tv_not_found', array('tv'=> $lng_tv));
+}
+$lat_tv_id = $LatTV->get('id');
+$lng_tv_id = $LngTV->get('id');
+
 $tv_filters = array();
 
 // Trigger a query on the modTemplateVarResource (for performance reasons).
@@ -203,7 +216,8 @@ if (!empty($limit)) {
 	$criteria->limit($limit, $offset);
 }
 
-$pages = $modx->getCollectionGraph('modResource', '{"TemplateVarResources":{"TemplateVar":{}}}', $criteria);
+//$pages = $modx->getCollectionGraph('modResource', '{"TemplateVarResources":{"TemplateVar":{}}}', $criteria);
+$pages = $modx->getCollection('modResource', $criteria);
 //$criteria->prepare();
 //return $criteria->toSQL();
 
@@ -218,7 +232,14 @@ foreach ($pages as $p) {
 	$raw_prps = $prps; // we need a version w/o prefixes for Google lookups
 	$prps['idx'] = $idx;
 	
-	// Add all TVs
+	// Add TVs
+	$val = json_encode($p->getTVValue($lat_tv_id));
+	$prps[$tvPrefix.$lat_tv] = $val;
+	$raw_prps[$lat_tv] = $val;
+	$val = json_encode($p->getTVValue($lng_tv_id));
+	$prps[$tvPrefix.$lng_tv] = $val;
+	$raw_prps[$lng_tv] = $val;
+/*
 	foreach ($p->TemplateVarResources as $tvr) {
 		$tv_name = $tvr->TemplateVar->get('name');
 		$val = $tvr->get('value');
@@ -228,6 +249,7 @@ foreach ($pages as $p) {
 		$prps[$tvPrefix.$tv_name] = $val;
 		$raw_prps[$tv_name] = $val;
 	}
+*/
 	
 	if (!isset($raw_prps[$lat_tv]) || !isset($raw_prps[$lng_tv])) {
 		$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] '.$modx->lexicon('invalid_resource', array('id'=> $p->get('id'))));
