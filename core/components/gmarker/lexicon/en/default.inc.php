@@ -39,6 +39,8 @@ $_lang['hook_error'] = 'Hook needs gmaps.lat_tv and gmaps.lng_tv set.';
 $_lang['problem_saving'] = 'There was a problem saving the latitude/longitude TVs on page id [[+id]]';
 $_lang['invalid_resource'] = 'Resource id [[+id]] is missing required latitude/longitude TVs.';
 $_lang['tv_not_found'] = 'TV [[+tv]] not found.';
+$_lang['utf8_error'] = 'String for page id [[+id]] "[[+var]]" is not UTF-8 encoded.';
+
 
 // System Settings
 $_lang['setting_gmarker.formatting_string'] = 'Formatting String';

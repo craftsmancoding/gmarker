@@ -77,11 +77,17 @@ $tvName = $modx->getOption('tvName',$scriptProperties);
 $tvValue = $modx->getOption('tvValue',$scriptProperties);
 $groupCallback = $modx->getOption('groupCallback',$scriptProperties);
 $parents = $modx->getOption('parents',$scriptProperties);
+$tvs = $modx->getOption('parents',$scriptProperties);
+$debug = $modx->getOption('debug',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties);
+$offset = $modx->getOption('offset',$scriptProperties,0);
 
 $marker_center = '%E2%80%A2';
 $distinct_groups = array(); // init
 $parents = (!empty($parents)) ? explode(',', $parents) : array();
 $templates = (!empty($templates)) ? explode(',', $templates) : array();
+$tvs = (!empty($tvs)) ? explode(',', $tvs) : array();
+
 array_walk($parents, 'trim');
 array_walk($templates, 'trim');
 
@@ -114,6 +120,7 @@ if ($tvName && $tvValue) {
 		return $modx->lexicon('tv_not_found', array('tv'=> $tvName));
 	}
 	
+	$criteria = array();
 	$criteria['tmplvarid'] = $tv->get('id');
 	$criteria['value:IN'] = $tvValues;
 
@@ -183,6 +190,11 @@ if (!empty($hideContainers)) {
 if (!empty($tv_filters)) {
 	$criteria['modResource.id:IN'] = $tv_filters;
 }
+// If we set tv filters and got no results, we need to clip the query
+elseif ($tvName && $tvValue) {
+	$criteria = array(); // kill it
+	$criteria['modResource.id:IN'] = array('0');
+}
 
 
 $criteria = $modx->newQuery('modResource', $criteria);
@@ -218,8 +230,11 @@ if (!empty($limit)) {
 
 //$pages = $modx->getCollectionGraph('modResource', '{"TemplateVarResources":{"TemplateVar":{}}}', $criteria);
 $pages = $modx->getCollection('modResource', $criteria);
-//$criteria->prepare();
-//return $criteria->toSQL();
+// Debugging
+if ($debug) {
+	$criteria->prepare();
+	return $criteria->toSQL();
+}
 
 // Iterate over markers
 $idx = 1;
@@ -232,25 +247,33 @@ foreach ($pages as $p) {
 	$raw_prps = $prps; // we need a version w/o prefixes for Google lookups
 	$prps['idx'] = $idx;
 	
-	// Add TVs
-	$val = json_encode($p->getTVValue($lat_tv_id));
-	$prps[$tvPrefix.$lat_tv] = $val;
-	$raw_prps[$lat_tv] = $val;
-	$val = json_encode($p->getTVValue($lng_tv_id));
-	$prps[$tvPrefix.$lng_tv] = $val;
-	$raw_prps[$lng_tv] = $val;
-/*
-	foreach ($p->TemplateVarResources as $tvr) {
-		$tv_name = $tvr->TemplateVar->get('name');
-		$val = $tvr->get('value');
-		if ($tv_name == $lat_tv || $tv_name == $lng_tv) {
-			$val = json_encode($val); // do this to reduce the chance of use bombing out the javascript.
-		}
-		$prps[$tvPrefix.$tv_name] = $val;
-		$raw_prps[$tv_name] = $val;
+	// Add lat and lng TVs
+	$lat = $p->getTVValue($lat_tv_id);
+	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] page '.$p->get('id') . ' '.$lat);
+	$lng = $p->getTVValue($lng_tv_id);
+	if (mb_check_encoding($lat, 'UTF-8')) {
+		$val = json_encode($lat);
+		$prps[$tvPrefix.$lat_tv] = $val;
+		$raw_prps[$lat_tv] = $val;
 	}
-*/
+	else {
+		$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] '.$modx->lexicon('utf8_error', array('id'=> $p->get('id'),'var'=> $lat_tv)));
+	}
+	if (mb_check_encoding($lng, 'UTF-8')) {
+		$val = json_encode($lng);
+		$prps[$tvPrefix.$lng_tv] = $val;
+		$raw_prps[$lng_tv] = $val;
+	}
+	else {
+		$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] '.$modx->lexicon('utf8_error', array('id'=> $p->get('id'),'var'=> $lng_tv)));	
+	}
+	// ... and optionally any other TVs specified by &tvs
+	foreach ($tvs as $t) {
+		$prps[$tvPrefix.$t] = $p->getTVValue($t);
+		$raw_prps[$t] = $p->getTVValue($t);
+	}
 	
+		
 	if (!isset($raw_prps[$lat_tv]) || !isset($raw_prps[$lng_tv])) {
 		$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] '.$modx->lexicon('invalid_resource', array('id'=> $p->get('id'))));
 		continue;
@@ -268,14 +291,21 @@ foreach ($pages as $p) {
 		$prps['drop'] = '';
 	}
 	if ($info) {
-		$prps['info'] = "
-		var contentString{$idx} = ".json_encode(trim($modx->getChunk($infoTpl, $prps))).";
-		google.maps.event.addListener(marker{$idx}, 'click', function() { 
-			infowindow.close();
-			infowindow.setContent(contentString{$idx});
-			infowindow.open(myMap,marker{$idx}); 
-		});
-		";
+		$info_txt = trim($modx->getChunk($infoTpl, $prps));
+		if (mb_check_encoding($info_txt, 'UTF-8')) {
+			$prps['info'] = "
+			var contentString{$idx} = ".json_encode($info_txt).";
+			google.maps.event.addListener(marker{$idx}, 'click', function() { 
+				infowindow.close();
+				infowindow.setContent(contentString{$idx});
+				infowindow.open(myMap,marker{$idx}); 
+			});
+			";
+		}
+		else {
+			$prps['info'] = '';
+			$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] '.$modx->lexicon('invalid_resource', array('id'=> $p->get('id'),'var'=>'Chunk:'.$infoChunk)));
+		}
 	}
 	else {
 		$prps['info'] = '';
