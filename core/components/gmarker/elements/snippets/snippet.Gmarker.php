@@ -77,7 +77,7 @@ $tvName = $modx->getOption('tvName',$scriptProperties);
 $tvValue = $modx->getOption('tvValue',$scriptProperties);
 $groupCallback = $modx->getOption('groupCallback',$scriptProperties);
 $parents = $modx->getOption('parents',$scriptProperties);
-$tvs = $modx->getOption('parents',$scriptProperties);
+$tvs = $modx->getOption('tvs',$scriptProperties);
 $debug = $modx->getOption('debug',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties);
 $offset = $modx->getOption('offset',$scriptProperties,0);
@@ -90,6 +90,7 @@ $tvs = (!empty($tvs)) ? explode(',', $tvs) : array();
 
 array_walk($parents, 'trim');
 array_walk($templates, 'trim');
+array_walk($tvs, 'trim');
 
 $LatTV = $modx->getObject('modTemplateVar', array('name'=>$lat_tv));
 $LngTV = $modx->getObject('modTemplateVar', array('name'=>$lng_tv));
@@ -341,7 +342,7 @@ foreach ($pages as $p) {
 	if ($group) {
 		$group_str = trim($p->getTVValue($group));
 		if ($groupCallback) {
-			$group_json = $modx->runSnippet($groupCallback,array('group'=>$group_str));
+			$group_str = $modx->runSnippet($groupCallback,array('group'=>$group_str));
 		}
 		$prps['group_json'] = json_encode($group_str);
 	}
@@ -367,14 +368,14 @@ if($checkbox == 1 && $group != null) {
 	$i = 0;
 	foreach ($cb_group as $g ) {
 		$props3 = array();
-		$props3['group'] = $g;
 		$props3['group_id'] = 'gmarker_group_'.$i;
-
 		$group_str = trim($g);
 		if ($groupCallback) {
-			$group_json = $modx->runSnippet($groupCallback,array('group'=>$group_str));
+			$group_str = $modx->runSnippet($groupCallback,array('group'=>$group_str));
+
 		}
-		$prps3['group_json'] = json_encode($group_str);
+		$props3['group'] = $group_str;
+		$props3['group_json'] = json_encode($group_str);
 		$props3['marker_color'] = $Gmarker->get_color($g,0);
 		$checkboxes .= $modx->getChunk($checkboxTpl, $props3);
 		$i++;
