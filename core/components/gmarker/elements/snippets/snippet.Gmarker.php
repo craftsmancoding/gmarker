@@ -250,7 +250,7 @@ foreach ($pages as $p) {
 	
 	// Add lat and lng TVs
 	$lat = $p->getTVValue($lat_tv_id);
-	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] page '.$p->get('id') . ' '.$lat);
+	
 	$lng = $p->getTVValue($lng_tv_id);
 	if (mb_check_encoding($lat, 'UTF-8')) {
 		$val = json_encode($lat);
