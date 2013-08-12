@@ -98,8 +98,8 @@ if (!$props2['w']) {
 $json = $Gmarker->lookup($props);
 
 // Pull the coordinates out
-$props2['lat'] = $Gmarker->get('location.lat');
-$props2['lng'] = $Gmarker->get('location.lng');
+$props2['lat'] = number_format($Gmarker->get('location.lat'), 8);
+$props2['lng'] = number_format($Gmarker->get('location.lng'), 8);
 
 
 // Add the stuff to the head
