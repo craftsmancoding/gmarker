@@ -386,8 +386,8 @@ if($checkbox == 1 && $group != null) {
 $json = $Gmarker->lookup($goog, $secure);
 
 // Pull the coordinates out of the response
-$props['lat'] = $Gmarker->get('location.lat');
-$props['lng'] = $Gmarker->get('location.lng');
+$props['lat'] = number_format($Gmarker->get('location.lat'), 8);
+$props['lng'] = number_format($Gmarker->get('location.lng'), 8);
 
 // Add some styling to hide the info-window shadows
 $props['hide_shadow'] = '';
