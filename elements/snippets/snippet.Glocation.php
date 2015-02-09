@@ -67,12 +67,16 @@
  * @var array $scriptProperties
  *
  * @name Glocation
+ * @description Lookup latitude and longitude from a given address and set a series of placeholders. The results for any address are returned from cache whenever possible
  * @url http://craftsmancoding.com/
  * @author Everett Griffiths <everett@craftsmancoding.com>
  * @package gmarker
  */
 
-require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
+$core_path = $modx->getOption('gmarker.core_path', null, MODX_CORE_PATH.'components/gmarker/');
+include_once $core_path .'vendor/autoload.php';
+
+//require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
 
 $Gmarker = new Gmarker(); 
 $modx->lexicon->load('gmarker:default');

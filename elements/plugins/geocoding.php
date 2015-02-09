@@ -1,6 +1,6 @@
 <?php
 /**
- * Geocoding Plugin
+ * geocoding Plugin
  *
  * This Plugin should fire on the OnBeforeDocFormSave event (i.e. when saving a MODX page).
  * It takes location information on the page (e.g. address, city, state, zip TVs), and 
@@ -8,22 +8,18 @@
  * about that address, which it then stores inside the page in pre-defined TVs.
  * See the System Settings for ways to control the behavior of the plugin.
  *
- * LICENSE:
- * See the core/components/gmarker/docs/license.txt for full licensing info.
- *
- *
  * @name Geocoding
- * @url http://craftsmancoding.com/
- * @author Everett Griffiths <everett@craftsmancoding.com>
- * @package marker
+ * @description Multi-purpose plugin for Moxycart handling URL routing and manager customizations
+ * @PluginEvents OnBeforeDocFormSave
  */
 
-require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
+//require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
+$core_path = $modx->getOption('gmarker.core_path', null, MODX_CORE_PATH.'components/gmarker/');
+include_once $core_path .'vendor/autoload.php';
 $Gmarker = new Gmarker();
 $modx->lexicon->load('gmarker:default');
 
 $cache_opts = array(xPDO::OPT_CACHE_KEY => 'gmarker');
-
 
 // Check the event
 $events = array('OnDocFormSave');
@@ -65,7 +61,6 @@ foreach ($templateVars as $tv) {
 
 $tvList = array_keys($props);
 
-//$modx->log(xPDO::LOG_LEVEL_ERROR, "[Geocoding Plugin] ". print_r($props, true));
 
 // A few more checks.
 if (!in_array($lat_tv, $tvList)) {

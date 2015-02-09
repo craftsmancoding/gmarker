@@ -3,3 +3,5 @@ config.core.php
 .idea
 nbproject
 .DS_Store
+composer.phar
+phpunit.phar

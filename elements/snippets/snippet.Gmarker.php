@@ -3,9 +3,10 @@
  * Gmarker
  *
  * This Snippet draws a map with one or more markers on it to identify locations. 
- * It leverages getResources to iterate over multiple locations, e.g. over pages
+ * Its syntax is similar to getResources: it iterates over multiple locations, e.g. over pages
  * which contain address information.
- * It is centered centered by either by an address or by lat/lng coordinates.
+ *
+ * The map is centered centered by either by an address or by lat/lng coordinates.
  *
  * LICENSE:
  * See the core/components/gmarker/docs/license.txt for full licensing info.
@@ -37,13 +38,16 @@
  * @var array $scriptProperties
  *
  * @name Gmarker
+ * @description Iterates over pages containing location data to draw a Google Map with markers on it.
  * @url http://craftsmancoding.com/
  * @author Everett Griffiths <everett@craftsmancoding.com>
  * @package garmker
  */
 
 
-require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
+$core_path = $modx->getOption('gmarker.core_path', null, MODX_CORE_PATH.'components/gmarker/');
+include_once $core_path .'vendor/autoload.php';
+//require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
 
 $Gmarker = new Gmarker(); 
 $modx->lexicon->load('gmarker:default');

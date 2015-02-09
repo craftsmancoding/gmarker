@@ -40,14 +40,16 @@
  * @var array $scriptProperties
  *
  * @name Gmap
+ * @description Draws a Google Map of the area indicated by &address or &latlng.
  * @url http://craftsmancoding.com/
  * @author Everett Griffiths <everett@craftsmancoding.com>
  * @package gmarker
  */
 
 
-
-require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
+$core_path = $modx->getOption('gmarker.core_path', null, MODX_CORE_PATH.'components/gmarker/');
+include_once $core_path .'vendor/autoload.php';
+//require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
 
 $cache_opts = array(xPDO::OPT_CACHE_KEY => 'gmarker');
 
