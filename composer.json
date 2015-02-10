@@ -23,10 +23,7 @@
     "php": ">=5.3"
   },
   "autoload": {
-    "classmap":["model/"],
-    "psr-4": {
-      "Gmarker\\": ["model/","controllers/"]
-    }
+    "classmap":["model/gmarker/"]
   },
   "extra": {
     "package_name": "Gmarker",

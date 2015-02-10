@@ -50,6 +50,13 @@ return array(
         'area' 		=>     'gmarker:default'
     ),
     array(
+        'key'  		=>     'gmarker.pin_img_tv',
+        'value'		=>     '',
+        'xtype'		=>     'textfield',
+        'namespace' =>     'gmarker',
+        'area' 		=>     'gmarker:default'
+    ),
+    array(
         'key'  		=>     'gmarker.secure',
         'value'		=>     1,
         'xtype'		=>     'combo-boolean',
@@ -65,19 +72,25 @@ return array(
     ),
     array(
         'key'  		=>     'gmarker.default_height',
-        'value'		=>     300,
+        'value'		=>     '300px',
         'xtype'		=>     'textfield',
         'namespace' =>     'gmarker',
         'area' 		=>     'gmarker:default'
     ),
     array(
         'key'  		=>     'gmarker.default_width',
-        'value'		=>     500,
+        'value'		=>     '100%',
         'xtype'		=>     'textfield',
         'namespace' =>     'gmarker',
         'area' 		=>     'gmarker:default'
     ),
-
+    array(
+        'key'  		=>     'gmarker.style',
+        'value'		=>     '',
+        'xtype'		=>     'textfield',
+        'namespace' =>     'gmarker',
+        'area' 		=>     'gmarker:default'
+    ),
     array(
         'key'  		=>     'gmarker.language',
         'value'		=>     '',

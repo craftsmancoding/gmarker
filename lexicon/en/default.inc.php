@@ -61,6 +61,9 @@ $_lang['setting_gmarker.lat_tv_desc'] = 'The name of the Template Variable where
 $_lang['setting_gmarker.lng_tv'] = 'Longitude TV';
 $_lang['setting_gmarker.lng_tv_desc'] = 'The name of the Template Variable where longitude information will be automatically stored. All templates listed in the gmaps.templates Setting should have this TV assigned to them.';
 
+$_lang['setting_gmarker.pin_img_tv'] = 'Pin Image TV';
+$_lang['setting_gmarker.pin_img_desc'] = 'Optionally, you can use a custom image for the pin drawn on the map.  Specify the TV name here.';
+
 $_lang['setting_gmarker.secure'] = 'Geocoding Secure';
 $_lang['setting_gmarker.secure_desc'] = "This controls the protocol used when accessing the Google Geocoding API.  No = HTTP, Yes = HTTPS. HTTPS is recommended for applications that include sensitive user data, such as a user's location, in requests.";
 
@@ -68,10 +71,13 @@ $_lang['setting_gmarker.apikey'] = 'Google Maps API Key';
 $_lang['setting_gmarker.apikey_desc'] = 'Log into https://code.google.com/apis/console using your Google account, activate the Google Maps API v3 and the Static Maps API, then click on the API Access and copy your key here.  See https://developers.google.com/maps/documentation/javascript/tutorial#api_key for more info.';
 
 $_lang['setting_gmarker.default_height'] = 'Default Height';
-$_lang['setting_gmarker.default_height_desc'] = 'The default height (in pixels) for maps drawn using the Gmap or Gmarker Snippets';
+$_lang['setting_gmarker.default_height_desc'] = 'The default height (specify px or %) for maps drawn using the Gmap or Gmarker Snippets';
 
 $_lang['setting_gmarker.default_width'] = 'Width';
-$_lang['setting_gmarker.default_width_desc'] = 'The default width (in pixels) for maps drawn using the Gmap or Gmarker Snippets';
+$_lang['setting_gmarker.default_width_desc'] = 'The default width (specify px or %) for maps drawn using the Gmap or Gmarker Snippets';
+
+$_lang['setting_gmarker.style'] = 'Style';
+$_lang['setting_gmarker.style_desc'] = 'Paste a JSON array from https://snazzymaps.com here. Browse Snazzy Maps for hundreds of map themes and styles!';
 
 $_lang['setting_gmarker.language'] = 'Language';
 $_lang['setting_gmarker.language_desc'] = 'The language in which to return results.  See https://developers.google.com/maps/faq#languagesupport for the latest list of languages.';
