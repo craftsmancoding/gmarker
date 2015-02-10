@@ -2,7 +2,7 @@
 /**
  * geocoding Plugin
  *
- * This Plugin should fire on the OnBeforeDocFormSave event (i.e. when saving a MODX page).
+ * This Plugin should fire on the OnDocFormSave event (i.e. when saving a MODX page).
  * It takes location information on the page (e.g. address, city, state, zip TVs), and 
  * passes them to the Google Geocoding API in order to retrieve latitude/longitude info
  * about that address, which it then stores inside the page in pre-defined TVs.
@@ -10,7 +10,7 @@
  *
  * @name Geocoding
  * @description Multi-purpose plugin for Moxycart handling URL routing and manager customizations
- * @PluginEvents OnBeforeDocFormSave
+ * @PluginEvents OnDocFormSave
  */
 
 //require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');

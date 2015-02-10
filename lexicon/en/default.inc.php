@@ -50,10 +50,10 @@ $_lang['setting_gmarker.templates'] = 'Templates to Geocode';
 $_lang['setting_gmarker.templates_desc'] = 'Enter a comma-separated list of template IDs. Pages using these templates should contain address information.  When saving pages of this type, Geocoding lookups will be performed and used to auto-populate dedicated latitude and longitude TVs (see gmaps.lat_tv and gmaps.lng_tv)';
 
 $_lang['setting_gmarker.components'] = 'Geocoding Components';
-$_lang['setting_gmarker.components_desc'] = 'Optionally, you can restrict address results to a certain area, e.g. "country:NZL". See https://developers.google.com/maps/documentation/geocoding/#ComponentFiltering for more info.';
+$_lang['setting_gmarker.components_desc'] = 'Optionally, you can restrict address results to a certain area, e.g. "country:NZL". <a href="https://developers.google.com/maps/documentation/geocoding/#ComponentFiltering">more info</a>';
 
 $_lang['setting_gmarker.bounds'] = 'Geocoding Bounds';
-$_lang['setting_gmarker.bounds_desc'] = 'The optional lat|lng bounding box of the viewport within which to bias geocode results more prominently, e.g. "34.172684,-118.604794|34.236144,-118.500938". This parameter will only influence, not fully restrict, results from the geocoder. See https://developers.google.com/maps/documentation/geocoding/#Viewports for more info.';
+$_lang['setting_gmarker.bounds_desc'] = 'The optional lat|lng bounding box of the viewport within which to bias geocode results more prominently, e.g. "34.172684,-118.604794|34.236144,-118.500938". This parameter will only influence, not fully restrict, results from the geocoder. <a href="https://developers.google.com/maps/documentation/geocoding/#Viewports">more info</a>';
 
 $_lang['setting_gmarker.lat_tv'] = 'Latitude TV';
 $_lang['setting_gmarker.lat_tv_desc'] = 'The name of the Template Variable where latitude information will be automatically stored.  All templates listed in the gmaps.templates Setting should have this TV assigned to them.';
@@ -68,7 +68,7 @@ $_lang['setting_gmarker.secure'] = 'Geocoding Secure';
 $_lang['setting_gmarker.secure_desc'] = "This controls the protocol used when accessing the Google Geocoding API.  No = HTTP, Yes = HTTPS. HTTPS is recommended for applications that include sensitive user data, such as a user's location, in requests.";
 
 $_lang['setting_gmarker.apikey'] = 'Google Maps API Key';
-$_lang['setting_gmarker.apikey_desc'] = 'Log into https://code.google.com/apis/console using your Google account, activate the Google Maps API v3 and the Static Maps API, then click on the API Access and copy your key here.  See https://developers.google.com/maps/documentation/javascript/tutorial#api_key for more info.';
+$_lang['setting_gmarker.apikey_desc'] = 'Log into <a href="https://code.google.com/apis/console">https://code.google.com/apis/console</a> using your Google account, activate the Google Maps API v3 and the Static Maps API, then click on the API Access and copy your key here.  See https://developers.google.com/maps/documentation/javascript/tutorial#api_key for more info.';
 
 $_lang['setting_gmarker.default_height'] = 'Default Height';
 $_lang['setting_gmarker.default_height_desc'] = 'The default height (specify px or %) for maps drawn using the Gmap or Gmarker Snippets';
@@ -77,13 +77,13 @@ $_lang['setting_gmarker.default_width'] = 'Width';
 $_lang['setting_gmarker.default_width_desc'] = 'The default width (specify px or %) for maps drawn using the Gmap or Gmarker Snippets';
 
 $_lang['setting_gmarker.style'] = 'Style';
-$_lang['setting_gmarker.style_desc'] = 'Paste a JSON array from https://snazzymaps.com here. Browse Snazzy Maps for hundreds of map themes and styles!';
+$_lang['setting_gmarker.style_desc'] = 'Paste a JSON array from <a href="https://snazzymaps.com">https://snazzymaps.com</a> here. Browse Snazzy Maps for hundreds of map themes and styles!';
 
 $_lang['setting_gmarker.language'] = 'Language';
-$_lang['setting_gmarker.language_desc'] = 'The language in which to return results.  See https://developers.google.com/maps/faq#languagesupport for the latest list of languages.';
+$_lang['setting_gmarker.language_desc'] = 'The language in which to return results. <a href="https://developers.google.com/maps/faq#languagesupport">Available languages</a>';
 
 $_lang['setting_gmarker.region'] = 'Region';
-$_lang['setting_gmarker.region_desc'] = 'The region code, specified as a ccTLD ("top-level domain") two-character value. This parameter will only influence, not fully restrict, results from the geocoder. See https://developers.google.com/maps/documentation/geocoding/#RegionCodes for more info.';
+$_lang['setting_gmarker.region_desc'] = 'The region code, specified as a ccTLD ("top-level domain") two-character value. This parameter will only influence, not fully restrict, results from the geocoder. <a href="https://developers.google.com/maps/documentation/geocoding/#RegionCodes">more info</a>';
 
 $_lang['setting_gmarker.pincolor'] = 'Default Pin Color';
 $_lang['setting_gmarker.pincolor_desc'] = 'Set a valid CSS color, e.g. FE7569 (do not include the #), to set the default color of your pins.  Used by the Gmarker Snippet.';

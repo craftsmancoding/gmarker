@@ -47,7 +47,9 @@ include '.env.php';
                     icon: {
                         path: google.maps.SymbolPath.CIRCLE,
                         scale: 10,
-                        strokeColor: 'orange'
+                        strokeColor: 'orange',
+                        fillColor: 'orange',
+                        fillOpacity: 1
                     }
                 });
 
