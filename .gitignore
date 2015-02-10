@@ -6,3 +6,4 @@ nbproject
 .env.php
 composer.phar
 phpunit.phar
+vendor/
