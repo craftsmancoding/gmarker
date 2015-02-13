@@ -1,0 +1,84 @@
+<!--
+@name gmap-ajax-infowindows
+@description Queries a remote URL for marker data and info windows. Used by the Gmap Snippet.
+
+You must pass a valid URL containing JSON data as the &src parameter!
+-->
+<script type="text/javascript">
+	function gmapInitialize() {
+		var myLatlng = new google.maps.LatLng([[+lat]], [[+lng]]);
+		var mapOptions = {
+			zoom: [[+zoom]],
+			center: myLatlng,
+			styles: [[+style]]
+		};
+
+		var map = new google.maps.Map(document.getElementById('[[+id]]'), mapOptions);
+
+		// Get this via Ajax
+		$.get( "[[+src]]", function( data ) {
+
+			console.log('Data loaded from src page');
+
+			// Reuse a single object throughout
+			var infowindow = new google.maps.InfoWindow();
+			var markers = [];
+			for (var i =0; i < data.results.length; i++)
+			{
+				console.log(data.results[i].title +' Latitude: '+ data.results[i].lat + ' Longitude: '+data.results[i].lng);
+
+				var marker = new google.maps.Marker({
+					position: new google.maps.LatLng(data.results[i].lat,data.results[i].lng),
+					title: data.results[i].title,
+					icon: {
+						path: google.maps.SymbolPath.CIRCLE,
+						scale: 7,
+						strokeColor: 'orange',
+						fillColor: 'orange',
+						fillOpacity: 1
+					}
+				});
+
+				attachInfo(marker, data.results[i].content, i);
+				markers.push(marker);
+
+			}
+
+			drawMarkersOnMap(markers, map);
+
+			/**
+			 * We use a separate function here to help isolate functionality and to help scope variables
+			 * Declared within the initialize() function so we have access to the infowindow var.
+			 * @param marker
+			 * @param content
+			 * @param i
+			 */
+			function attachInfo(marker, content, i) {
+				google.maps.event.addListener(marker, 'click', function() {
+					console.log('Clicked on marker: '+i)
+					infowindow.close(); // close existing
+					infowindow.setContent(content);
+					infowindow.open(map,marker);
+				});
+			}
+		});
+
+	}
+
+	function drawMarkersOnMap(markers, map)
+	{
+		for (var i = 0; i < markers.length; i++) {
+			markers[i].setMap(map);
+		}
+	}
+
+	function gmaploadScript() {
+		var script = document.createElement('script');
+		script.type = 'text/javascript';
+		script.src = '//maps.googleapis.com/maps/api/js?key=[[++gmarker.apikey]]&v=3.exp&' +
+		'callback=gmapInitialize';
+		document.body.appendChild(script);
+	}
+
+	window.onload = gmaploadScript;
+</script>

@@ -2,45 +2,42 @@
 /**
  * Gmap
  *
- * This Snippet draws a map centered on a single location, identified either by an address 
- * or by latitude/longitude coordinates.
+ * This Snippet draws a dynamic google map; optionally add markers and info-windows.
  *
  * LICENSE:
- * See the docs/license.txt for full licensing info.
+ * See the core/components/gmarker/docs/license.txt for full licensing info.
  *
  *
  * SNIPPET PARAMETERS:
  *
- * &address string (optional) what you might type into a Google Maps search. If not present,
- * 	the [[++gmarker.formatting_string]] will be used, which should in turn pull in relevant
- *	address info from the page on which this snippet appears.
- * &lat long (optional) latitude.  Overrides &address.
- * &lng long (optional) longitude.  Overrides &address.
- * &height integer (optional) hieght of the map in pixels. Defaults to [[++gmarker.default_height]]
- * &width integer (optional) width of the map in pixels. Defaults to [[++gmarker.default_width]]
- * &static boolean 1|0 (option). If set, the map will be fixed, undraggable. Default: 0
+ * &address string (required) street address where the map should be centered (what you might type into Google Maps search)
+ * &latlng mixed (optional) latitude,longitude coordinates for centering the map.  Overrides &address when present.
+ * &headTpl string (optional) Chunk name containing the Google Maps JS API call.
+ * &outTpl string (optional) Chunk name containing the div where the map should be drawn.
+ * &height mixed (optional) height of the map (include 'px' or '%'). Defaults to [[++gmarker.default_height]]
+ * &width mixed (optional) width of the map (include 'px' or '%'). Defaults to [[++gmarker.default_width]]
  * &zoom integer (optional) A zoom factor for the map. default: 15.
- * &js string (optional) Default: [[++gmarker.jquery]]
- * 
+ * &id string (optional) CSS id of the div where the map will be drawn. Default: map-canvas
+ * &class the CSS class of the outputted div (identified by &outTpl). Default is empty.
+ * &zoom integer (optional) zoom level of the map. Default: 8
+ * &type string (optional) ROADMAP (default), SATELLITE, HYBRID, TERRAIN; From https://developers.google.com/maps/documentation/javascript/maptypes
+ * All other parameters passed to the Snippet are made available to the &outTpl and &headTpl
  *
  * USAGE:
  *
  * Place the snippet call where you want your map to appear.
  *
- * [[!Gmap? &address=`221 B Baker St. London, England`]]
+ * [[!Gmap]]
  *
- * OR
+ * [[Gmap? &width=`100%` &height=`300px` &class=`my_class` &latlng=`40.3810679,-78.0758859` &zoom=`8`]]
  *
- * [[Gmap? &latlng=`-12.043333,-77.028333`]]
- *
- * OR
- *
- * [[Gmap? &lat=`-12.043333` &lng=`-77.028333` &height=`400` &width=`800`]]
+ * WARNING:
+ * 	- Your map cannot use percentages for BOTH height and width.
  *
  * @var array $scriptProperties
  *
  * @name Gmap
- * @description Draws a Google Map of the area indicated by &address or &latlng.
+ * @description Iterates over pages containing location data to draw a Google Map with markers on it.
  * @url http://craftsmancoding.com/
  * @author Everett Griffiths <everett@craftsmancoding.com>
  * @package gmarker
@@ -49,54 +46,76 @@
 
 $core_path = $modx->getOption('gmarker.core_path', null, MODX_CORE_PATH.'components/gmarker/');
 include_once $core_path .'vendor/autoload.php';
+//require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
 
 $Gmarker = new Gmarker($modx);
 $modx->lexicon->load('gmarker:default');
 
-
-// Read inputs
-// First some controlling props
-$refresh = (int) $modx->getOption('refresh', $scriptProperties, 0);
+//------------------------------------------------------------------------------
+//! Read inputs
+//------------------------------------------------------------------------------
 $secure = (int) $modx->getOption('secure', $scriptProperties, $modx->getOption('gmarker.secure'));
-$headTpl = $modx->getOption('headTpl', $scriptProperties, 'gmapshead');
-$outTpl = $modx->getOption('outTpl', $scriptProperties, 'g_out'); 
+$headTpl = $modx->getOption('headTpl', $scriptProperties, 'gmap-example');
+$outTpl = $modx->getOption('outTpl', $scriptProperties, 'gmap-canvas');
+
 
 // Props that influence the address fingerprint and the Lat/Lng cache
-$props = array();
-$props['address'] = $modx->getOption('address', $scriptProperties, $modx->getOption('gmarker.formatting_string'));
-$props['latlng'] = $modx->getOption('latlng', $scriptProperties, '');
-$props['bounds'] = $modx->getOption('bounds', $scriptProperties, $modx->getOption('gmarker.bounds'));
-$props['components'] = $modx->getOption('components', $scriptProperties, $modx->getOption('gmarker.components'));
-$props['region'] = $modx->getOption('region', $scriptProperties, $modx->getOption('gmarker.region'));
-$props['language'] = $modx->getOption('language', $scriptProperties, $modx->getOption('gmarker.language'));
+$apiParams = array();
+$apiParams['address'] = $modx->getOption('address', $scriptProperties, '');
+$apiParams['latlng'] = $modx->getOption('latlng', $scriptProperties, '');
+$apiParams['bounds'] = $modx->getOption('bounds', $scriptProperties, $modx->getOption('gmarker.bounds'));
+$apiParams['components'] = $modx->getOption('components', $scriptProperties, $modx->getOption('gmarker.components'));
+$apiParams['region'] = $modx->getOption('region', $scriptProperties, $modx->getOption('gmarker.region'));
+$apiParams['language'] = $modx->getOption('language', $scriptProperties, $modx->getOption('gmarker.language'));
 
-// Other props that are used in the output
-$props2 = array();
-$props2['h'] = $modx->getOption('height', $scriptProperties, $modx->getOption('gmarker.default_height'));
-$props2['w'] = $modx->getOption('width', $scriptProperties, $modx->getOption('gmarker.default_width'));
-$props2['id'] = $modx->getOption('id', $scriptProperties, 'map');
-$props2['zoom'] = $modx->getOption('zoom', $scriptProperties, 15);
-$props2['type'] = $modx->getOption('type', $scriptProperties, 'ROADMAP');
-$props2['gmarker_url'] = $Gmarker->get_maps_url(array('key'=>$modx->getOption('gmarker.apikey')), $secure);
+// Props used in the headerTpl or outTpl
+$props = $scriptProperties;
+$props['height'] = $modx->getOption('height', $scriptProperties, $modx->getOption('gmarker.default_height'));
+$props['width'] = $modx->getOption('width', $scriptProperties, $modx->getOption('gmarker.default_width'));
+$props['style'] = $modx->getOption('style', $scriptProperties, $modx->getOption('gmarker.style'));
+$props['id'] = $modx->getOption('id', $scriptProperties, 'map-canvas');
+$props['class'] = $modx->getOption('class', $scriptProperties);
+$props['zoom'] = (int) $modx->getOption('zoom', $scriptProperties, 8);
+$props['type'] = $modx->getOption('type', $scriptProperties, 'ROADMAP');
 
-// Verify inputs
-if (empty($address) && empty($latlng)) {
-	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmap] '. $modx->lexicon('missing_params'));
-	return $Gmarker->alert($modx->lexicon('missing_params'));
+if (empty($props['style'])) {
+	$props['style'] = '[]';
 }
 
-// Handle lookups and caching
-// Fingerprint the lookup
-$json = $Gmarker->lookup($props);
+// Make sure the map is centered
+if (empty($apiParams['address']) && empty($apiParams['latlng'])) {
+	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmap] '. $modx->lexicon('missing_center'));
+	return sprintf('<script type="text/javascript"> alert(%s);</script>',json_encode('[Gmap] '.$modx->lexicon('missing_center')));
+}
 
-// Pull the coordinates out
-$props2['lat'] = number_format($Gmarker->get('location.lat'), 8);
-$props2['lng'] = number_format($Gmarker->get('location.lng'), 8);
+// Make sure we have viable dimensions
+if (strpos($props['height'],'%') === false && strpos($props['height'],'px') === false)
+{
+	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmap] '. $modx->lexicon('invalid_height'));
+	return sprintf('<script type="text/javascript"> alert(%s);</script>',json_encode('[Gmap] '.$modx->lexicon('invalid_height')));
+}
+if (strpos($props['width'],'%') === false && strpos($props['width'],'px') === false)
+{
+	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmap] '. $modx->lexicon('invalid_width'));
+	return sprintf('<script type="text/javascript"> alert(%s);</script>',json_encode('[Gmap] '.$modx->lexicon('invalid_width')));
+}
+if (strpos($props['height'],'%') !== false && strpos($props['width'],'%') !== false)
+{
+	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmap] '. $modx->lexicon('missing_center'));
+	return sprintf('<script type="text/javascript"> alert(%s);</script>',json_encode('[Gmap] '.$modx->lexicon('invalid_dimensions')));
+}
+
+// Look up the map center
+$json = $Gmarker->lookup($apiParams, $secure);
+
+// Pull the coordinates out of the response
+$props['lat'] = number_format($Gmarker->get('location.lat'), 8);
+$props['lng'] = number_format($Gmarker->get('location.lng'), 8);
 
 
 // Add the stuff to the head
-$modx->regClientStartupHTMLBlock($modx->getChunk($headTpl, $props2));
+$modx->regClientStartupHTMLBlock($modx->getChunk($headTpl, $props));
 
-return $modx->parseChunk($outTpl, $props2);
+return $modx->parseChunk($outTpl, $props);
 
 /*EOF*/

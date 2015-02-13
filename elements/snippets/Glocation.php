@@ -67,7 +67,7 @@
  * @var array $scriptProperties
  *
  * @name Glocation
- * @description Lookup latitude and longitude from a given address and set a series of placeholders. The results for any address are returned from cache whenever possible
+ * @description geocoding/reverse-geocoding utility script used to lookup latitude/longitude from a given address. Also available as a hook (e.g. for Formit or Login).
  * @url http://craftsmancoding.com/
  * @author Everett Griffiths <everett@craftsmancoding.com>
  * @package gmarker

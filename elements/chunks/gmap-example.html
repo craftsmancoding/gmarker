@@ -1,0 +1,28 @@
+<!--
+@name gmap-example
+@description Example Chunk demonstrating the Google Maps API and a plain and simple google map.
+-->
+<script type="text/javascript">
+    function gmapInitialize() {
+        console.log('Initializing Google Maps centered at Lat: %s Lng: %s', [[+lat]], [[+lng]]);
+        var myLatlng = new google.maps.LatLng([[+lat]], [[+lng]]);
+        var mapOptions = {
+            zoom: [[+zoom]],
+            center: myLatlng
+        };
+
+        var map = new google.maps.Map(document.getElementById('[[+id]]'), mapOptions);
+
+    }
+
+    function gmaploadScript() {
+        console.log('Window loaded. Running gmaploadScript()');
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = '//maps.googleapis.com/maps/api/js?key=[[++gmarker.apikey]]&v=3.exp&' +
+        'callback=gmapInitialize';
+        document.body.appendChild(script);
+    }
+
+    window.onload = gmaploadScript;
+</script>

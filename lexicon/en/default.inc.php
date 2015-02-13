@@ -35,6 +35,9 @@ $_lang['node_not_found'] = 'The following node was not found in the JSON: [[+nod
 $_lang['missing_params'] = 'Missing required parameters.';
 $_lang['bad_dimensions'] = 'Map has bad dimensions!  Height and width must be non-zero.';
 $_lang['missing_center'] = 'Map center must be defined via &address or &latlng';
+$_lang['invalid_dimensions'] = 'Map dimensions must include at least one pixel width. You cannot use percentages for both height and width.';
+$_lang['invalid_height'] = '&height parameter must include a unit: either "px" or "&"';
+$_lang['invalid_width'] = '&width parameter must include a unit: either "px" or "&"';
 $_lang['hook_error'] = 'Hook needs gmaps.lat_tv and gmaps.lng_tv set.';
 $_lang['problem_saving'] = 'There was a problem saving the latitude/longitude TVs on page id [[+id]]';
 $_lang['invalid_resource'] = 'Resource id [[+id]] is missing required latitude/longitude TVs.';
@@ -68,7 +71,7 @@ $_lang['setting_gmarker.secure'] = 'Geocoding Secure';
 $_lang['setting_gmarker.secure_desc'] = "This controls the protocol used when accessing the Google Geocoding API.  No = HTTP, Yes = HTTPS. HTTPS is recommended for applications that include sensitive user data, such as a user's location, in requests.";
 
 $_lang['setting_gmarker.apikey'] = 'Google Maps API Key';
-$_lang['setting_gmarker.apikey_desc'] = 'Log into <a href="https://code.google.com/apis/console">https://code.google.com/apis/console</a> using your Google account, activate the Google Maps API v3 and the Static Maps API, then click on the API Access and copy your key here.  See https://developers.google.com/maps/documentation/javascript/tutorial#api_key for more info.';
+$_lang['setting_gmarker.apikey_desc'] = 'Log into <a href="https://code.google.com/apis/console">https://code.google.com/apis/console</a> using your Google account, activate the <strong>Google Maps JavaScript API v3</strong> and the <strong>Static Maps API</strong>, then click on the API Access and copy your key here.  See https://developers.google.com/maps/documentation/javascript/tutorial#api_key for more info.';
 
 $_lang['setting_gmarker.default_height'] = 'Default Height';
 $_lang['setting_gmarker.default_height_desc'] = 'The default height (specify px or %) for maps drawn using the Gmap or Gmarker Snippets';

@@ -45,12 +45,8 @@ class Gmarker {
 	public $json;
 	public $modx;
 	public $colors = array();
-	
-	// Google Maps URLs
-	public $maps_http = 'http://maps.google.com/maps/api/js?sensor=false';
-	public $maps_https = 'https://maps.google.com/maps/api/js?sensor=false';
 
-	// Geocoding URLs
+	// Geocoding API URLs
 	public $geocoding_http = 'http://maps.googleapis.com/maps/api/geocode/json';
 	public $geocoding_https = 'https://maps.googleapis.com/maps/api/geocode/json';
 
@@ -66,20 +62,6 @@ class Gmarker {
 	public function __construct($modx) {
 		$this->modx = $modx;
 	}
-
-
-
-	/**
-	 * Formats a string message for use as a Javascript alert
-	 *
-	 * @param string  $msg
-	 * @return string
-	 */
-	public function alert($msg) {
-		return '<script type="text/javascript"> alert('.json_encode($msg).'); </script>';
-	}
-
-
 
 	/**
 	 * Generate a unique fingerprint of the input parameters that would affect
@@ -170,57 +152,12 @@ class Gmarker {
 		return $this->modx->lexicon('node_not_found', array('node'=>$key));
 	}
 
-	/**
-	 * Gets one color for each distinct input $val.  Used when &group is set.
-	 *
-	 * @param string     $val
-	 * @param int|string $id (optional)
-	 *
-	 * @return string corresponding to HTML color code
-	 */
-	public function get_color($val, $id=0) {
-		$color_set = array('e3947a','e32d7a','b70004','65c2f5','8e6fec', '79f863','f1ee69','BE9073','FB2FC8','90C57F','0AA87B','38BCB9','ACDA3B','39DBF0','9E6CA3','1042F1','48F6A1','5B49CD','B6DE82','5871A7','B2E5A3','D52213','AD54D7','8E3B32','4E0160','F88439','E7460B','F0EBA1','8962BF','A540D0','72E5C8','405EDB','032543','C329B3','FCF922','0FA4BD','354FA8','1019BC','2E5BE6','438921','197238','6D4134','FAB7AD','921536','1EF0E8','8576E1','5B4F2D','A8EB6E','E57611','2858F9','6E53AA','B5B6B4','9B3EDF','21BFE2','771257','22BECC','ED8099');
-		if (!isset($this->colors[$val])) {
-			$this->colors[$val] = $color_set[$id]; // <-- new random color here
-		}
-
-		return $this->colors[$val];
-	}
 
 	/**
-	 * Get the URL for the Google Maps API service, optionally includin other keys.
-	 * See https://developers.google.com/maps/documentation/javascript/tutorial#api_key
+	 * This function acts as a gateway protector to the API.  Results are loaded either from cache (when possible) or
+	 * from a query to the Google Geocoding API. Access the data using $this->get()
 	 *
-	 * @param array $props  (optional) any properties to append to the URL
-	 * @param boolean $secure (optional) whether or not to use the secure version of the URL
-	 * @return string the URL of the service
-	 */
-	public function get_maps_url($props=array(), $secure=true) {
-		$url = '';
-		if ($secure) {
-			$url = $this->maps_https;
-		}
-		else {
-			$url = $this->maps_http;
-		}
-
-		foreach ($props as $k => $v) {
-			if ($v) {
-				$url .= '&'.$k.'='.trim($v);
-			}
-		}
-
-		return $url;
-	}
-
-
-
-	/**
-	 * Where the magic happens: JSON is loaded either from cache (when possible) or
-	 * from a query to the Google Geocoding API. The JSON is then read to be queried
-	 * for data via the $this->get() method.
-	 *
-	 * @props array $props required for a lookup
+	 * @props array $props required for a lookup (&address, etc)
 	 * @props boolean $secure 1 for https, 0 for http
 	 * @props boolean $refresh 1 to ignore cache and force api query
 	 * @return string JSON data
@@ -234,7 +171,7 @@ class Gmarker {
 		// if $refresh OR if not fingerprint is not cached, then lookup the address
 		if ($refresh || empty($json)) {
 			// Perform the lookup
-			$json = $this->query_api($props, $secure);
+			$json = $this->queryApi($props, $secure);
 
 			// Cache the lookup
 			$this->modx->cacheManager->set($fingerprint, $json, $this->lifetime, $this->cache_opts);
@@ -248,14 +185,14 @@ class Gmarker {
 
 
 	/**
-	 * Hit the Google GeoCoding API service: this function builds the URL
+	 * Hit the Google GeoCoding API service: this function builds the URL. Remember to URL-encode your values:
 	 * See http://stackoverflow.com/questions/6976446/google-maps-geocode-api-inconsistencies
 	 *
 	 * @param array   $props  defining the search
 	 * @param boolean $secure (optional) whether or not the lookup should use HTTPS
 	 * @return string JSON result
 	 */
-	public function query_api($props, $secure=false) {
+	public function queryApi($props, $secure=false) {
 		$url = $this->geocoding_http;
 		if ($secure) {
 			$url = $this->geocoding_https;
@@ -288,27 +225,6 @@ class Gmarker {
 		return $curlOutput;
 	}
 
-	/**
-	 * Get a random HTML color
-	 * 
-	 * @return string
-	 */
-	public function rand_color() {
-		$chars = "ABCDEF0123456789";
-		$size = strlen( $chars );
-		$str = array();
-
-		for ( $j = 0; $j < 6; $j++ ) {
-			if (isset($str[$j])) {
-				$str[$j] .= $chars[ rand( 0, $size - 1 ) ];
-			}
-			else {
-				$str[$j] = $chars[ rand( 0, $size - 1 ) ];
-			}
-		}
-
-		return implode('', $str);
-	}
 
 	/**
 	 * This takes a JSON string, converts it to a PHP array
