@@ -49,7 +49,7 @@ $core_path = $modx->getOption('gmarker.core_path', null, MODX_CORE_PATH.'compone
 include_once $core_path .'vendor/autoload.php';
 //require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
 
-$Gmarker = new Gmarker(); 
+$Gmarker = new Gmarker($modx);
 $modx->lexicon->load('gmarker:default');
 
 //------------------------------------------------------------------------------
@@ -147,8 +147,8 @@ $goog['language'] = $modx->getOption('language', $scriptProperties, $modx->getOp
 
 // Props used in the headerTpl
 $props = array();
-$props['h'] = (int) $modx->getOption('height', $scriptProperties, $modx->getOption('gmarker.default_height'));
-$props['w'] = (int) $modx->getOption('width', $scriptProperties, $modx->getOption('gmarker.default_width'));
+$props['h'] = $modx->getOption('height', $scriptProperties, $modx->getOption('gmarker.default_height'));
+$props['w'] = $modx->getOption('width', $scriptProperties, $modx->getOption('gmarker.default_width'));
 $props['id'] = $modx->getOption('id', $scriptProperties, 'map');
 $props['class'] = $modx->getOption('class', $scriptProperties);
 $props['zoom'] = (int) $modx->getOption('zoom', $scriptProperties, 15);
@@ -157,15 +157,6 @@ $props['type'] = $modx->getOption('type', $scriptProperties, 'ROADMAP');
 
 // Used for search results
 $results = '';
-
-
-// Verify inputs
-if (!$props['h']) {
-	$props['h'] = 300;
-}
-if (!$props['w']) {
-	$props['w'] = 500;
-}
 
 if (empty($goog['address']) && empty($goog['latlng'])) {
 	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] '. $modx->lexicon('missing_center'));

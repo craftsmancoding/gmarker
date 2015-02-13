@@ -78,7 +78,7 @@ include_once $core_path .'vendor/autoload.php';
 
 //require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
 
-$Gmarker = new Gmarker(); 
+$Gmarker = new Gmarker($modx);
 $modx->lexicon->load('gmarker:default');
 
 $goog = array();

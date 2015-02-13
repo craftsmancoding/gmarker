@@ -6,7 +6,7 @@
  * or by latitude/longitude coordinates.
  *
  * LICENSE:
- * See the core/components/gmarker/docs/license.txt for full licensing info.
+ * See the docs/license.txt for full licensing info.
  *
  *
  * SNIPPET PARAMETERS:
@@ -31,7 +31,7 @@
  *
  * OR
  *
- * [[Gmap? &lat=`-12.043333` &lng=`-77.028333`]]
+ * [[Gmap? &latlng=`-12.043333,-77.028333`]]
  *
  * OR
  *
@@ -49,11 +49,8 @@
 
 $core_path = $modx->getOption('gmarker.core_path', null, MODX_CORE_PATH.'components/gmarker/');
 include_once $core_path .'vendor/autoload.php';
-//require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
 
-$cache_opts = array(xPDO::OPT_CACHE_KEY => 'gmarker');
-
-$Gmarker = new Gmarker();
+$Gmarker = new Gmarker($modx);
 $modx->lexicon->load('gmarker:default');
 
 
@@ -75,24 +72,17 @@ $props['language'] = $modx->getOption('language', $scriptProperties, $modx->getO
 
 // Other props that are used in the output
 $props2 = array();
-$props2['h'] = (int) $modx->getOption('height', $scriptProperties, $modx->getOption('gmarker.default_height'));
-$props2['w'] = (int) $modx->getOption('width', $scriptProperties, $modx->getOption('gmarker.default_width'));
+$props2['h'] = $modx->getOption('height', $scriptProperties, $modx->getOption('gmarker.default_height'));
+$props2['w'] = $modx->getOption('width', $scriptProperties, $modx->getOption('gmarker.default_width'));
 $props2['id'] = $modx->getOption('id', $scriptProperties, 'map');
 $props2['zoom'] = $modx->getOption('zoom', $scriptProperties, 15);
 $props2['type'] = $modx->getOption('type', $scriptProperties, 'ROADMAP');
 $props2['gmarker_url'] = $Gmarker->get_maps_url(array('key'=>$modx->getOption('gmarker.apikey')), $secure);
 
 // Verify inputs
-if (empty($address) && empty($latlng) && empty($components)) {
+if (empty($address) && empty($latlng)) {
 	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmap] '. $modx->lexicon('missing_params'));
 	return $Gmarker->alert($modx->lexicon('missing_params'));
-}
-
-if (!$props2['h']) {
-	$props2['h'] = 300;
-}
-if (!$props2['w']) {
-	$props2['w'] = 500;
 }
 
 // Handle lookups and caching

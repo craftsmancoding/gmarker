@@ -106,6 +106,7 @@ include '.env.php';
  * You can specify the hieght/width etc of your map div here.
  */
 ?>
-<div id="map-canvas" style="width: 100%; height: 100%"></div>
+<div id="map-canvas" style="width: 100%; height: 80%"></div>
+<span onclick="javascript:initialize();">Redraw</span>
 </body>
 </html>

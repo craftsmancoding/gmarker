@@ -3,6 +3,7 @@
  * geocoding Plugin
  *
  * This Plugin should fire on the OnDocFormSave event (i.e. when saving a MODX page).
+ * This should only fire if the values for the lat and lng are found to be empty or zero.
  * It takes location information on the page (e.g. address, city, state, zip TVs), and 
  * passes them to the Google Geocoding API in order to retrieve latitude/longitude info
  * about that address, which it then stores inside the page in pre-defined TVs.
@@ -16,7 +17,7 @@
 //require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
 $core_path = $modx->getOption('gmarker.core_path', null, MODX_CORE_PATH.'components/gmarker/');
 include_once $core_path .'vendor/autoload.php';
-$Gmarker = new Gmarker();
+$Gmarker = new Gmarker($modx);
 $modx->lexicon->load('gmarker:default');
 
 $cache_opts = array(xPDO::OPT_CACHE_KEY => 'gmarker');
@@ -31,6 +32,7 @@ if (!in_array($modx->event->name, $events)) {
 $secure = (int) $modx->getOption('gmarker.secure');
 $templates = $modx->getOption('gmarker.templates');
 if (empty($templates)) {
+	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] gmarker.templates not defined.');
 	return;
 }
 
@@ -45,6 +47,12 @@ $tpl = $modx->getOption('gmarker.formatting_string');
 $secure = $modx->getOption('gmarker.secure');
 $lat_tv = $modx->getOption('gmarker.lat_tv');
 $lng_tv = $modx->getOption('gmarker.lng_tv');
+
+if (empty($tpl))
+{
+	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmarker] gmarker.formatting_string cannot be empty for geolocation API queries.');
+	return;
+}
 
 // Google props: what we will send them
 $goog = array(); 
@@ -70,6 +78,15 @@ if (!in_array($lat_tv, $tvList)) {
 
 if (!in_array($lng_tv,$tvList)) {
 	$modx->log(xPDO::LOG_LEVEL_ERROR, "[Geocoding Plugin] Invalid gmarker.lng_tv TV $lng_tv not assigned to template ". $resource->template);
+	return;
+}
+
+// Don't do the lookup if we already have values
+$lat = $resource->getTVValue($lat_tv);
+$lng = $resource->getTVValue($lng_tv);
+if ($lat && $lng)
+{
+	$modx->log(xPDO::LOG_LEVEL_DEBUG, "[Geocoding Plugin] values already present for latitude and longitude; skipping API lookup.");
 	return;
 }
 

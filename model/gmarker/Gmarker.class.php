@@ -63,8 +63,7 @@ class Gmarker {
 	/**
 	 *
 	 */
-	public function __construct() {
-		global $modx;
+	public function __construct($modx) {
 		$this->modx = $modx;
 	}
 
@@ -87,8 +86,7 @@ class Gmarker {
 	 * the results of a lookup.  All properties passed to this should be the props
 	 * that would uniquely identify an address, e.g. address, city, state, zip
 	 *
-	 * @param array
-	 * @param unknown $props
+	 * @param array $props
 	 * @return string
 	 */
 	public function fingerprint($props) {
@@ -108,9 +106,9 @@ class Gmarker {
 
 
 	/**
-	 * Read item out of Geocoding JSON
+	 * Read item out of Geocoding JSON response
 	 *
-	 * @param unknown $key
+	 * @param string $key
 	 * @return string
 	 */
 	public function get($key) {
@@ -175,8 +173,9 @@ class Gmarker {
 	/**
 	 * Gets one color for each distinct input $val.  Used when &group is set.
 	 *
-	 * @param string $val
-	 * @param string $id (optional)
+	 * @param string     $val
+	 * @param int|string $id (optional)
+	 *
 	 * @return string corresponding to HTML color code
 	 */
 	public function get_color($val, $id=0) {
@@ -192,10 +191,8 @@ class Gmarker {
 	 * Get the URL for the Google Maps API service, optionally includin other keys.
 	 * See https://developers.google.com/maps/documentation/javascript/tutorial#api_key
 	 *
-	 * @param array   (optional) any properties to append to the URL
-	 * @param boolean (optional) whether or not to use the secure version of the URL
-	 * @param unknown $props  (optional)
-	 * @param unknown $secure (optional)
+	 * @param array $props  (optional) any properties to append to the URL
+	 * @param boolean $secure (optional) whether or not to use the secure version of the URL
 	 * @return string the URL of the service
 	 */
 	public function get_maps_url($props=array(), $secure=true) {
@@ -225,7 +222,7 @@ class Gmarker {
 	 *
 	 * @props array $props required for a lookup
 	 * @props boolean $secure 1 for https, 0 for http
-	 * @props boolen $refresh 1 to ignore cache and force api query
+	 * @props boolean $refresh 1 to ignore cache and force api query
 	 * @return string JSON data
 	 */
 	public function lookup($props, $secure=1, $refresh=0) {
@@ -263,7 +260,7 @@ class Gmarker {
 		if ($secure) {
 			$url = $this->geocoding_https;
 		}
-		$url .= '?sensor=false';
+		$url .= '?sensor=false'; // no longer required
 
 		// Special cleaning of the address: no extra spaces, then all spaces to +
 		$props['address'] = preg_replace('/\s+/', ' ', $props['address']);
@@ -271,7 +268,6 @@ class Gmarker {
 		
 		foreach ($props as $k => $v) {
 			if (!empty($v)) {
-				//$url .= preg_replace('/\s+/', ' ', "&$k=".trim($v));
 				$url .= "&$k=".urlencode($v);
 			}
 		}
@@ -317,8 +313,7 @@ class Gmarker {
 	/**
 	 * This takes a JSON string, converts it to a PHP array
 	 *
-	 * @param string  JSON array
-	 * @param unknown $json
+	 * @param string $json JSON array
 	 */
 	public function set_json($json) {
 		$this->json = json_decode($json, true);
