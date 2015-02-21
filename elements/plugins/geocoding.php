@@ -14,6 +14,7 @@
  * @PluginEvents OnDocFormSave
  */
 
+
 //require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
 $core_path = $modx->getOption('gmarker.core_path', null, MODX_CORE_PATH.'components/gmarker/');
 include_once $core_path .'vendor/autoload.php';
