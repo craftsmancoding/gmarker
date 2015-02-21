@@ -106,16 +106,16 @@ $goog['language'] = $modx->getOption('gmarker.language');
 $json = $Gmarker->lookup($goog,$secure);
 
 // Write lat/lng back to the page
-$modx->log(xPDO::LOG_LEVEL_DEBUG, "[Geocoding Plugin] setting lat:".$Gmarker->get('location.lat')." and lng:".$Gmarker->get('location.lng'));
+$modx->log(xPDO::LOG_LEVEL_ERROR, "[Geocoding Plugin] ".$goog['address']." @COORDS lat:".$Gmarker->get('location.lat')." and lng:".$Gmarker->get('location.lng'));
 
-if(!$resource->getTVValue($lat_tv)) {
+//if(!$resource->getTVValue($lat_tv)) {
 	if(!$resource->setTVValue($lat_tv, $Gmarker->get('location.lat'))) {
 		$modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('problem_saving', array('id'=> $resource->get('id'))));
 	}
-}
-if(!$resource->getTVValue($lng_tv)) {
+//}
+//if(!$resource->getTVValue($lng_tv)) {
 	if(!$resource->setTVValue($lng_tv, $Gmarker->get('location.lng'))) {
 		$modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('problem_saving', array('id'=> $resource->get('id'))));
 	}
-}
+//}
 /*EOF*/
