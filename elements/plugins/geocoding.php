@@ -83,13 +83,13 @@ if (!in_array($lng_tv,$tvList)) {
 }
 
 // Don't do the lookup if we already have values
-$lat = $resource->getTVValue($lat_tv);
-$lng = $resource->getTVValue($lng_tv);
-if ($lat && $lng)
-{
-	$modx->log(xPDO::LOG_LEVEL_DEBUG, "[Geocoding Plugin] values already present for latitude and longitude; skipping API lookup.");
-	return;
-}
+//$lat = $resource->getTVValue($lat_tv);
+//$lng = $resource->getTVValue($lng_tv);
+//if ($lat && $lng)
+//{
+//	$modx->log(xPDO::LOG_LEVEL_DEBUG, "[Geocoding Plugin] values already present for latitude and longitude; skipping API lookup.");
+//	return;
+//}
 
 // We load up an "imaginary" chunk: this is done so the output is parsed
 // with all the output filters, chunk tags, snippet output etc. 

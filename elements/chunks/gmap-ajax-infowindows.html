@@ -25,7 +25,7 @@ You must pass a valid URL containing JSON data as the &src parameter!
 			var markers = [];
 			for (var i =0; i < data.results.length; i++)
 			{
-				console.log(data.results[i].title +' Latitude: '+ data.results[i].lat + ' Longitude: '+data.results[i].lng);
+				//console.log(data.results[i].title +' Latitude: '+ data.results[i].lat + ' Longitude: '+data.results[i].lng);
 
 				var marker = new google.maps.Marker({
 					position: new google.maps.LatLng(data.results[i].lat,data.results[i].lng),
@@ -39,7 +39,8 @@ You must pass a valid URL containing JSON data as the &src parameter!
 					}
 				});
 
-				attachInfo(marker, data.results[i].content, i);
+				//attachInfo(marker, data.results[i].content, i);
+				attachInfo2(marker, data.results[i].id);
 				markers.push(marker);
 
 			}
@@ -53,7 +54,8 @@ You must pass a valid URL containing JSON data as the &src parameter!
 			 * @param content
 			 * @param i
 			 */
-			function attachInfo(marker, content, i) {
+			/*
+function attachInfo(marker, content, i) {
 				google.maps.event.addListener(marker, 'click', function() {
 					console.log('Clicked on marker: '+i)
 					infowindow.close(); // close existing
@@ -61,9 +63,41 @@ You must pass a valid URL containing JSON data as the &src parameter!
 					infowindow.open(map,marker);
 				});
 			}
+*/
+			
+			function attachInfo2(marker, page_id) {
+                google.maps.event.addListener(marker, 'click', (function(marker, infowindow, page_id) {
+                    return function() {
+                        if(infowindow) {
+                            infowindow.close();
+                        }
+                        infowindow.setContent('<img src="/img/loading_large.gif"/>');
+                        infowindow.open(map, marker);
+                        infowindowAjax(page_id, function(data) {
+                            infowindow.setContent(data);
+                            $('.bxslider').bxSlider();
+                        });
+                    };
+                })(marker, infowindow, page_id));
+			}
+			
+			
 		});
 
 	}
+
+    function infowindowAjax(page_id, callback) {
+        return $.ajax({
+            url: '[[~154]]',
+            data: {
+                page_id: page_id
+            }
+        })
+        .done(callback)
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        });
+    }
 
 	function drawMarkersOnMap(markers, map)
 	{
