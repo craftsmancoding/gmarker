@@ -13,17 +13,17 @@
  *
  * SNIPPET PARAMETERS:
  *
- * &address string (optional) what you might type into a Google Maps search that defines where the map should be centered.
- * &latlng mixed (optional) latitude,longitude coordinates for centering the map.  Overrides &address when present.
- * &lng long (optional) longitude.  Overrides &address.
- * &height mixed (optional) height of the map (include 'px' or '%'). Defaults to [[++gmarker.default_height]]
- * &width mixed (optional) width of the map (include 'px' or '%'). Defaults to [[++gmarker.default_width]]
- * &zoom integer (optional) A zoom factor for the map. default: 15.
- * &id string CSS id of the div where the map will be drawn. Default: map-canvas
- * &class the CSS class of the outputted div (identified by &outTpl). Default is empty.
- * &zoom integer (optional) zoom level of the map. Default: 8
- * &type string (optional) ROADMAP (default), SATELLITE, HYBRID, TERRAIN; From https://developers.google.com/maps/documentation/javascript/maptypes
- * All other parameters passed to the Snippet are made available to the
+ * @param string $center - Where the map should be centered. This can either be lat,lng coordinates, or an address (what you might type into a Google Maps search).
+ * @param string $height - height of the map (specify 'px' or '%'). Defaults to gmarker.default_height System Setting
+ * @param string $width - width of the map (specify 'px' or '%'). Defaults to gmarker.default_width System Setting
+ * @param integer $zoom - A zoom factor for the map. [default=15]
+ * @param string $id - CSS dom id of the div where the map will be drawn. [default=map-canvas]
+ * @param string $class - the CSS class of the outputted div (identified by &outTpl). Default is empty.
+ * @param list $type Determines the type of map used (see https://developers.google.com/maps/documentation/javascript/maptypes) [default=ROADMAP] [options=["ROADMAP","SATELLITE","HYBRID","TERRAIN"]]
+ * @param string $headTpl Name of chunk injected into the page <head> [default=gmarkershead]
+ * @param string $outTpl Name of chunk containing the map canvas div (correlates with $id) [default=g_out]
+ * @param boolean $secure
+ * All other parameters passed to the Snippet are made available to the $outTpl Chunk as placeholders.
  *
  * USAGE:
  *
@@ -31,7 +31,7 @@
  *
  * [[!Gmarker]]
  *
- * [[Gmarker? &width=`100%` &height=`300px` &class=`my_class` &latlng=`40.3810679,-78.0758859` &zoom=`8`]]
+ * [[Gmarker? &width=`100%` &height=`300px` &class=`my_class` &center=`40.3810679,-78.0758859` &zoom=`8`]]
  *
  * @var array $scriptProperties
  *

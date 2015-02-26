@@ -64,6 +64,26 @@ class Gmarker {
 	}
 
 	/**
+	 * A function devoted to determining whether the given $str represents lat,lng coordinates.
+	 * @param $str
+	 * @return boolean
+	 */
+	public function isLatLng($str)
+	{
+		$commas = substr_count($str,',');
+		$dots = substr_count($str,'.');
+		if ($commas == 1 && $dots == 2)
+		{
+			list($lat,$lng) = explode(',', $str);
+			if ($lat >= -90 && $lat <= 90 && $lng >= -180 && $lng <= 180)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Generate a unique fingerprint of the input parameters that would affect
 	 * the results of a lookup.  All properties passed to this should be the props
 	 * that would uniquely identify an address, e.g. address, city, state, zip

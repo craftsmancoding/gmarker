@@ -2,33 +2,22 @@
   "name": "craftsmancoding/gmarker",
   "description": "",
   "type": "modx-package",
-  "keywords": ["modx","maps","google","location","geo"],
+  "keywords": ["modx","google","maps","location","markers","store locator","latitute","longitude"],
   "homepage": "https://github.com/craftsmancoding/gmarker",
   "license": "GPL-2.0+",
-  "authors": [
-    {
-      "name": "Everett Griffiths",
-      "email": "everett@craftsmancoding.com",
-      "homepage" : "https://craftsmancoding.com/"
-    }
-  ],
   "support": {
-    "email": "donotreply@craftsmancoding.com",
     "issues": "https://github.com/craftsmancoding/gmarker/issues",
     "forum": "http://forums.modx.com/",
     "wiki": "https://github.com/craftsmancoding/gmarker/wiki",
     "source": "https://github.com/craftsmancoding/gmarker.git"
   },
-  "require": {
-    "php": ">=5.3"
-  },
   "autoload": {
     "classmap":["model/gmarker/"]
   },
   "extra": {
-    "package_name": "Gmarker",
+    "package_name": "gmarker",
     "namespace": "gmarker",
-    "version": "2.0.0",
+    "version": "2.0",
     "release": "dev",
     "category":"Gmarker"
   }
