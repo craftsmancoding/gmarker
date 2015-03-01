@@ -12,12 +12,15 @@
     "source": "https://github.com/craftsmancoding/gmarker.git"
   },
   "autoload": {
-    "classmap":["model/gmarker/"]
+    "classmap":["model/gmarker/"],
+    "psr-4": {
+      "Gmarker\\": ["model/","controllers/"]
+    }
   },
   "extra": {
     "package_name": "gmarker",
     "namespace": "gmarker",
-    "version": "2.0",
+    "version": "2.0.0",
     "release": "dev",
     "category":"Gmarker"
   }

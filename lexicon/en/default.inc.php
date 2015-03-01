@@ -28,7 +28,22 @@
  * @subpackage lexicon
  */
 $_lang['gmarker'] = 'Gmarker';
-$_lang['gmarker_desc'] = 'Implementation of the Google Geocoding API (v3)';
+$_lang['gmarker_desc'] = 'Google Maps Geocoding API (v3)';
+
+
+// License
+// License stuff
+$_lang['status'] = 'Status';
+$_lang['valid'] = 'Valid';
+$_lang['invalid'] = 'Invalid';
+$_lang['expired'] = 'Expired';
+
+// Warning Boxes
+$_lang['warning'] = 'Warning';
+$_lang['error'] = 'Error';
+$_lang['invalid_expired_msg'] = 'Your license for Gmarker is invalid or expired. <strong>gmarker.license_key</strong> System Setting.  <a href="https://craftsmancoding.com/products/gmarker/">Renew License Key</a>';
+$_lang['activation_problem_msg'] = 'There was a problem activating your license.';
+$_lang['reqs_license_msg'] = 'Gmarker requires a license key. Paste it into your <strong>gmarker.license_key</strong> System Setting.  <a href="https://craftsmancoding.com/products/gmarker/">Buy License Key Now.</a>';
 
 // Errors
 $_lang['node_not_found'] = 'The following node was not found in the JSON: [[+node]]';
@@ -46,6 +61,9 @@ $_lang['utf8_error'] = 'String for page id [[+id]] "[[+var]]" is not UTF-8 encod
 
 
 // System Settings
+$_lang['setting_gmarker.license_key'] = 'License Key';
+$_lang['setting_gmarker.license_key_desc'] = 'Gmarker requires a valid license key. You may purchase one at <a href="https://craftsmancoding.com/products/downloads/gmarker/">https://craftsmancoding.com/products/downloads/gmarker/</a> and enter it here.';
+
 $_lang['setting_gmarker.formatting_string'] = 'Formatting String';
 $_lang['setting_gmarker.formatting_string_desc'] = 'Assemble all the Template Variables so that when they are parsed they will contain a valid address that you could conceivably type into a Google Maps search field.';
 

@@ -1,0 +1,265 @@
+#modxbackup_header a,
+#modxbackup_canvas a,
+.modxbackup_nav_item a {
+    color: #3697cd;
+    text-decoration: none;
+}
+
+
+
+#modxbackup_header a:hover,
+#modxbackup_canvas a:hover,
+.modxbackup_nav_item a:hover {
+    color: #3697cd;
+}
+
+/**
+ * CMPs
+ */
+#modxbackup_canvas {
+    background: #fff;
+    margin: 0px 10px 0px;
+    padding-bottom: 20px;
+    -webkit-box-shadow: 0px 0px 3px -1px rgba(181,179,181,1);
+    -moz-box-shadow: 0px 0px 3px -1px rgba(181,179,181,1);
+    box-shadow: 0px 0px 3px -1px rgba(181,179,181,1);
+}
+
+.modxbackup_canvas_inner {
+    padding: 20px 20px 0 20px;
+}
+
+h2.modxbackup_cmp_heading {
+    margin-bottom: 0px;
+}
+
+#modxbackup_nav {
+    list-style-type:none;
+    padding:0;
+    list-style-type: none;
+    padding: 0;
+    float: right;
+    margin: 40px 10px 5px 10px;
+    font-size: 12px;
+}
+
+.modxbackup_nav_item {
+    display:inline;
+    padding: 10px;
+    color: #3697cd;
+    font-size: 13px;
+}
+
+.modxbackup_nav_item a.current {
+    background: #fff;
+    padding: 7px 10px;
+    border-top: 3px solid #3697cd;
+}
+/* not sure if we need this... */
+.modxbackup_nav_home {
+
+}
+
+#modxbackup_footer {
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+}
+
+#modxbackup_copyright {
+    color: #727272;
+    margin-top: 15px;
+    font-style: italic;
+    text-align: center;
+}
+
+#modxbackup_buttons {
+    width: 100%;
+}
+#modxbackup_buttons ul:before,
+#modxbackup_buttons ul:after {
+    content: " ";
+    display: table;
+}
+#modxbackup_buttons ul:after {
+    clear: both;
+}
+#modxbackup_buttons ul {
+    width: 102%;
+    margin: -1% 0 0 -1%;
+    /* clearfix */
+    *zoom: 1;
+}
+#modxbackup_buttons ul li {
+    display: table;
+    position: relative;
+    float: left;
+    width: 32%;
+    margin: 0;
+    padding: 1% 0 0 1%;
+}
+
+.modxbackup_nav_item a.current {
+    font-weight: bold;
+}
+
+.modxbackup-btn {
+    background: #fff;
+    border: 1px solid #e4e4e4;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    padding: 7px 15px;
+    color: #6a6a6a !important;
+    font-weight: normal;
+    font-size: 14px;
+    text-shadow: none !important;
+    cursor: pointer !important;
+}
+
+
+
+div > label.x-form-cb-label {
+    display: inline;
+}
+
+div > input.x-form-field {
+    background: none !important;
+    margin-bottom: 0px !important;
+}
+
+.img-info-wrap {
+    position: relative;
+    max-height:180px;
+}
+
+.img-info-inner {
+    position: absolute;
+    bottom: 0px;
+    background: #000;
+    background-color: rgba(0,0,0,0.3);
+    width: 100%;
+    color: #fff;
+}
+
+.img-info-inner p {
+    margin: 3px 5px;
+}
+
+
+
+
+/**** Alerts*****/
+.modxbackup_danger {
+    margin: 10px;
+    padding: 10px;
+    background: #ffddde;
+    border: 1px solid #9b0004;
+    color: #9b0004;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+.modxbackup_success {
+    margin: 10px;
+    padding: 10px;
+    background: #dae8bf;
+    border: 1px solid #64812e;
+    color: #4e6424;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+.modxbackup_info {
+    margin: 10px;
+    padding: 10px;
+    background: #33CCFF;
+    border: 1px solid #3399FF;
+    color: #4e6424;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+
+table.classy {
+    width: 100%;
+}
+
+table.classy thead tr {
+    background: #e4e9ee !important;
+}
+
+table.classy thead tr th {
+    padding: 12px 5px;
+    color: #696969;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+table.classy thead a {
+    color: #fff;
+}
+
+table thead a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+tr:nth-child(even) {background: #f5f6f9}
+tr:nth-child(odd) {background: #fff}
+
+.span70 {
+    width: 70%;
+}
+
+.span20 {
+    width: 20%;
+}
+
+.span100 {
+    width: 100%;
+    display: block;
+}
+.pull-right {
+    float: right;
+}
+.pull-left {
+    float: left;
+}
+
+#modxbackup_msg {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+#cboxContent {
+    background: #fff !important;
+}
+#cboxLoadedContent {
+    padding: 20px;
+    background: #fff !important;
+}
+
+.asset-modal-controls {
+    position: absolute;
+    bottom: 0px;
+    background: #fff;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    display: block;
+    width: 100%;
+}
+
+
+/* The Magnificent Clearfix: Updated to prevent margin-collapsing on child elements.
+   j.mp/bestclearfix */
+.clear:before, .clear:after,
+.clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; visibility: hidden; }
+.clear:after,
+.clearfix:after { clear: both; }
+/* Fix clearfix: blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
+.clear,
+.clearfix { zoom: 1; }

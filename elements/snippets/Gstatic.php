@@ -2,8 +2,8 @@
 /**
  * Gstatic
  *
- * This Snippet draws a map centered on a single location, identified either by an address 
- * or by latitude/longitude coordinates.
+ * This Snippet draws a map centered on a single location, specified as either an address
+ * or as latitude/longitude coordinates.
  *
  * LICENSE:
  * See the docs/license.txt for full licensing info.

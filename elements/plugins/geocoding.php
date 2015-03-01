@@ -15,7 +15,6 @@
  */
 
 
-//require_once(MODX_CORE_PATH.'components/gmarker/model/gmarker/Gmarker.class.php');
 $core_path = $modx->getOption('gmarker.core_path', null, MODX_CORE_PATH.'components/gmarker/');
 include_once $core_path .'vendor/autoload.php';
 $Gmarker = new Gmarker($modx);
@@ -55,7 +54,7 @@ if (empty($tpl))
 	return;
 }
 
-// Google props: what we will send them
+// Google props: what we will send to the API
 $goog = array(); 
 
 // Init w standard fields

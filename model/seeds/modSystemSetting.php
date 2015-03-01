@@ -5,7 +5,13 @@
  * Description: setting_ + $key + _desc
  -----------------------------------------------------------------*/
 return array(
-
+    array(
+        'key'  		=>     'gmarker.license_key',
+        'value'		=>     '',
+        'xtype'		=>     'textfield',
+        'namespace' =>     'gmarker',
+        'area' 		=>     'gmarker:default'
+    ),
     array(
         'key'  		=>     'gmarker.formatting_string',
         'value'		=>     '',
