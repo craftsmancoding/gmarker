@@ -35,8 +35,14 @@ $_lang['gmarker_desc'] = 'Google Maps Geocoding API (v3)';
 // License stuff
 $_lang['status'] = 'Status';
 $_lang['valid'] = 'Valid';
+$_lang['none'] = 'None';
+$_lang['required'] = 'Required';
 $_lang['invalid'] = 'Invalid';
 $_lang['expired'] = 'Expired';
+$_lang['ok'] = 'Ok';
+
+$_lang['license.pagetitle'] = 'Gmarker License';
+$_lang['settings.pagetitle'] = 'Gmarker Settings';
 
 // Warning Boxes
 $_lang['warning'] = 'Warning';
@@ -108,6 +114,11 @@ $_lang['setting_gmarker.region_desc'] = 'The region code, specified as a ccTLD (
 
 $_lang['setting_gmarker.pincolor'] = 'Default Pin Color';
 $_lang['setting_gmarker.pincolor_desc'] = 'Set a valid CSS color, e.g. FE7569 (do not include the #), to set the default color of your pins.  Used by the Gmarker Snippet.';
+
+// Settings Errors
+$_lang['gmarker.templates_empty'] = 'gmarker.templates empty. This setting is required for the Geocoding plugin to work.';
+$_lang['gmarker.templates_do_not_exist'] = 'gmarker.templates defines templates that do not exist.';
+
 
 
 /*EOF*/

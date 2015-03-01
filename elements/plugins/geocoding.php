@@ -36,7 +36,7 @@ if (empty($templates)) {
 	return;
 }
 
-$templates = explode(',',$templates);
+$templates = array_map('trim', explode(',',$templates));
 
 // We are only concerned with pages that use one of the special templates
 if (!in_array($resource->template, $templates)) {

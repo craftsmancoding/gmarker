@@ -14,7 +14,6 @@ class IndexController extends BaseController {
     public function getPageTitle()
     {
         return $this->modx->lexicon('settings.pagetitle');
-        //return $this->modx->lexicon('index.pagetitle');
     }
 
     /**
@@ -32,8 +31,9 @@ class IndexController extends BaseController {
      */
     public function process(array $scriptProperties = array())
     {
+        $this->setPlaceholder('gmarker.templates_msg', 'ddd');
+
         return $this->fetchTemplate('settings.php');
-        //return $this->fetchTemplate('index.php');
     }
 
 }

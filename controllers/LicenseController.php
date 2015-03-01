@@ -35,8 +35,6 @@ class LicenseController extends BaseController {
      */
     public function process(array $scriptProperties = array())
     {
-
-        //return '<pre>'. print_r($this->getPlaceholders(),true).'</pre>';
         return $this->fetchTemplate('license.php');
     }
 
