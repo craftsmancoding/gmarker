@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+        <title>Glocation - Gmarker MODX Extra</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">Gmarker MODX Extra</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Getting Started <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../License">License</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Getting-Started">Getting Started</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Snippets <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../Gmap-Snippet">Gmap</a>
+                        </li>
+                    
+                        <li class="active">
+                            <a href=".">Glocation</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../Geocoding-Plugin">Plugins</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../System-Settings">Settings</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li >
+                    <a rel="next" href="../Gmap-Snippet">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../Geocoding-Plugin">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#snippet-parameters">Snippet Parameters</a></li>
+        
+    
+        <li class="main "><a href="#placeholders">Placeholders</a></li>
+        
+    
+        <li class="main "><a href="#snippet-usage-example">Snippet Usage Example</a></li>
+        
+            <li><a href="#example-1">Example 1</a></li>
+        
+            <li><a href="#example-2">Example 2</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<p>The Glocation Snippet is a geocoding/reverse-geocoding utility script used to lookup latitude/longitude from a given address. This script can be called either as a Snippet or a Hook (e.g. a Formit or Register hook). See https://github.com/craftsmancoding/gmarker/wiki/Glocation-Hook[Glocation Hook] for how to use this as a hook.</p>
+<p>When used as a Snippet, the lookup will set a series of placeholders (e.g. [[+location.lat]]).  When used as a hook, form fields representing address information will be parsed and 2 additional form parameters will be added for the latitude and the longitude.</p>
+<p>The results for any address lookup are returned from cache whenever possible to help reduce the load on the Google Geocoding API and its limit of 2,500 geolocation requests per day.  </p>
+<p>Each time an address is looked up, the JSON result from Google is cached so that even when multiple pages query the same address, the Google Geocoding API is only queried the first time the address is encountered.</p>
+<p>See <a href="../Google's Geocoding documentation">https://developers.google.com/maps/documentation/geocoding/</a> for more information about their service.</p>
+<h2 id="snippet-parameters">Snippet Parameters</h2>
+<ul>
+<li><em>address</em> <em>usually required</em> string.  The address to look up.  </li>
+<li><em>latlng</em> <em>(optional)</em> string. Provide the Snippet with latitude/longitude coordinates (e.g. "40.714224,-73.961452") if you need to conduct reverse geocoding.  This argument will override the &amp;address parameter.</li>
+<li><em>prefix</em> <em>(optional)</em> an optional prefix to use on your placeholders, e.g. to distinguish between multiple instances of this Snippet on a single page.  Default: <em>none</em>.</li>
+<li><em>refresh</em> <em>(optional)</em> boolean, default: 0.  When set to 1 (true), the local cache of geocoded results will be ignored and the Google Geocoding API <em>will be queried</em>.  It's recommended that you leave this set to 0 so as to avoid maxing out the API usage limits (the latitude and longitude coordinates for any address should never change, after all).</li>
+<li><em>sensor</em> <em>(optional, default=0)</em> whether or not the device being used has a location sensor. Default: false.</li>
+<li><em>components</em> <em>(optional)</em> Causes address results to be restricted to a specific area. Default value is inherited from the <em>gmarker.components</em> https://github.com/craftsmancoding/gmarker/wiki/System-Settings[System Setting]. See https://developers.google.com/maps/documentation/geocoding/#ComponentFiltering[Component Filtering].</li>
+<li><em>bounds</em> <em>(optional)</em> optionally you can add soft filters to bias results. See https://developers.google.com/maps/documentation/geocoding/#Viewports[Viewport Biasing]</li>
+<li><em>language</em> <em>(optional)</em> Defaults to the <em>manager_language</em> System Setting</li>
+<li><em>region</em> <em>(optional)</em> The region code, specified as a ccTLD ("top-level domain") two-character value.  See https://developers.google.com/maps/documentation/geocoding/#RegionCodes[Region Biasing]</li>
+</ul>
+<h2 id="placeholders">Placeholders</h2>
+<p>The Glocation Snippet will set the following placeholders.  Put these placeholders anywhere on your page containing the Snippet call.</p>
+<ul>
+<li><em>[[+formatted_address]]</em> : The nicely formatted address, e.g. "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA"</li>
+<li><em>[[+location.lat]]</em> : The pinpoint latitude, e.g. "37.42291810"</li>
+<li><em>[[+location.lng]]</em> : The pinpoint longitude, e.g. "-122.08542120"</li>
+<li><em>[[+northeast.lat]]</em> : The latitude of the northeast boundary, e.g. "37.42426708029149"</li>
+<li><em>[[+northeast.lng]]</em> : The longitude of the northeast boundary, e.g. "-122.0840722197085"</li>
+<li><em>[[+southwest.lat]]</em> : The latitude of the southwest boundary, e.g. "37.42156911970850"</li>
+<li><em>[[+southwest.lng]]</em> : The longitude of the southwest boundary, e.g. "-122.0867701802915"</li>
+<li><em>[[+location_type]]</em> e.g. "ROOFTOP"</li>
+<li><em>[[+json]]</em> : raw JSON result.</li>
+<li><em>[[+status]]</em> e.g. "OK" or "ZERO_RESULTS"</li>
+</ul>
+<h2 id="snippet-usage-example">Snippet Usage Example</h2>
+<h3 id="example-1">Example 1</h3>
+<p>This Snippet should always be called uncached.  If the address has been looked up previously, then the results in the geocoding cache will be used so the Geocoding API will not be queried.</p>
+<pre><code>[[!Glocation? &amp;address=`1600 Amphitheatre Parkway,Mountain View,CA`]]
+</code></pre>
+
+<p>Then somewhere on your page:</p>
+<p>The address you looked up: [[+formatted_address]]
+ The Latitude of this address is: [[+location.lat]]
+ The Longitude of this address is: [[+location.lng]]</p>
+<h3 id="example-2">Example 2</h3>
+<p>When you use 2 or more instances of the Snippet on a single page, you'll want to utilize the <em>&amp;prefix</em> parameter to keep your placeholders organized.</p>
+<pre><code>[[!Glocation? &amp;address=`1600 Amphitheatre Parkway,Mountain View,CA` &amp;prefix=`1.`]]
+[[!Glocation? &amp;address=`565 N Clinton Drive, Milwaukee, WI` &amp;prefix=`2.`]]
+</code></pre>
+
+<p>Then somewhere on your page you would display the information:</p>
+<pre><code> Address 1:
+ The first address you looked up: [[+1.formatted_address]]
+ The Latitude of this address is: [[+1.location.lat]]
+ The Longitude of this address is: [[+1.location.lng]]
+
+ Address 2:
+ The second address you looked up: [[+2.formatted_address]]
+ The Latitude of this address is: [[+2.location.lat]]
+ The Longitude of this address is: [[+2.location.lng]]
+</code></pre>
+
+</div>
+        </div>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/prettify-1.0.min.js"></script>
+        <script src="../js/base.js"></script>
+    </body>
+</html>
