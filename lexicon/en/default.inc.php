@@ -118,7 +118,10 @@ $_lang['setting_gmarker.pincolor_desc'] = 'Set a valid CSS color, e.g. FE7569 (d
 // Settings Errors
 $_lang['gmarker.templates_empty'] = 'gmarker.templates empty. This setting is required for the Geocoding plugin to work.';
 $_lang['gmarker.templates_do_not_exist'] = 'gmarker.templates defines templates that do not exist.';
-
+$_lang['gmarker.lng_tv_empty'] = 'gmarker.lng_tv empty. This setting is required for the Geocoding plugin to work.';
+$_lang['gmarker.lng_tv_does_not_exist'] = 'gmarker.lng_tv defines a template variable that does not exist.';
+$_lang['gmarker.lat_tv_empty'] = 'gmarker.lat_tv empty. This setting is required for the Geocoding plugin to work.';
+$_lang['gmarker.lat_tv_does_not_exist'] = 'gmarker.lat_tv defines a template variable that does not exist.';
 
 
 /*EOF*/

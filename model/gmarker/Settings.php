@@ -37,6 +37,7 @@ class Settings {
         $results = array();
 
         $results['gmarker.templates'] = $this->testTemplates('gmarker.templates');
+        $results['gmarker.lat_tv'] = $this->testTVs('gmarker.lat_tv');
 
         return $results;
     }
@@ -65,6 +66,37 @@ class Settings {
                     'msg' => 'gmarker.templates_do_not_exist'
                 );
             }
+        }
+
+        return array(
+            'key' => $key,
+            'status' => 'ok',
+            'msg' => 'ok',
+        );
+    }
+
+    public function testTVs($key)
+    {
+        $name = trim($this->modx->getOption($key));
+
+        if (empty($name)) {
+            return array(
+                'key' => $key,
+                'status' => 'error',
+                'msg' => $key.'_empty'
+            );
+        }
+
+
+
+
+        if (!$TV = $this->modx->getObject('modTemplateVar', array('name'=>$name)))
+        {
+            return array(
+                'key' => $key,
+                'status' => 'error',
+                'msg' => $key.'_does_not_exist'
+            );
         }
 
         return array(

@@ -61,5 +61,16 @@ class SettingsTest extends PHPUnit_Framework_TestCase {
 
     }
 
+    public function testLatTv()
+    {
+        self::$modx->setOption('gmarker.lat_tv','Does not exist');
+        $results = self::$Settings->testTVs('gmarker.lat_tv');
+        $this->assertEquals('error',$results['status']);
+
+        self::$modx->setOption('gmarker.lng_tv','Does not exist');
+        $results = self::$Settings->testTVs('gmarker.lng_tv');
+        $this->assertEquals('error',$results['status']);
+    }
+
 }
 /*EOF*/
