@@ -40,6 +40,7 @@ $_lang['required'] = 'Required';
 $_lang['invalid'] = 'Invalid';
 $_lang['expired'] = 'Expired';
 $_lang['ok'] = 'Ok';
+$_lang['back'] = 'Back';
 
 $_lang['license.pagetitle'] = 'Gmarker License';
 $_lang['settings.pagetitle'] = 'Gmarker Settings';
@@ -145,4 +146,5 @@ $_lang['gmarker.formatting_string_unknown_fields'] = 'References unknown fields.
 
 $_lang['gmarker.style_invalid'] = 'Invalid style data.';
 
+$_lang['raw_json_response'] = 'Raw JSON Response';
 /*EOF*/

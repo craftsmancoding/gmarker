@@ -35,6 +35,14 @@ return array(
     ),
 
     array(
+        'key'  		=>     'gmarker.zoom',
+        'value'		=>     8,
+        'xtype'		=>     'textfield',
+        'namespace' =>     'gmarker',
+        'area' 		=>     'gmarker:default'
+    ),
+
+    array(
         'key'  		=>     'gmarker.bounds',
         'value'		=>     '',
         'xtype'		=>     'textfield',

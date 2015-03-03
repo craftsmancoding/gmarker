@@ -54,9 +54,6 @@ if (empty($tpl))
 	return;
 }
 
-// Google props: what we will send to the API
-$goog = array(); 
-
 // Init w standard fields
 $props = $resource->toArray();
 
@@ -81,20 +78,22 @@ if (!in_array($lng_tv,$tvList)) {
 	return;
 }
 
-// Don't do the lookup if we already have values
-//$lat = $resource->getTVValue($lat_tv);
-//$lng = $resource->getTVValue($lng_tv);
-//if ($lat && $lng)
-//{
-//	$modx->log(xPDO::LOG_LEVEL_DEBUG, "[Geocoding Plugin] values already present for latitude and longitude; skipping API lookup.");
-//	return;
-//}
+// Don't do the lookup if we already have values present (e.g. manually entered)
+$lat = $resource->getTVValue($lat_tv);
+$lng = $resource->getTVValue($lng_tv);
+if ($lat && $lng)
+{
+	$modx->log(xPDO::LOG_LEVEL_DEBUG, "[Geocoding Plugin] values already present for latitude and longitude; skipping API lookup.");
+	return;
+}
 
 // We load up an "imaginary" chunk: this is done so the output is parsed
 // with all the output filters, chunk tags, snippet output etc. 
 $uniqid = uniqid();
 $chunk = $modx->newObject('modChunk', array('name' => "{geocoding_tmp}-{$uniqid}"));
 $chunk->setCacheable(false);
+// Google props: what we will send to the API
+$goog = array();
 $goog['address'] = $chunk->process($props, $tpl);
 $goog['bounds'] = $modx->getOption('gmarker.bounds');
 $goog['components'] = $modx->getOption('gmarker.components');
@@ -105,16 +104,14 @@ $goog['language'] = $modx->getOption('gmarker.language');
 $json = $Gmarker->lookup($goog,$secure);
 
 // Write lat/lng back to the page
-$modx->log(xPDO::LOG_LEVEL_ERROR, "[Geocoding Plugin] ".$goog['address']." @COORDS lat:".$Gmarker->get('location.lat')." and lng:".$Gmarker->get('location.lng'));
+$modx->log(xPDO::LOG_LEVEL_DEBUG, "[Geocoding Plugin] ".$goog['address']." @COORDS lat:".$Gmarker->get('location.lat')." and lng:".$Gmarker->get('location.lng'));
 
-//if(!$resource->getTVValue($lat_tv)) {
-	if(!$resource->setTVValue($lat_tv, $Gmarker->get('location.lat'))) {
-		$modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('problem_saving', array('id'=> $resource->get('id'))));
-	}
-//}
-//if(!$resource->getTVValue($lng_tv)) {
-	if(!$resource->setTVValue($lng_tv, $Gmarker->get('location.lng'))) {
-		$modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('problem_saving', array('id'=> $resource->get('id'))));
-	}
-//}
+if(!$resource->setTVValue($lat_tv, $Gmarker->get('location.lat'))) {
+    $modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('problem_saving', array('id'=> $resource->get('id'))));
+}
+
+if(!$resource->setTVValue($lng_tv, $Gmarker->get('location.lng'))) {
+    $modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('problem_saving', array('id'=> $resource->get('id'))));
+}
+
 /*EOF*/
