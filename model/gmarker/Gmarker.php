@@ -217,7 +217,7 @@ class Gmarker {
 		if ($secure) {
 			$url = $this->geocoding_https;
 		}
-		$url .= '?sensor=false'; // no longer required
+		$url .= '?sensor=false'; // TODO: no longer required
 
 		// Special cleaning of the address: no extra spaces, then all spaces to +
 		$props['address'] = preg_replace('/\s+/', ' ', $props['address']);

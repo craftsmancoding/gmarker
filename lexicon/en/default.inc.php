@@ -43,6 +43,15 @@ $_lang['ok'] = 'Ok';
 
 $_lang['license.pagetitle'] = 'Gmarker License';
 $_lang['settings.pagetitle'] = 'Gmarker Settings';
+$_lang['advanced_settings'] = 'Advanced Settings';
+$_lang['address'] = 'Address';
+$_lang['api_test'] = 'Submit an address to test the Google Maps API.';
+
+// Footer
+$_lang['menu.bug'] = 'Report a Bug';
+$_lang['menu.wiki'] = 'Read the Docs';
+$_lang['menu.support'] = 'Get Pro Support';
+
 
 // Warning Boxes
 $_lang['warning'] = 'Warning';
@@ -100,7 +109,7 @@ $_lang['setting_gmarker.apikey_desc'] = 'Log into <a href="https://code.google.c
 $_lang['setting_gmarker.default_height'] = 'Default Height';
 $_lang['setting_gmarker.default_height_desc'] = 'The default height (specify px or %) for maps drawn using the Gmap or Gmarker Snippets';
 
-$_lang['setting_gmarker.default_width'] = 'Width';
+$_lang['setting_gmarker.default_width'] = 'Default Width';
 $_lang['setting_gmarker.default_width_desc'] = 'The default width (specify px or %) for maps drawn using the Gmap or Gmarker Snippets';
 
 $_lang['setting_gmarker.style'] = 'Style';
@@ -116,12 +125,24 @@ $_lang['setting_gmarker.pincolor'] = 'Default Pin Color';
 $_lang['setting_gmarker.pincolor_desc'] = 'Set a valid CSS color, e.g. FE7569 (do not include the #), to set the default color of your pins.  Used by the Gmarker Snippet.';
 
 // Settings Errors
-$_lang['gmarker.templates_empty'] = 'gmarker.templates empty. This setting is required for the Geocoding plugin to work.';
-$_lang['gmarker.templates_do_not_exist'] = 'gmarker.templates defines templates that do not exist.';
-$_lang['gmarker.lng_tv_empty'] = 'gmarker.lng_tv empty. This setting is required for the Geocoding plugin to work.';
-$_lang['gmarker.lng_tv_does_not_exist'] = 'gmarker.lng_tv defines a template variable that does not exist.';
-$_lang['gmarker.lat_tv_empty'] = 'gmarker.lat_tv empty. This setting is required for the Geocoding plugin to work.';
-$_lang['gmarker.lat_tv_does_not_exist'] = 'gmarker.lat_tv defines a template variable that does not exist.';
+$_lang['gmarker.templates_empty'] = 'This setting is required for the Geocoding plugin to work.';
+$_lang['gmarker.templates_do_not_exist'] = 'Defines templates that do not exist.';
+$_lang['gmarker.lng_tv_empty'] = 'This setting is required for the Geocoding plugin to work.';
+$_lang['gmarker.lng_tv_does_not_exist'] = 'Defines a template variable that does not exist.';
+$_lang['gmarker.lat_tv_empty'] = 'This setting is required for the Geocoding plugin to work.';
+$_lang['gmarker.lat_tv_does_not_exist'] = 'Defines a template variable that does not exist.';
+$_lang['gmarker.default_height_empty'] = 'Empty.';
+$_lang['gmarker.default_height_missing_units'] = 'Missing units (px or %).';
+$_lang['gmarker.default_height_invalid'] = 'Must specify an integer and a unit, e.g. 80% or 500px';
+$_lang['gmarker.default_width_empty'] = 'Empty.';
+$_lang['gmarker.default_width_missing_units'] = 'Missing units (px or %).';
+$_lang['gmarker.default_width_invalid'] = 'Must specify an integer and a unit, e.g. 80% or 500px';
+$_lang['gmarker.apikey_empty'] = 'Using an API key is strongly recommended. Get yours at <a href="https://code.google.com/apis/console">https://code.google.com/apis/console</a>';
 
+$_lang['gmarker.formatting_string_empty'] = 'Empty.';
+$_lang['gmarker.formatting_string_invalid'] = 'Appears invalid.';
+$_lang['gmarker.formatting_string_unknown_fields'] = 'References unknown fields.';
+
+$_lang['gmarker.style_invalid'] = 'Invalid style data.';
 
 /*EOF*/

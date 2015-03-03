@@ -6,24 +6,35 @@
 
     <div class="x-panel-body panel-desc x-panel-body-noheader x-panel-body-noborder">
 
+        <?php
+        //print_r($this->getPlaceholder('gmarker.templates'));
+        ?>
 
 
 <ul>
-    <li><strong><?php print $this->modx->lexicon('setting_gmarker.license_key') ?></strong> : <code><?php print $this->modx->getOption('gmarker.license_key');?></code> <span class="gmarker_success"><?php print $this->modx->lexicon('valid'); ?> &#10004;</span></li>
-
-    <li><strong><?php print $this->modx->lexicon('setting_gmarker.formatting_string'); ?></strong>: <?php print $this->modx->getOption('gmarker.formatting_string'); ?>
-
-    </li>
-
     <li>
-        <strong><?php print $this->modx->lexicon('setting_gmarker.templates'); ?></strong>: <?php print $this->modx->getOption('gmarker.templates'); ?>
-        <?php if (empty($this->modx->getOption('gmarker.templates'))): ?>
-            <span class="gmarker_danger"><?php print $this->modx->lexicon('required'); ?> &#10007;</span>
-        <?php else: ?>
-            <span class="gmarker_success"><?php print $this->modx->lexicon('valid'); ?> &#10004;</span>
-        <?php endif; ?>
+        <strong><?php print $this->modx->lexicon('setting_gmarker.license_key') ?></strong> : <code><?php print $this->modx->getOption('gmarker.license_key');?></code> <span class="gmarker_success"><?php print $this->modx->lexicon('valid'); ?> &#10004;</span>
     </li>
-
+    <?php
+    $settings = $this->getPlaceholder('settings');
+    //print_r($settings);
+    foreach ($settings as $s => $data):
+    ?>
+        <li>
+            <strong><?php print $this->modx->lexicon('setting_'.$s); ?></strong>: <?php print $this->modx->getOption($s); ?>
+            <?php if ($data['status'] == 'error'): ?>
+                <span class="gmarker_danger"><?php print $this->modx->lexicon($data['msg']); ?> &#10007;</span>
+            <?php else: ?>
+                <span class="gmarker_success"><?php print $this->modx->lexicon($data['msg']); ?> &#10004;</span>
+            <?php endif; ?>
+        </li>
+    <?php
+    endforeach;
+    ?>
+</ul>
+<hr/>
+<h2><?php print $this->modx->lexicon('advanced_settings'); ?></h2>
+<ul>
     <li>
         <strong><?php print $this->modx->lexicon('setting_gmarker.components'); ?></strong>: <?php print $this->modx->getOption('gmarker.components'); ?>
         <?php if (empty($this->modx->getOption('gmarker.components'))): ?>
@@ -39,28 +50,8 @@
         <?php endif; ?>
     </li>
 
-    <li>
-        <strong><?php print $this->modx->lexicon('setting_gmarker.lat_tv'); ?></strong>: <?php print $this->modx->getOption('gmarker.lat_tv'); ?>
-        <?php if (empty($this->modx->getOption('gmarker.lat_tv'))): ?>
-            <span class="gmarker_danger"><?php print $this->modx->lexicon('required'); ?> &#10007;</span>
-        <?php else: ?>
-            <span class="gmarker_success"><?php print $this->modx->lexicon('valid'); ?> &#10004;</span>
-        <?php endif; ?>
-    </li>
-
-    <li><strong><?php print $this->modx->lexicon('setting_gmarker.lng_tv'); ?></strong>: <?php print $this->modx->getOption('gmarker.lng_tv'); ?></li>
-
-    <li><strong><?php print $this->modx->lexicon('setting_gmarker.pin_img_tv'); ?></strong>: <?php print $this->modx->getOption('gmarker.pin_img_tv'); ?></li>
-
     <li><strong><?php print $this->modx->lexicon('setting_gmarker.secure'); ?></strong>: <?php print $this->modx->getOption('gmarker.secure'); ?></li>
 
-    <li><strong><?php print $this->modx->lexicon('setting_gmarker.apikey'); ?></strong>: <?php print $this->modx->getOption('gmarker.apikey'); ?></li>
-
-    <li><strong><?php print $this->modx->lexicon('setting_gmarker.default_height'); ?></strong>: <?php print $this->modx->getOption('gmarker.default_height'); ?></li>
-
-    <li><strong><?php print $this->modx->lexicon('setting_gmarker.default_width'); ?></strong>: <?php print $this->modx->getOption('gmarker.default_width'); ?></li>
-
-    <li><strong><?php print $this->modx->lexicon('setting_gmarker.style'); ?></strong>: <?php print $this->modx->getOption('gmarker.style'); ?></li>
 
     <li><strong><?php print $this->modx->lexicon('setting_gmarker.language'); ?></strong>: <?php print $this->modx->getOption('gmarker.language'); ?></li>
 
@@ -68,8 +59,15 @@
 
 </ul>
 
-        <hr/>
+<hr/>
+<h2>API Test</h2>
 
+<p><?php print $this->modx->lexicon('api_test'); ?></p>
+<form action="<?php print self::page('apitest'); ?>" method="post">
+    <label for="address"><?php print $this->modx->lexicon('address'); ?></label>
+    <input type="text" id="address" name="address" placeholder="123 Main St." value="" size="70"/>
+    <input type="submit" value="<?php print $this->modx->lexicon('submit'); ?>" />
+</form>
 
 
 

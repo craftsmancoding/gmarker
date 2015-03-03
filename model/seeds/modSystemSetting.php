@@ -56,13 +56,6 @@ return array(
         'area' 		=>     'gmarker:default'
     ),
     array(
-        'key'  		=>     'gmarker.pin_img_tv',
-        'value'		=>     '',
-        'xtype'		=>     'textfield',
-        'namespace' =>     'gmarker',
-        'area' 		=>     'gmarker:default'
-    ),
-    array(
         'key'  		=>     'gmarker.secure',
         'value'		=>     1,
         'xtype'		=>     'combo-boolean',

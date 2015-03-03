@@ -63,13 +63,80 @@ class SettingsTest extends PHPUnit_Framework_TestCase {
 
     public function testLatTv()
     {
-        self::$modx->setOption('gmarker.lat_tv','Does not exist');
+        self::$modx->setOption('gmarker.lat_tv','');
         $results = self::$Settings->testTVs('gmarker.lat_tv');
         $this->assertEquals('error',$results['status']);
 
         self::$modx->setOption('gmarker.lng_tv','Does not exist');
         $results = self::$Settings->testTVs('gmarker.lng_tv');
         $this->assertEquals('error',$results['status']);
+    }
+
+    public function testLngTv()
+    {
+        self::$modx->setOption('gmarker.lng_tv','');
+        $results = self::$Settings->testTVs('gmarker.lng_tv');
+        $this->assertEquals('error',$results['status']);
+
+        self::$modx->setOption('gmarker.lng_tv','Does not exist');
+        $results = self::$Settings->testTVs('gmarker.lng_tv');
+        $this->assertEquals('error',$results['status']);
+    }
+
+    public function testHeight()
+    {
+        self::$modx->setOption('gmarker.default_height','');
+        $results = self::$Settings->testDimensions('gmarker.default_height');
+        $this->assertEquals('error',$results['status']);
+        $this->assertEquals('gmarker.default_height_empty',$results['msg']);
+
+        self::$modx->setOption('gmarker.default_height','50');
+        $results = self::$Settings->testDimensions('gmarker.default_height');
+        $this->assertEquals('error',$results['status']);
+        $this->assertEquals('gmarker.default_height_missing_units',$results['msg']);
+
+        self::$modx->setOption('gmarker.default_height','16.5px');
+        $results = self::$Settings->testDimensions('gmarker.default_height');
+        $this->assertEquals('error',$results['status']);
+        $this->assertEquals('gmarker.default_height_invalid',$results['msg']);
+
+        self::$modx->setOption('gmarker.default_height','-50%');
+        $results = self::$Settings->testDimensions('gmarker.default_height');
+        $this->assertEquals('error',$results['status']);
+        $this->assertEquals('gmarker.default_height_invalid',$results['msg']);
+
+        self::$modx->setOption('gmarker.default_height','500px');
+        $results = self::$Settings->testDimensions('gmarker.default_height');
+        $this->assertEquals('ok',$results['status']);
+
+    }
+
+    public function testApiKey()
+    {
+        self::$modx->setOption('gmarker.apikey','');
+        $results = self::$Settings->testApi('gmarker.apikey');
+        $this->assertEquals('error',$results['status']);
+        $this->assertEquals('gmarker.apikey_empty',$results['msg']);
+
+    }
+
+    public function testFormattingString()
+    {
+        self::$modx->setOption('gmarker.formatting_string','');
+        $results = self::$Settings->testFormattingString('gmarker.formatting_string');
+        $this->assertEquals('error',$results['status']);
+        $this->assertEquals('gmarker.formatting_string_empty',$results['msg']);
+
+        self::$modx->setOption('gmarker.formatting_string','Nada');
+        $results = self::$Settings->testFormattingString('gmarker.formatting_string');
+        $this->assertEquals('error',$results['status']);
+        $this->assertEquals('gmarker.formatting_string_invalid',$results['msg']);
+
+        self::$modx->setOption('gmarker.formatting_string','[[++does_not_exist]]');
+        $results = self::$Settings->testFormattingString('gmarker.formatting_string');
+        $this->assertEquals('error',$results['status']);
+        $this->assertEquals('gmarker.formatting_string_unknown_fields',$results['msg']);
+
     }
 
 }
