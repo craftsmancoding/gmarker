@@ -5,7 +5,11 @@
     </div>
 
     <div class="x-panel-body panel-desc x-panel-body-noheader x-panel-body-noborder">
+        Welcome to Gmarker System Settings
+    </div>
 
+
+<div class="gmarker_canvas_inner">
         <script type="text/javascript">
             function gmapInitialize() {
 
@@ -38,6 +42,7 @@
         </script>
 
         <a href="<?php print self::page('index'); ?>" class="gmarker-btn"><?php print $this->modx->lexicon('back'); ?></a>
+
         <strong><?php print $this->modx->lexicon('status'); ?></strong>:
         <?php if ($this->getPlaceholder('status') != 'OK'): ?>
             <span class="gmarker_danger"><?php print $this->getPlaceholder('status'); ?> &#10007;</span>
@@ -53,8 +58,9 @@
         <label for="raw"><?php $this->modx->lexicon('raw_json_response'); ?>:</label><br/>
         <textarea id="raw" rows="20" cols="80"><?php print $this->getPlaceholder('raw'); ?></textarea>
 
+</div>
 
 
 
-    </div>
+  
 <?php include 'footer.php'; ?>
