@@ -119,6 +119,32 @@ h2.gmarker_cmp_heading {
 
 
 
+.gmarker-primary {
+  background: #2aa798;
+  color: #fff !important;
+  border: 1px solid #2aa798;
+}
+
+.gmarker-info {
+  background: #556c88;
+  color: #fff !important;
+   border: 1px solid #556c88;
+}
+
+.gmarker-primary:hover {
+  background: #02958f;
+}
+
+.gmarker-large {
+  padding: 15px 25px !important;
+  font-size: 16px;
+}
+
+.gmarker-mini {
+  padding: 5px 10px !important;
+   font-size: 10px;
+}
+
 div > label.x-form-cb-label {
     display: inline;
 }
@@ -146,7 +172,9 @@ div > input.x-form-field {
     margin: 3px 5px;
 }
 
-
+#address {
+    padding: 5px 10px;
+}
 
 
 /**** Alerts*****/
@@ -159,8 +187,17 @@ div > input.x-form-field {
     border-radius: 3px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
+    line-height: 20px;
+    padding-bottom: 8px;
 }
 
+.gmarker-valid {
+    color: #7EC003;
+}
+
+.gmarker-invalid {
+    color: #C60005;
+}
 .gmarker_success {
     margin: 10px;
     padding: 10px;
@@ -183,33 +220,6 @@ div > input.x-form-field {
     -moz-border-radius: 3px;
 }
 
-
-table.classy {
-    width: 100%;
-}
-
-table.classy thead tr {
-    background: #e4e9ee !important;
-}
-
-table.classy thead tr th {
-    padding: 12px 5px;
-    color: #696969;
-    font-weight: bold;
-    font-size: 12px;
-}
-
-table.classy thead a {
-    color: #fff;
-}
-
-table thead a:hover {
-    color: #fff;
-    text-decoration: underline;
-}
-
-tr:nth-child(even) {background: #f5f6f9}
-tr:nth-child(odd) {background: #fff}
 
 .span70 {
     width: 70%;
@@ -253,6 +263,72 @@ tr:nth-child(odd) {background: #fff}
     width: 100%;
 }
 
+.gmarker_danger h3 {
+    float: left;
+    margin-right: 5px;
+    color: #9b0004;
+}
+
+.gmarker_danger h3:after {
+    content: ':';
+}
+
+.gmarker_danger a {
+    color: #4B474B !important;
+    font-weight: bold;
+}
+.gmarker_danger a:hover {
+    color: #9b0004 !important;
+}
+
+.gmarker-inline-msg {
+    display: inline-block;
+    line-height: 12px;
+    background: none !important;
+    border: none;
+    padding: 2px;
+    margin: 0;
+}
+
+.gmarker-inline-msg-danger {
+    color: #C60005;
+}
+table.classy-gmarker-mgr {
+    width: 100%;
+}
+
+table.classy-gmarker-mgr thead tr {
+    background: #e4e9ee !important; 
+}
+
+table.classy-gmarker-mgr thead tr th {
+  padding: 12px 5px;
+  color: #696969;
+  font-weight: bold;
+  font-size: 12px;
+}
+table.classy-gmarker-mgr tbody tr td {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+table.classy-gmarker-mgr thead a {
+    color: #fff;
+}
+
+table.classy-gmarker-mgr thead a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+table.classy-gmarker-mgr  tr:nth-child(even) {background: #f5f6f9}
+table.classy-gmarker-mgr tr:nth-child(odd) {background: #fff} 
+
+.gmarker-description {
+    color: #bbb;
+    font-size: 11px;
+    font-style: italic;
+}
 
 /* The Magnificent Clearfix: Updated to prevent margin-collapsing on child elements.
    j.mp/bestclearfix */

@@ -4,10 +4,10 @@
         <h2 class="gmarker_cmp_heading" id="gmarker_pagetitle"><?php print $this->modx->lexicon('license.pagetitle') ?></h2>
     </div>
 
-    <div class="x-panel-body panel-desc x-panel-body-noheader x-panel-body-noborder">
+  
         <?php if ($this->getPlaceholder('error_msg')): ?>
             <div class="gmarker_danger">
-                <h3><?php print $this->modx->lexicon('errors'); ?></h3>
+                <h3><?php print $this->modx->lexicon('error'); ?></h3>
                 <p><?php print $this->getPlaceholder('error_msg'); ?></p>
 
             </div>
@@ -18,5 +18,4 @@
             </div>
         <?php endif; ?>
 
-    </div>
 <?php include 'footer.php'; ?>
