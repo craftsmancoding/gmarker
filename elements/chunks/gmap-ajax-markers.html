@@ -2,7 +2,10 @@
 @name gmap-ajax-markers
 @description Queries a remote URL for marker data.
 
-You must pass a valid URL containing JSON data as the &src parameter!
+@param string $id - CSS id of div containing the map (Set by the Gmap Snippet)
+@param string $lat - latitude coordinate. (Set by the Gmap Snippet)
+@param string $lng - longitude coordinate. (Set by the Gmap Snippet)
+@param string markers_src - URL of page generating JSON data with location and title info for our markers.
 -->
 <script type="text/javascript">
 	function gmapInitialize() {
@@ -16,7 +19,7 @@ You must pass a valid URL containing JSON data as the &src parameter!
 		var map = new google.maps.Map(document.getElementById('[[+id]]'), mapOptions);
 
 		// Get this via Ajax
-		$.get( "[[+src]]", function( data ) {
+		$.get( "[[+markers_src]]", function( data ) {
 
 			console.log('Data loaded from src page');
 
@@ -39,9 +42,7 @@ You must pass a valid URL containing JSON data as the &src parameter!
 					}
 				});
 
-
 				markers.push(marker);
-
 			}
 
 			drawMarkersOnMap(markers, map);

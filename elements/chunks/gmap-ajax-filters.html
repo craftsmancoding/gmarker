@@ -1,0 +1,150 @@
+<!--
+@name gmap-custom-filters
+@description Queries a remote URL for marker data and info windows. Used by the Gmap Snippet.
+
+@param string $id - CSS id of div containing the map (Set by the Gmap Snippet)
+@param string $lat - latitude coordinate. (Set by the Gmap Snippet)
+@param string $lng - longitude coordinate. (Set by the Gmap Snippet)
+@param string markers_src - URL of page generating JSON data with location and title info for our markers.
+
+-->
+<script type="text/javascript">
+
+    var map;
+    var markers = [];
+
+    function gmapInitialize() {
+        var myLatlng = new google.maps.LatLng([[+lat]], [[+lng]]);
+        var mapOptions = {
+            zoom: [[+zoom]],
+            center: myLatlng,
+            styles: [[++gmarker.style]],
+            mapTypeControl: false
+        };
+
+        map = new google.maps.Map(document.getElementById('[[+id]]'), mapOptions);
+
+        fillMap();
+    }
+
+    function fillMap()
+    {
+        var filters = {
+            project_type: $('#project_type').val(),
+            project_year: $('#project_year').val(),
+            project_status: $('#project_status').val(),
+            project_scale: $('#project_scale').val()
+        };
+
+        console.log(filters);
+
+        // Get this via Ajax
+        var jqxhr = $.ajax({
+            url:"[[+markers_src]]",
+            type:'GET',
+            data:filters
+        }).done(function(data) {
+
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+
+            console.log('Data loaded from markers_src page');
+
+            // Reuse a single object throughout
+            var infowindow = new google.maps.InfoWindow();
+            //var markers = [];
+            markers = []; // reset
+            for (var i =0; i < data.results.length; i++)
+            {
+
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(data.results[i].lat,data.results[i].lng),
+                    title: data.results[i].title,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 7,
+                        strokeColor: 'orange',
+                        fillColor: 'orange',
+                        fillOpacity: 1
+                    }
+                });
+
+                attachInfo(marker, data.results[i].id);
+
+
+                markers.push(marker);
+
+            }
+
+            drawMarkersOnMap(markers, map);
+
+            /**
+             * We use a separate function here to help isolate functionality and to help scope variables
+             * Declared within the initialize() function so we have access to the infowindow var.
+             * @param marker
+             * @param content
+             * @param i
+             */
+            function attachInfo(marker, page_id) {
+                google.maps.event.addListener(marker, 'click', (function(marker, infowindow, page_id) {
+                    return function() {
+                        $('.preloader').show();
+                        if(infowindow) {
+                            infowindow.close();
+                        }
+
+                        map.setCenter(marker.getPosition());
+                        infowindowAjax(page_id, function(data) {
+
+                            infowindow.open(map, marker);
+                            $('body').append('<div id="iw-hook"></div>');
+                            $('.preloader').hide();
+                            var content = $('#iw-hook').html(data);
+
+                            infowindow.setContent($(content)[0]);
+
+                            $('#iw-hook').parent().parent().parent().addClass("infowindow-wrap");
+                            $('#iw-hook').parent().parent().addClass("infowindow-wrap-inner");
+                            $('.infowindow-wrap-inner').prev().addClass('infowindow-wrap-inner-parent');
+                            $('.infowindow-wrap-inner').next().addClass('infowindow-wrap-close');
+
+
+                        });
+                    };
+                })(marker, infowindow, page_id));
+            }
+        });
+
+
+    }
+
+    function drawMarkersOnMap(markers, map)
+    {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+        }
+    }
+
+    function infowindowAjax(page_id, callback) {
+        return $.ajax({
+            url: '[[+infowindow_src]]',
+            data: {
+                page_id: page_id
+            }
+        })
+        .done(callback)
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        });
+    }
+    function gmaploadScript() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = '//maps.googleapis.com/maps/api/js?key=AIzaSyDQTsX8kfUTwrzPBwMNf3jjkLQLH4v5uFw&v=3.exp&' +
+        'callback=gmapInitialize';
+        document.body.appendChild(script);
+    }
+
+    window.onload = gmaploadScript;
+</script>

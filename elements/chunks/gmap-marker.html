@@ -1,6 +1,6 @@
 <!--
-@name gmap-example
-@description Example Chunk demonstrating the Google Maps API and a plain and simple google map.
+@name gmap-marker
+@description Example Chunk demonstrating the Google Maps API including a single marker.
 
 @param string $id - CSS id of div containing the map (Set by the Gmap Snippet)
 @param string $lat - latitude coordinate. (Set by the Gmap Snippet)
@@ -17,6 +17,11 @@
 
         var map = new google.maps.Map(document.getElementById('[[+id]]'), mapOptions);
 
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: ''
+        });
     }
 
     function gmaploadScript() {
@@ -28,5 +33,5 @@
         document.body.appendChild(script);
     }
 
-window.onload = gmaploadScript;
+    window.onload = gmaploadScript;
 </script>

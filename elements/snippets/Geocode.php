@@ -1,15 +1,14 @@
 <?php
 /**
- * Glocation
+ * @name Geocode
+ * @description geocoding/reverse-geocoding utility script used to lookup latitude/longitude from a given address. Also available as a hook (e.g. for Formit or Login).
  *
- * This Snippet/Hook is used to lookup latitude and longitude from a given address and set 
- * a series of placeholders. The results for any address are returned from cache 
- * whenever possible to help reduce the load on the Google Geocoding API.
+ * The results for any address are returned from cache whenever possible to help reduce the load on the Google Maps API.
  *
  * When used as a hook (e.g. for Formit or for the Login's Register Snippet), the 
  * Snippet parameters are irrelevant and you must instead rely on the system settings. 
  * Any fields referenced in your gmarkers.formatting_string must be available as form fields
- * and accessible via the $hook->getValue() method.  After executing, the Glocation hook
+ * and accessible via the $hook->getValue() method.  After executing, the Geocode hook
  * will add 2 fields named after the gmarker.lat_tv and gmarker.lng_tv.  This is useful
  * if another hook writes this data to the database.
  * 
@@ -20,23 +19,20 @@
  *
  * SNIPPET PARAMETERS:
  *
- * &address string (optional) what you might type into a Google Maps search. If not present,
- * 	the [[++gmarkers.formatting_string]] will be used, which should in turn pull in relevant
- *	address info from the page on which this snippet appears.
- * &latlng string (optional) This overrides the &address argument and is used only for 
- *	reverse geocoding, e.g. "40.714224,-73.961452"
- * &prefix string (optional) used to prefix placeholder names. Default: none.
- * &bounds string (optional) Defaults to [[++gmarkers.bounds]] System Setting
- * &components string (optional) Defaults to [[++gmarkers.components]] System Setting
- * &region string (optional) Defaults to [[++gmarkers.region]] System Setting
- * &language string (optional) Defaults to [[++gmarkers.language]] System Setting
- * &secure boolean 1|0 Defaults to [[++gmarkers.secure]] System Setting
+ * @param string &address - What you might type into a Google Maps search. If not present, the [[++gmarkers.formatting_string]] will be used, which should in turn pull in relevant address info from the page on which this snippet appears.
+ * @param string &latlng - This overrides the &address argument and is used only for reverse geocoding, e.g. "40.714224,-73.961452"
+ * @param string &prefix Used to prefix placeholder names, useful if you have multiple instances of this Snippet on one page.
+ * @param string &bounds Defaults to [[++gmarkers.bounds]] System Setting
+ * @param string &components Defaults to [[++gmarkers.components]] System Setting
+ * @param string &region Defaults to [[++gmarkers.region]] System Setting
+ * @param string &language Defaults to [[++gmarkers.language]] System Setting
+ * @param boolean &secure Defaults to [[++gmarkers.secure]] System Setting
  *
  * USAGE 1 (Snippet):
  *
  * Place the uncached snippet call anywhere on your page:
  *
- * [[!Glocation? &address=`123 Main St. Anywhere, OH`]]
+ * [[!Geocode? &address=`123 Main St. Anywhere, OH`]]
  *
  * On your page, you may use the following placeholders:
  *
@@ -57,7 +53,7 @@
  * E.g. if your gmarkers.formatting_string is "[[+address]],[[+city]],[[+state]]", then 
  * the following FormIt call could be used to perform Geocoding.
  *
- * 	[[!FormIt? &hooks=`Glocation` ... ]]
+ * 	[[!FormIt? &hooks=`Geocode` ... ]]
  * 		<!-- other form fields here... -->
  * 		<input type="text" name="address" />
  * 		<input type="text" name="city" />
@@ -66,8 +62,6 @@
  * 
  * @var array $scriptProperties
  *
- * @name Glocation
- * @description geocoding/reverse-geocoding utility script used to lookup latitude/longitude from a given address. Also available as a hook (e.g. for Formit or Login).
  * @url http://craftsmancoding.com/
  * @author Everett Griffiths <everett@craftsmancoding.com>
  * @package gmarker
@@ -87,7 +81,7 @@ $goog = array();
 //! Hook Mode
 //------------------------------------------------------------------------------
 if (is_object($hook)) {
-	$modx->log(xPDO::LOG_LEVEL_DEBUG, '[Glocation] being used as a hook.');
+	$modx->log(xPDO::LOG_LEVEL_DEBUG, '[Geocode] being used as a hook.');
 	$props = $hook->getValues();
 	
 	$uniqid = uniqid();
@@ -100,7 +94,7 @@ if (is_object($hook)) {
 	$lng_tv = ($hook->getValue('gmarker.lng_tv') ? $hook->getValue('gmarker.lng_tv') : $modx->getOption('gmarker.lng_tv'));
 	
 	if (empty($lat_tv) || empty($lng_tv)) {
-		$modx->log(xPDO::LOG_LEVEL_ERROR, '[Glocation] '.$modx->lexicon('hook_error'));
+		$modx->log(xPDO::LOG_LEVEL_ERROR, '[Geocode] '.$modx->lexicon('hook_error'));
 		return true;
 	}
 	
@@ -144,7 +138,7 @@ $secure = $modx->getOption('secure', $scriptProperties, $modx->getOption('gmarke
 
 // Verify inputs
 if (empty($address) && empty($latlng) && empty($components)) {
-	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Glocation] '. $modx->lexicon('missing_params'));
+	$modx->log(xPDO::LOG_LEVEL_ERROR, '[Geocode] '. $modx->lexicon('missing_params'));
 	$modx->setPlaceholder($prefix.'status', $modx->lexicon('missing_params'));
 	return;
 }

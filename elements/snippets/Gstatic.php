@@ -1,9 +1,9 @@
 <?php
 /**
- * Gstatic
+ * @name Gstatic
+ * @description Draws a Google Map of the area indicated by &address or &latlng.
  *
- * This Snippet draws a map centered on a single location, specified as either an address
- * or as latitude/longitude coordinates.
+ * @no_import TODO
  *
  * LICENSE:
  * See the docs/license.txt for full licensing info.
@@ -39,9 +39,7 @@
  *
  * @var array $scriptProperties
  *
- * @name Gstatic
- * @description Draws a Google Map of the area indicated by &address or &latlng.
- * @url http://craftsmancoding.com/
+  * @url http://craftsmancoding.com/
  * @author Everett Griffiths <everett@craftsmancoding.com>
  * @package gmarker
  */
