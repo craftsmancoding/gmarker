@@ -17,6 +17,14 @@
 
 $core_path = $modx->getOption('gmarker.core_path', null, MODX_CORE_PATH.'components/gmarker/');
 include_once $core_path .'vendor/autoload.php';
+
+$License = new \Gmarker\License($modx);
+$status = $License->check($modx->getOption('gmarker.license_key'));
+if ($status != 'valid')
+{
+    return;
+}
+
 $Gmarker = new Gmarker($modx);
 $modx->lexicon->load('gmarker:default');
 
