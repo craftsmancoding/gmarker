@@ -12,6 +12,13 @@ See the Wiki for more information: https://github.com/craftsmancoding/gmarker/wi
 
 Overview video here: https://www.youtube.com/watch?v=dayu6RXZld4
 
+## Required Google APIs:
+
+Head to your [Google Developer Console](https://console.developers.google.com/project) and enable the following 3 APIs:
+ 
+- Google Maps Embed API
+- Google Maps JavaScript API v3
+- Static Maps API
 
 ## Example 
 

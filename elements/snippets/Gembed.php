@@ -7,6 +7,7 @@
  * LICENSE:
  * See the core/components/gmarker/docs/license.txt for full licensing info.
  *
+ * See https://developers.google.com/maps/documentation/embed/guide#place_mode
  *
  * SNIPPET PARAMETERS:
  *
@@ -26,12 +27,8 @@
  *
  * Place the snippet call where you want your map to appear.
  *
- * [[!Gmap]]
  *
- * [[Gmap? &width=`100%` &height=`300px` &class=`my_class` &center=`40.3810679,-78.0758859` &zoom=`8`]]
- *
- * WARNING:
- * 	- Your map cannot use percentages for BOTH height and width.
+
  *
  * @var array $scriptProperties
  * @url http://craftsmancoding.com/
@@ -50,15 +47,10 @@ if ($status != 'valid')
     return $modx->lexicon('invalid_expired_msg');
 }
 
-$Gmarker = new Gmarker($modx);
-$modx->lexicon->load('gmarker:default');
-
 //------------------------------------------------------------------------------
 //! Read inputs
 //------------------------------------------------------------------------------
-$secure = (int) $modx->getOption('secure', $scriptProperties, $modx->getOption('gmarker.secure'));
-$headTpl = $modx->getOption('headTpl', $scriptProperties, 'gmap-example');
-$outTpl = $modx->getOption('outTpl', $scriptProperties, 'gmap-canvas');
+$outTpl = $modx->getOption('outTpl', $scriptProperties, 'gembed-iframe');
 $center = $modx->getOption('center', $scriptProperties);
 
 $props = $scriptProperties;
