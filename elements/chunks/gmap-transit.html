@@ -1,0 +1,35 @@
+<!--
+@name gmap-transit
+@description Example Chunk demonstrating the Google Maps API and a plain with the public transit layer
+
+@param string $id - CSS id of div containing the map (Set by the Gmap Snippet)
+@param string $lat - latitude coordinate. (Set by the Gmap Snippet)
+@param string $lng - longitude coordinate. (Set by the Gmap Snippet)
+-->
+<script type="text/javascript">
+    function gmapInitialize() {
+        console.log('Initializing Google Maps centered at Lat: %s Lng: %s', [[+lat]], [[+lng]]);
+        var myLatlng = new google.maps.LatLng([[+lat]], [[+lng]]);
+        var mapOptions = {
+            zoom: [[+zoom]],
+            center: myLatlng
+        };
+
+        var map = new google.maps.Map(document.getElementById('[[+id]]'), mapOptions);
+
+        var transitLayer = new google.maps.TransitLayer();
+        transitLayer.setMap(map);
+
+    }
+
+    function gmaploadScript() {
+        console.log('Window loaded. Running gmaploadScript()');
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = '//maps.googleapis.com/maps/api/js?key=[[++gmarker.apikey]]&v=3.exp&' +
+        'callback=gmapInitialize';
+        document.body.appendChild(script);
+    }
+
+    window.onload = gmaploadScript;
+</script>
