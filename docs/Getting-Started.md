@@ -4,20 +4,20 @@ First, download the Extra from the MODX repository or via the manager in your MO
 
 ## 2. Get a Google Maps API Key
 
-You _may_ be able to skip this step -- Google does not seem to be thoroughly checking every single request for an API key.
+An API key is not _strictly_ required, but it is _recommended_, especially on shared hosts: without an API key, Google will use the server IP address to track requests, so on a shared host it's more likely that the request quota is quickly used up.
 
-https://developers.google.com/maps/documentation/javascript/tutorial#api_key
+[Click here to get your Google API key](https://developers.google.com/maps/documentation/javascript/tutorial#api_key).
 
 Enable the following 2 services (as pictured):
 
 * Google Maps API v3
 * Static Maps API
 
-image::https://www.evernote.com/shard/s17/sh/c190c33b-1df7-4a70-86b3-b5b934a7cc1a/c9ce566dd01273df0e4b453518a1c29e/res/3e3f626a-a29e-469d-9d20-f269545c2e4e/skitch.png?resizeSmall&width=832[Enable Google Services]
+![Enable Google Services](https://www.evernote.com/shard/s17/sh/c190c33b-1df7-4a70-86b3-b5b934a7cc1a/c9ce566dd01273df0e4b453518a1c29e/res/3e3f626a-a29e-469d-9d20-f269545c2e4e/skitch.png?resizeSmall&width=832)
 
 After you've enabled these services, you can copy your API key by clicking on the *API Access* link;
 
-image::https://www.evernote.com/shard/s17/sh/d0d1828e-aee3-4347-ad61-10c4caca1a0a/c406855d47622960147df71de5e731a5/res/2ca8d829-bda4-4ef5-bef0-3c44c8d31545/skitch.png?resizeSmall&width=832[get your API Key]
+![get your API Key](https://www.evernote.com/shard/s17/sh/d0d1828e-aee3-4347-ad61-10c4caca1a0a/c406855d47622960147df71de5e731a5/res/2ca8d829-bda4-4ef5-bef0-3c44c8d31545/skitch.png?resizeSmall&width=832)
 
 ## 3. Save the API Key
  
