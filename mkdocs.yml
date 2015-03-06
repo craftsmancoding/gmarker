@@ -1,0 +1,15 @@
+site_name: Gmarker MODX Extra
+pages:
+- [index.md, Home]
+- [License.md, Getting Started, License]
+- [Getting-Started.md, Getting Started, Getting Started]
+- [Tutorial-Map.md, Tutorials, Simple Map]
+- [Tutorial-Marker.md, Tutorials, Single Marker]
+- [Tutorial-Markers.md, Tutorials, Multiple Markers]
+- [Tutorial-Infowindow.md, Tutorials, Info Windows]
+- [Tutorial-Styles.md, Tutorials, Map Styles]
+- [Gmap-Snippet.md, Snippets, Gmap]
+- [Geocoding-Snippet.md, Snippets, Glocation]
+- [Geocoding-Plugin.md, Plugins]
+- [System-Settings.md, Settings]
+theme: flatly

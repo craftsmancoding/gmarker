@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+        <title>Getting Started - Gmarker MODX Extra</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">Gmarker MODX Extra</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Getting Started <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../License">License</a>
+                        </li>
+                    
+                        <li class="active">
+                            <a href=".">Getting Started</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../Tutorial-Map">Simple Map</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Marker">Single Marker</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Markers">Multiple Markers</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Infowindow">Info Windows</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Styles">Map Styles</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Snippets <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../Gmap-Snippet">Gmap</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Geocoding-Snippet">Glocation</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../Geocoding-Plugin">Plugins</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../System-Settings">Settings</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li >
+                    <a rel="next" href="../License">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../Tutorial-Map">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#1-download-the-addon">1. Download the AddOn</a></li>
+        
+    
+        <li class="main "><a href="#2-get-a-google-maps-api-key">2. Get a Google Maps API Key</a></li>
+        
+    
+        <li class="main "><a href="#3-save-the-api-key">3. Save the API Key</a></li>
+        
+    
+        <li class="main "><a href="#4-create-a-dedicated-location-template">4. Create a Dedicated Location Template</a></li>
+        
+    
+        <li class="main "><a href="#5-update-system-settings">5. Update System Settings</a></li>
+        
+    
+        <li class="main "><a href="#6-testing">6. Testing</a></li>
+        
+    
+        <li class="main "><a href="#see-also">See Also</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h2 id="1-download-the-addon">1. Download the AddOn</h2>
+<p>First, download the Extra from the MODX repository or via the manager in your MODX site.</p>
+<h2 id="2-get-a-google-maps-api-key">2. Get a Google Maps API Key</h2>
+<p>You <em>may</em> be able to skip this step -- Google does not seem to be thoroughly checking every single request for an API key.</p>
+<p>https://developers.google.com/maps/documentation/javascript/tutorial#api_key</p>
+<p>Enable the following 2 services (as pictured):</p>
+<ul>
+<li>Google Maps API v3</li>
+<li>Static Maps API</li>
+</ul>
+<p>image::https://www.evernote.com/shard/s17/sh/c190c33b-1df7-4a70-86b3-b5b934a7cc1a/c9ce566dd01273df0e4b453518a1c29e/res/3e3f626a-a29e-469d-9d20-f269545c2e4e/skitch.png?resizeSmall&amp;width=832[Enable Google Services]</p>
+<p>After you've enabled these services, you can copy your API key by clicking on the <em>API Access</em> link;</p>
+<p>image::https://www.evernote.com/shard/s17/sh/d0d1828e-aee3-4347-ad61-10c4caca1a0a/c406855d47622960147df71de5e731a5/res/2ca8d829-bda4-4ef5-bef0-3c44c8d31545/skitch.png?resizeSmall&amp;width=832[get your API Key]</p>
+<h2 id="3-save-the-api-key">3. Save the API Key</h2>
+<p>Inside your MODX manager, go to <em>System -&gt; Settings</em> and paste your key into the <em>gmarker.apikey</em> setting. </p>
+<p>Make sure the value gets saved correctly!</p>
+<h2 id="4-create-a-dedicated-location-template">4. Create a Dedicated Location Template</h2>
+<p>If you haven't already, set up your site so it's viably storing location information on your pages.  A typical scenario would be that you have one template for "Locations" or "Stores" or "People", and each using Template Variables (TVs) like "address", "city", "state", "zip".</p>
+<p>You must also create 2 additional TVs:  one for latitude and one for longitude.  You can name them whatever you like, but they should be either text fields or hidden fields.  This is where the Geocoding Plugin will save latitude and longitude data.  Make sure these TVs have been added to the template.</p>
+<p>INFO: It is possible to use the Gmarker Extra without storing any location information on your site (you can manually provide address information to your maps if desired) but the Gmarker Snippet in particular was built expecting that your local pages contain address data.</p>
+<p>When you save this template, take note of its ID -- you'll need it in the next step.  The template ID appears under the Elements tab: when you view all of your templates, the id appears in parentheses, e.g. "MyTemplate (12)" -- in this example "12" is the template ID.</p>
+<h2 id="5-update-system-settings">5. Update System Settings</h2>
+<p>Now that you have a template that will store address information, you need to update your System Settings again.  You need to tell Gmarker which template(s) contain address information.  </p>
+<p>Set the <em>gmarker.templates</em> setting to the template ID of the template(s) you created in the previous step.</p>
+<p>Next, set the <em>gmarker.lat_tv</em> to the name of the TV that you created in the previous step.  For example, if you named your TV "latitude", then enter "latitude" into the <em>gmarker.lat_tv</em> System Setting.</p>
+<p>Do the same for the <em>gmarker.lng_tv</em>: set it to the name of the TV that you created in the previous step.</p>
+<p>Finally, you need to update the value for the <em>gmarker.formatting_string</em>.  This is how we tell Google what our address is.  If your pages use TVs for "address", "city", and "state", then your formatting string might look like this:</p>
+<pre><code>[[+address]], [[+city]], [[+state]]
+</code></pre>
+
+<p>Remember to use the "+" version of any field name or TV.  Do not use the "*" variation of TVs!</p>
+<h2 id="6-testing">6. Testing</h2>
+<p>Now that you have configured the Gmarker Extra, try creating a new location page.  Be sure to choose the template you created previously.  Enter in some address data and save the page.  Then refresh your browser: you should see the latitude and longitude data appear in your dedicated TVs!</p>
+<p>If you don't see this, check the MODX error logs.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../Geocoding-Plugin">Geocoding Plugin</a></li>
+<li><a href="../Gmap-Snippet">Gmap Snippet</a></li>
+</ul>
+</div>
+        </div>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/prettify-1.0.min.js"></script>
+        <script src="../js/base.js"></script>
+    </body>
+</html>

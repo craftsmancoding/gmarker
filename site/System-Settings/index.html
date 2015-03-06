@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+        <title>Settings - Gmarker MODX Extra</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">Gmarker MODX Extra</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Getting Started <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../License">License</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Getting-Started">Getting Started</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../Tutorial-Map">Simple Map</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Marker">Single Marker</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Markers">Multiple Markers</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Infowindow">Info Windows</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Styles">Map Styles</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Snippets <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../Gmap-Snippet">Gmap</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Geocoding-Snippet">Glocation</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../Geocoding-Plugin">Plugins</a>
+                </li>
+            
+            
+            
+                <li class="active">
+                    <a href=".">Settings</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li >
+                    <a rel="next" href="../Geocoding-Plugin">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li class="disabled">
+                    <a rel="prev" >
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#gmarkerapikey">gmarker.apikey</a></li>
+        
+    
+        <li class="main "><a href="#gmarkerformatting_string">gmarker.formatting_string</a></li>
+        
+    
+        <li class="main "><a href="#gmarkertemplates">gmarker.templates</a></li>
+        
+    
+        <li class="main "><a href="#gmarkercomponents">gmarker.components</a></li>
+        
+    
+        <li class="main "><a href="#gmarkerbounds">gmarker.bounds</a></li>
+        
+    
+        <li class="main "><a href="#gmarkerlat_tv">gmarker.lat_tv</a></li>
+        
+    
+        <li class="main "><a href="#gmarkerlng_tv">gmarker.lng_tv</a></li>
+        
+    
+        <li class="main "><a href="#gmarkerzoom">gmarker.zoom</a></li>
+        
+    
+        <li class="main "><a href="#gmarkersecure">gmarker.secure</a></li>
+        
+    
+        <li class="main "><a href="#gmarkerdefault_height">gmarker.default_height</a></li>
+        
+    
+        <li class="main "><a href="#gmarkerdefault_width">gmarker.default_width</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<p>The Gmarker extra includes the following MODX System Settings</p>
+<h2 id="gmarkerapikey">gmarker.apikey</h2>
+<p>WARNING: Although the API key is not always required, it is strongly recommended.  Without an API key, your access is limited and requests may pegged to your IP address: this can be problematic if you are on a shared server.</p>
+<p>To get your Google Maps API key, log into https://code.google.com/apis/console using your Google account, activate the <strong>Google Maps API v3</strong> and the <strong>Static Maps API</strong>, then click on the API Access and copy your key here.  </p>
+<p><a href="https://developers.google.com/maps/documentation/javascript/tutorial#api_key">More info...</a></p>
+<h2 id="gmarkerformatting_string">gmarker.formatting_string</h2>
+<p>Assemble placeholders corresponding to available the default page variables or Template Variables so that when they are parsed they will contain a valid address that you could conceivably type into a Google Maps search field.  For example, if your location pages contain TVs named "address", "city", and "state", then your formatting string might look like this:</p>
+<pre><code>[[+address]], [[+city]], [[+state]]
+</code></pre>
+
+<p>If you store an entire address in a single TV named "fulladdress", then your formatting string would look like this:</p>
+<pre><code>[[+fulladdress]]
+</code></pre>
+
+<p>Built-in page fields are also supported, e.g.</p>
+<pre><code>[[+pagetitle]],[[+alias]]
+</code></pre>
+
+<p>All placeholders should use the "+" notation used for Chunks (do not use the "*" notation).</p>
+<p>Affects: <a href="../Geocoding-Plugin">Geocoding Plugin</a></p>
+<h2 id="gmarkertemplates">gmarker.templates</h2>
+<p>Geocoding will be conducted when saving any page that uses one of these templates.  Include a comma-separated list of template ids, e.g. </p>
+<pre><code>1,2,5
+</code></pre>
+<p>WARNING: If empty, no automatic geocoding will take place.  </p>
+<p>Make sure that the TVs named by <em>gmarker.lat_tv</em> and <em>gmarker.lng_tv</em> have been assigned to these templates.</p>
+<p>Affects: <a href="../Geocoding-Plugin">Geocoding Plugin</a></p>
+<h2 id="gmarkercomponents">gmarker.components</h2>
+<p>Used for Geocoding, you can pass additional hard filters to the Google Maps query to force the lookup to return address results restricted to a specific area.</p>
+<p>The components that can be filtered include:</p>
+<ul>
+<li><em>route</em> matches long or short name of a route.</li>
+<li><em>locality</em> matches against both locality and sublocality types.</li>
+<li><em>administrative_area</em> matches all the administrative_area levels.</li>
+<li><em>postal_code</em> matches postal_code and postal_code_prefix.</li>
+<li><em>country</em> matches a country name or a two letter http://en.wikipedia.org/wiki/ISO_3166-1[ISO 3166-1] country code.</li>
+</ul>
+<p>For example, to restrict Geocoding to results within New Zealand, you might do something like this:</p>
+<p>country:NZL</p>
+<p><a href="https://developers.google.com/maps/documentation/geocoding/#ComponentFiltering">More info...</a></p>
+<p>Affects: <a href="../Geocoding-Plugin">Geocoding Plugin</a></p>
+<h2 id="gmarkerbounds">gmarker.bounds</h2>
+<p>Used for Geocoding, you can pass additional soft filters to the Google Maps query so you can weight results that are in a given geographical boundary, limited by a latitude/longitude rectangle.<br />
+The gmarker.bounds parameter defines the latitude/longitude coordinates of the southwest and northeast corners of this bounding box using a pipe (|) character to separate the coordinates, e.g. </p>
+<pre><code>34.172684,-118.604794|34.236144,-118.500938
+</code></pre>
+
+<p><a href="https://developers.google.com/maps/documentation/geocoding/index#Viewports">More info...</a></p>
+<p>Affects: <a href="../Geocoding-Plugin">Geocoding Plugin</a></p>
+<h2 id="gmarkerlat_tv">gmarker.lat_tv</h2>
+<p>This is the name of a Template Variable where Gmarker will store latitude information. E.g.</p>
+<pre><code>longitude_tv
+</code></pre>
+
+<p>Affects: <a href="../Geocoding-Plugin">Geocoding Plugin</a></p>
+<h2 id="gmarkerlng_tv">gmarker.lng_tv</h2>
+<p>This is the name of a Template Variable where Gmarker will store longitude information. E.g.</p>
+<p>latitude_tv</p>
+<p>Affects: <a href="../Geocoding-Plugin">Geocoding Plugin</a></p>
+<h2 id="gmarkerzoom">gmarker.zoom</h2>
+<p>Zoom setting.  Default: 8.</p>
+<h2 id="gmarkersecure">gmarker.secure</h2>
+<p>The default here is "Yes": the Google Maps API will be accessed using an HTTPS connection.</p>
+<p>If secure is "No", the standard HTTP URLs are used:</p>
+<pre><code>http://maps.googleapis.com/maps/api/geocode/output
+</code></pre>
+
+<p>If secure is "Yes", the HTTPS URL is used for lookups:</p>
+<pre><code>https://maps.googleapis.com/maps/api/geocode/output
+</code></pre>
+
+<p>Affects: <a href="../Geocoding-Plugin">Geocoding Plugin</a></p>
+<h2 id="gmarkerdefault_height">gmarker.default_height</h2>
+<p>The default height of any map.  The value should specify either <code>px</code> or <code>%</code> as the unit, e.g. <code>500px</code> or <code>50%</code>.  This is used if <code>&amp;height</code> is not specified in the Snippet call.</p>
+<p>Affects: <a href="../Gmap-Snippet">Gmap Snippet</a></p>
+<h2 id="gmarkerdefault_width">gmarker.default_width</h2>
+<p>The default width of any map.  The value should specify either <code>px</code> or <code>%</code> as the unit, e.g. <code>500px</code> or <code>50%</code>.  This is used if <code>&amp;width</code> is not specified in the Snippet call.</p>
+<p>Affects: <a href="../Gmap-Snippet">Gmap Snippet</a></p>
+</div>
+        </div>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/prettify-1.0.min.js"></script>
+        <script src="../js/base.js"></script>
+    </body>
+</html>

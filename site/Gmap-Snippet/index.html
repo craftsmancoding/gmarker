@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+        <title>Gmap - Gmarker MODX Extra</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">Gmarker MODX Extra</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Getting Started <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../License">License</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Getting-Started">Getting Started</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../Tutorial-Map">Simple Map</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Marker">Single Marker</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Markers">Multiple Markers</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Infowindow">Info Windows</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Styles">Map Styles</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Snippets <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li class="active">
+                            <a href=".">Gmap</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Geocoding-Snippet">Glocation</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../Geocoding-Plugin">Plugins</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../System-Settings">Settings</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li >
+                    <a rel="next" href="../Tutorial-Styles">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../Geocoding-Snippet">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#parameters">Parameters</a></li>
+        
+    
+        <li class="main "><a href="#examples">Examples</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<p>The Gmap Snippet lets you draw a Google map using flexible address information or latitude and longitude coordinates.</p>
+<p>See this <a href="http://youtu.be/13gK6jiZ1RI">video</a> for a quick overview.</p>
+<h2 id="parameters">Parameters</h2>
+<ul>
+<li><code>$center</code> - Where the map should be centered. This can either be lat,lng coordinates, or an address (what you might type into a Google Maps search).</li>
+<li><code>$headTpl</code> - Name of chunk injected into the page <head> containing the JS call to Google Maps API [default=gmap-example]</li>
+<li><code>$outTpl</code> - Name of chunk containing the map canvas div (correlates with $id) [default=gmap-canvas]</li>
+<li><code>$height</code> - height of the map (specify 'px' or '%'). Defaults to gmarker.default_height System Setting</li>
+<li><code>$width</code> - width of the map (specify 'px' or '%'). Defaults to gmarker.default_width System Setting</li>
+<li><code>$zoom</code> - A zoom factor for the map. [default=15]</li>
+<li><code>$id</code> - CSS dom id of the div where the map will be drawn. [default=map-canvas]</li>
+<li><code>$class</code> - the CSS class of the outputted div (identified by &amp;outTpl). Default is empty.</li>
+<li><code>$type</code> - Determines the type of map used (see https://developers.google.com/maps/documentation/javascript/maptypes) [default=ROADMAP] [options=["ROADMAP","SATELLITE","HYBRID","TERRAIN"]]</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<pre><code>[[Gmap? &amp;center=`New York, NY, USA` 
+    &amp;height=`300px` 
+    &amp;width=`610px`
+    &amp;zoom=`12`
+]]
+</code></pre>
+
+<p><img alt="Sample Map: New York City" src="http://maps.googleapis.com/maps/api/staticmap?center=40.712784,-74.005941&amp;size=610x300&amp;sensor=true&amp;zoom=12" /></p>
+<p>For more flexible layouts, you can specify percentages for the height or width.</p>
+</div>
+        </div>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/prettify-1.0.min.js"></script>
+        <script src="../js/base.js"></script>
+    </body>
+</html>
