@@ -103,7 +103,7 @@
                         </li>
                     
                         <li >
-                            <a href="../Geocoding-Snippet">Glocation</a>
+                            <a href="../Geocoding-Snippet">Geocoding</a>
                         </li>
                     
                     </ul>
@@ -149,6 +149,14 @@
     
         <li class="main active"><a href="#map-markers">Map Markers</a></li>
         
+            <li><a href="#custom-image-1">Custom Image 1</a></li>
+        
+            <li><a href="#custom-image-2">Custom Image 2</a></li>
+        
+            <li><a href="#other-attributes">Other Attributes</a></li>
+        
+            <li><a href="#see-also">See Also</a></li>
+        
     
     </ul>
 </div></div>
@@ -156,7 +164,90 @@
 
 <h1 id="map-markers">Map Markers</h1>
 <p><img alt="Sample Map" src="https://maps.googleapis.com/maps/api/staticmap?center=36.774985,-76.197939&amp;zoom=12&amp;size=600x400&amp;markers=color:red%7Clabel:X%7C36.744985,-76.167939" /></p>
-<p>Markers are added to your maps via JavaScript.</p>
+<p>Markers are added to your maps via JavaScript. You can use the included <code>gmap-marker</code> Chunk for the <code>&amp;headTpl</code> argument.  The JavaScript in that Chunk will cause a marker to be drawn on your maps.</p>
+<pre><code>[[!Gmap? 
+    &amp;center=`888 S Michigan Avenue, Chicago, IL 60605` 
+    &amp;headTpl=`gmap-marker`
+]]
+</code></pre>
+
+<p>Inspect the JavaScript in the <code>gmap-marker</code>: the <code>marker</code> variable specifies which map variable it should be drawn on.</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+    function gmapInitialize() {
+        console.log('Initializing Google Maps centered at Lat: %s Lng: %s', [[+lat]], [[+lng]]);
+        var myLatlng = new google.maps.LatLng([[+lat]], [[+lng]]);
+        var mapOptions = {
+            zoom: [[+zoom]],
+            center: myLatlng
+        };
+
+        var map = new google.maps.Map(document.getElementById('[[+id]]'), mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: ''
+        });
+    }
+
+    function gmaploadScript() {
+        console.log('Window loaded. Running gmaploadScript()');
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = '//maps.googleapis.com/maps/api/js?key=[[++gmarker.apikey]]&amp;v=3.exp&amp;' +
+        'callback=gmapInitialize';
+        document.body.appendChild(script);
+    }
+
+    window.onload = gmaploadScript;
+&lt;/script&gt;
+</code></pre>
+
+<p>By studying the above example, you should notice that only the basic things are set by the <code>Gmap</code> Snippet (latitude, longitude, zoom, and css id).  The marker itself is handled entirely by JavaScript.  This is intentional: PHP Snippets get really messy when they attempt to generate complex JavaScript.</p>
+<p>If you want to customize your maps with markers, you should get familiar with the JavaScript examples in Gmarker's Chunks.  Once you understand how to customize a single marker, you will better understand how to customize multiple markers.</p>
+<h2 id="custom-image-1">Custom Image 1</h2>
+<p>You can use a custom image for your markers by setting the <code>icon</code> key.  Update the sample code so that the <code>marker</code> variable uses something like the following:</p>
+<pre><code>var marker = new google.maps.Marker({
+    position: myLatlng,
+    map: map,
+    title: 'My Example',
+    icon: '[[++assets_url]]images/flag.png'
+});
+</code></pre>
+
+<p>If you are hosting your images locally, make <em>sure</em> you use the <code>[[++assets_url]]</code> placeholder: this will ensure that the URL can be customized (e.g. to leverage a CDN).  Many designers and developers forget that the location of your MODX web assets is a configurable setting.  Its URL should <em>never</em> be hardcoded.</p>
+<h2 id="custom-image-2">Custom Image 2</h2>
+<p>The <code>icon</code> attribute can be more than a simple image path.  You can invoke vector shapes by supplying a full array of options, including the useful <code>SymbolPath</code> object.</p>
+<pre><code>var marker = new google.maps.Marker({
+    position: myLatlng,
+    title: 'Example with Vecors',
+    icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 7,
+        strokeColor: 'orange',
+        fillColor: 'orange',
+        fillOpacity: 1
+    }
+});
+</code></pre>
+
+<p>See <a href="https://developers.google.com/maps/documentation/javascript/reference#SymbolPath">Google's Docs</a> for more info on using Symbols for your icons.</p>
+<h2 id="other-attributes">Other Attributes</h2>
+<p>You can do other things with your markers, including make them draggable.  Just add the following key/value to your <code>marker</code> options:</p>
+<pre><code>draggable:true
+</code></pre>
+
+<p>Animate your marker by adding the <code>animation</code> attribute:</p>
+<pre><code>animation: google.maps.Animation.DROP
+</code></pre>
+
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://developers.google.com/maps/documentation/javascript/examples/marker-simple">Google Maps Simple Marker</a></li>
+<li><a href="https://developers.google.com/maps/documentation/javascript/markers#icons">Custom Marker Icons</a></li>
+<li><a href="https://developers.google.com/maps/documentation/javascript/reference#SymbolPath">Symbol Icons</a></li>
+<li><a href="https://developers.google.com/maps/documentation/javascript/markers">Google Maps - Markers</a></li>
+</ul>
 </div>
         </div>
 

@@ -9,7 +9,7 @@ pages:
 - [Tutorial-Infowindow.md, Tutorials, Info Windows]
 - [Tutorial-Styles.md, Tutorials, Map Styles]
 - [Gmap-Snippet.md, Snippets, Gmap]
-- [Geocoding-Snippet.md, Snippets, Glocation]
+- [Geocoding-Snippet.md, Snippets, Geocoding]
 - [Geocoding-Plugin.md, Plugins]
 - [System-Settings.md, Settings]
 theme: flatly

@@ -44,3 +44,64 @@ Inspect the JavaScript in the `gmap-marker`: the `marker` variable specifies whi
     window.onload = gmaploadScript;
 </script>
 ````
+
+By studying the above example, you should notice that only the basic things are set by the `Gmap` Snippet (latitude, longitude, zoom, and css id).  The marker itself is handled entirely by JavaScript.  This is intentional: PHP Snippets get really messy when they attempt to generate complex JavaScript.
+
+If you want to customize your maps with markers, you should get familiar with the JavaScript examples in Gmarker's Chunks.  Once you understand how to customize a single marker, you will better understand how to customize multiple markers.
+
+## Custom Image 1
+
+You can use a custom image for your markers by setting the `icon` key.  Update the sample code so that the `marker` variable uses something like the following:
+
+````
+var marker = new google.maps.Marker({
+    position: myLatlng,
+    map: map,
+    title: 'My Example',
+    icon: '[[++assets_url]]images/flag.png'
+});
+````
+
+If you are hosting your images locally, make _sure_ you use the `[[++assets_url]]` placeholder: this will ensure that the URL can be customized (e.g. to leverage a CDN).  Many designers and developers forget that the location of your MODX web assets is a configurable setting.  Its URL should _never_ be hardcoded.
+
+## Custom Image 2
+
+The `icon` attribute can be more than a simple image path.  You can invoke vector shapes by supplying a full array of options, including the useful `SymbolPath` object.
+
+````
+var marker = new google.maps.Marker({
+	position: myLatlng,
+	title: 'Example with Vecors',
+	icon: {
+		path: google.maps.SymbolPath.CIRCLE,
+		scale: 7,
+		strokeColor: 'orange',
+		fillColor: 'orange',
+		fillOpacity: 1
+	}
+});
+````
+
+See [Google's Docs](https://developers.google.com/maps/documentation/javascript/reference#SymbolPath) for more info on using Symbols for your icons.
+
+## Other Attributes
+
+You can do other things with your markers, including make them draggable.  Just add the following key/value to your `marker` options:
+
+````
+draggable:true
+````
+
+Animate your marker by adding the `animation` attribute:
+
+
+````
+animation: google.maps.Animation.DROP
+````
+
+## See Also
+
+* [Google Maps Simple Marker](https://developers.google.com/maps/documentation/javascript/examples/marker-simple)
+* [Custom Marker Icons](https://developers.google.com/maps/documentation/javascript/markers#icons)
+* [Symbol Icons](https://developers.google.com/maps/documentation/javascript/reference#SymbolPath)
+* [Google Maps - Markers](https://developers.google.com/maps/documentation/javascript/markers)
