@@ -103,7 +103,7 @@
                         </li>
                     
                         <li >
-                            <a href="../Geocoding-Snippet">Glocation</a>
+                            <a href="../Geocoding-Snippet">Geocoding</a>
                         </li>
                     
                     </ul>
@@ -148,6 +148,14 @@
     <ul class="nav bs-sidenav">
     
         <li class="main active"><a href="#map-markers">Map Markers</a></li>
+        
+            <li><a href="#custom-image-1">Custom Image 1</a></li>
+        
+            <li><a href="#custom-image-2">Custom Image 2</a></li>
+        
+            <li><a href="#other-attributes">Other Attributes</a></li>
+        
+            <li><a href="#see-also">See Also</a></li>
         
     
     </ul>
@@ -195,6 +203,51 @@
 &lt;/script&gt;
 </code></pre>
 
+<p>By studying the above example, you should notice that only the basic things are set by the <code>Gmap</code> Snippet (latitude, longitude, zoom, and css id).  The marker itself is handled entirely by JavaScript.  This is intentional: PHP Snippets get really messy when they attempt to generate complex JavaScript.</p>
+<p>If you want to customize your maps with markers, you should get familiar with the JavaScript examples in Gmarker's Chunks.  Once you understand how to customize a single marker, you will better understand how to customize multiple markers.</p>
+<h2 id="custom-image-1">Custom Image 1</h2>
+<p>You can use a custom image for your markers by setting the <code>icon</code> key.  Update the sample code so that the <code>marker</code> variable uses something like the following:</p>
+<pre><code>var marker = new google.maps.Marker({
+    position: myLatlng,
+    map: map,
+    title: 'My Example',
+    icon: '[[++assets_url]]images/flag.png'
+});
+</code></pre>
+
+<p>If you are hosting your images locally, make <em>sure</em> you use the <code>[[++assets_url]]</code> placeholder: this will ensure that the URL can be customized (e.g. to leverage a CDN).  Many designers and developers forget that the location of your MODX web assets is a configurable setting.  Its URL should <em>never</em> be hardcoded.</p>
+<h2 id="custom-image-2">Custom Image 2</h2>
+<p>The <code>icon</code> attribute can be more than a simple image path.  You can invoke vector shapes by supplying a full array of options, including the useful <code>SymbolPath</code> object.</p>
+<pre><code>var marker = new google.maps.Marker({
+    position: myLatlng,
+    title: 'Example with Vecors',
+    icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 7,
+        strokeColor: 'orange',
+        fillColor: 'orange',
+        fillOpacity: 1
+    }
+});
+</code></pre>
+
+<p>See <a href="https://developers.google.com/maps/documentation/javascript/reference#SymbolPath">Google's Docs</a> for more info on using Symbols for your icons.</p>
+<h2 id="other-attributes">Other Attributes</h2>
+<p>You can do other things with your markers, including make them draggable.  Just add the following key/value to your <code>marker</code> options:</p>
+<pre><code>draggable:true
+</code></pre>
+
+<p>Animate your marker by adding the <code>animation</code> attribute:</p>
+<pre><code>animation: google.maps.Animation.DROP
+</code></pre>
+
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://developers.google.com/maps/documentation/javascript/examples/marker-simple">Google Maps Simple Marker</a></li>
+<li><a href="https://developers.google.com/maps/documentation/javascript/markers#icons">Custom Marker Icons</a></li>
+<li><a href="https://developers.google.com/maps/documentation/javascript/reference#SymbolPath">Symbol Icons</a></li>
+<li><a href="https://developers.google.com/maps/documentation/javascript/markers">Google Maps - Markers</a></li>
+</ul>
 </div>
         </div>
 
