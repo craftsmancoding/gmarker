@@ -175,16 +175,16 @@
 <h2 id="1-download-the-addon">1. Download the AddOn</h2>
 <p>First, download the Extra from the MODX repository or via the manager in your MODX site.</p>
 <h2 id="2-get-a-google-maps-api-key">2. Get a Google Maps API Key</h2>
-<p>You <em>may</em> be able to skip this step -- Google does not seem to be thoroughly checking every single request for an API key.</p>
-<p>https://developers.google.com/maps/documentation/javascript/tutorial#api_key</p>
+<p>An API key is not <em>strictly</em> required, but it is <em>recommended</em>, especially on shared hosts: without an API key, Google will use the server IP address to track requests, so on a shared host it's more likely that the request quota is quickly used up.</p>
+<p><a href="https://developers.google.com/maps/documentation/javascript/tutorial#api_key">Click here to get your Google API key</a>.</p>
 <p>Enable the following 2 services (as pictured):</p>
 <ul>
 <li>Google Maps API v3</li>
 <li>Static Maps API</li>
 </ul>
-<p>image::https://www.evernote.com/shard/s17/sh/c190c33b-1df7-4a70-86b3-b5b934a7cc1a/c9ce566dd01273df0e4b453518a1c29e/res/3e3f626a-a29e-469d-9d20-f269545c2e4e/skitch.png?resizeSmall&amp;width=832[Enable Google Services]</p>
+<p><img alt="Enable Google Services" src="https://www.evernote.com/shard/s17/sh/c190c33b-1df7-4a70-86b3-b5b934a7cc1a/c9ce566dd01273df0e4b453518a1c29e/res/3e3f626a-a29e-469d-9d20-f269545c2e4e/skitch.png?resizeSmall&amp;width=832" /></p>
 <p>After you've enabled these services, you can copy your API key by clicking on the <em>API Access</em> link;</p>
-<p>image::https://www.evernote.com/shard/s17/sh/d0d1828e-aee3-4347-ad61-10c4caca1a0a/c406855d47622960147df71de5e731a5/res/2ca8d829-bda4-4ef5-bef0-3c44c8d31545/skitch.png?resizeSmall&amp;width=832[get your API Key]</p>
+<p><img alt="get your API Key" src="https://www.evernote.com/shard/s17/sh/d0d1828e-aee3-4347-ad61-10c4caca1a0a/c406855d47622960147df71de5e731a5/res/2ca8d829-bda4-4ef5-bef0-3c44c8d31545/skitch.png?resizeSmall&amp;width=832" /></p>
 <h2 id="3-save-the-api-key">3. Save the API Key</h2>
 <p>Inside your MODX manager, go to <em>System -&gt; Settings</em> and paste your key into the <em>gmarker.apikey</em> setting. </p>
 <p>Make sure the value gets saved correctly!</p>
