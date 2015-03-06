@@ -65,6 +65,35 @@
             
             
             
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../Tutorial-Map">Simple Map</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Marker">Single Marker</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Markers">Multiple Markers</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Infowindow">Info Windows</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Styles">Map Styles</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
                 <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Snippets <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -178,8 +207,14 @@
  The Longitude of this address is: [[+location.lng]]</p>
 <h3 id="example-2">Example 2</h3>
 <p>When you use 2 or more instances of the Snippet on a single page, you'll want to utilize the <em>&amp;prefix</em> parameter to keep your placeholders organized.</p>
-<pre><code>[[!Glocation? &amp;address=`1600 Amphitheatre Parkway,Mountain View,CA` &amp;prefix=`1.`]]
-[[!Glocation? &amp;address=`565 N Clinton Drive, Milwaukee, WI` &amp;prefix=`2.`]]
+<pre><code>[[!Glocation? 
+    &amp;address=`1600 Amphitheatre Parkway,Mountain View,CA` 
+    &amp;prefix=`1.`
+]]
+[[!Glocation? 
+    &amp;address=`565 N Clinton Drive, Milwaukee, WI` 
+    &amp;prefix=`2.`
+]]
 </code></pre>
 
 <p>Then somewhere on your page you would display the information:</p>

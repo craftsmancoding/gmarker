@@ -65,6 +65,35 @@
             
             
             
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../Tutorial-Map">Simple Map</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Marker">Single Marker</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Markers">Multiple Markers</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Infowindow">Info Windows</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Styles">Map Styles</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
                 <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Snippets <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -74,7 +103,7 @@
                         </li>
                     
                         <li >
-                            <a href="../Glocation-Snippet">Glocation</a>
+                            <a href="../Geocoding-Snippet">Glocation</a>
                         </li>
                     
                     </ul>
@@ -99,12 +128,12 @@
             <ul class="nav navbar-nav navbar-right">
                 
                 <li >
-                    <a rel="next" href="../Getting-Started">
+                    <a rel="next" href="../Tutorial-Styles">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
                 <li >
-                    <a rel="prev" href="../Glocation-Snippet">
+                    <a rel="prev" href="../Geocoding-Snippet">
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -118,40 +147,40 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
+        <li class="main active"><a href="#parameters">Parameters</a></li>
+        
+    
+        <li class="main "><a href="#examples">Examples</a></li>
+        
+    
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<p>The Gmap Snippet lets you easily draw a Google map using flexible address information or latitude and longitude coordinates.</p>
-<p>image::http://maps.googleapis.com/maps/api/staticmap?center=-12.043333,-77.028333&amp;size=610x300&amp;sensor=true&amp;zoom=15[Standard map]</p>
-<p>See this video for a quick overview: http://youtu.be/13gK6jiZ1RI</p>
-<p>== Parameters ==
-<em> </em>&amp;div<em> <em>(string)</em> optional CSS id of the target div.  Default: map.</em> <em>&amp;headTpl</em> <em>(string)</em> optional Chunk name containing the necessary JS and CSS to inject into the page head.  Default: gmapshead.
-<em> </em>&amp;latlng<em> <em>(string)</em> latitude,longitude coordinates (comma-separated). Overrides &amp;address.</em> <em>&amp;address</em> <em>(string)</em> what you might type into a Google map search. Defaults to the <em>gmarker.format_string</em>, which in turn inherits values from the page on which the Snippet appears.
-<em> </em>&amp;type<em> <em>ROADMAP | TERRAIN | SATELLITE</em> the type of map you wish to generate. Default: ROADMAP</em> <em>&amp;height</em> <em>(string)</em> desired map height (specify <code>px</code> or <code>%</code> -- v1 was pixels only).  Defaults to System Setting <em>gmarker.default_height</em>.
-<em> </em>&amp;width<em> <em>(string)</em> desired map width (specify <code>px</code> or <code>%</code> -- v1 was pixels only).  Defaults to System Setting </em>gmarker.default_width<em>.
-</em> <em>&amp;static</em> <em>(boolean)</em> set this to 1 if want your map to be fixed. Default is 0. TODO: NOT YET INTEGRATED
-<em> </em>&amp;zoom* <em>(integer</em>) default is 15.</p>
-<p>== Examples ==</p>
-<p>=== Simplest Example ===</p>
-<p>The "simplest" example requires that you have correctly configured the Extra and its System Settings.</p>
-<p>[[Gmap]]</p>
-<p>This invocation of the Snippet with no parameters is identical to this:</p>
-<p>[[Gmap? &amp;address=<code>[[++gmarker.format_string]]</code> &amp;height=<code>[[++gmarker.default_height]]</code> &amp;width=<code>[[++gmarker.default_width]]</code>]]</p>
-<p>If your <em>gmarker.format_string</em> is set to something like the following:</p>
-<p>[[<em>address]], [[</em>city]], [[*state]]</p>
-<p>Then the Snippet call is equivalent to this:</p>
-<p>[[Gmap? &amp;address=<code>[[*address]], [[*city]], [[*state]]</code> 
- &amp;height=<code>[[++gmarker.default_height]]</code> 
- &amp;width=<code>[[++gmarker.default_width]]</code>]]</p>
-<p>That would mean that the page where you put this Snippet call must have values set for &#91;&#91;<em>address&#93;&#93;, &#91;&#91;</em>city&#93;&#93;, and &#91;&#91;*state&#93;&#93;.  If your page does not have TVs of that name, then the &amp;address parameter will evaluate to nothing and the map won't work!</p>
-<p>=== Manual Execution ===</p>
-<p>To use the Gmaps Snippet with no prior configuration, you must supply enough parameters to generate a map:</p>
-<p>[[Gmap? &amp;lat=<code>-12.043333</code> &amp;lng=<code>-77.028333</code> &amp;height=<code>400</code> &amp;width=<code>800</code>]]</p>
-<p>Or rely on the https://github.com/craftsmancoding/gmarker/wiki/System-Settings[System Settings] defaults to specify the height and width:</p>
-<p>[[Gmap? &amp;lat=<code>-12.043333</code> &amp;lng=<code>-77.028333</code>]]</p>
-<p>Or you can pass an address of your own choosing directly to the Snippet:</p>
-<p>[[Gmap? &amp;address=<code>221 B Baker St. London, England</code>]]</p>
+<p>The Gmap Snippet lets you draw a Google map using flexible address information or latitude and longitude coordinates.</p>
+<p>See this <a href="http://youtu.be/13gK6jiZ1RI">video</a> for a quick overview.</p>
+<h2 id="parameters">Parameters</h2>
+<ul>
+<li><code>$center</code> - Where the map should be centered. This can either be lat,lng coordinates, or an address (what you might type into a Google Maps search).</li>
+<li><code>$headTpl</code> - Name of chunk injected into the page <head> containing the JS call to Google Maps API [default=gmap-example]</li>
+<li><code>$outTpl</code> - Name of chunk containing the map canvas div (correlates with $id) [default=gmap-canvas]</li>
+<li><code>$height</code> - height of the map (specify 'px' or '%'). Defaults to gmarker.default_height System Setting</li>
+<li><code>$width</code> - width of the map (specify 'px' or '%'). Defaults to gmarker.default_width System Setting</li>
+<li><code>$zoom</code> - A zoom factor for the map. [default=15]</li>
+<li><code>$id</code> - CSS dom id of the div where the map will be drawn. [default=map-canvas]</li>
+<li><code>$class</code> - the CSS class of the outputted div (identified by &amp;outTpl). Default is empty.</li>
+<li><code>$type</code> - Determines the type of map used (see https://developers.google.com/maps/documentation/javascript/maptypes) [default=ROADMAP] [options=["ROADMAP","SATELLITE","HYBRID","TERRAIN"]]</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<pre><code>[[Gmap? &amp;center=`New York, NY, USA` 
+    &amp;height=`300px` 
+    &amp;width=`610px`
+    &amp;zoom=`12`
+]]
+</code></pre>
+
+<p><img alt="Sample Map: New York City" src="http://maps.googleapis.com/maps/api/staticmap?center=40.712784,-74.005941&amp;size=610x300&amp;sensor=true&amp;zoom=12" /></p>
+<p>For more flexible layouts, you can specify percentages for the height or width.</p>
 </div>
         </div>
 

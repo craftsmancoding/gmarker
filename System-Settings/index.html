@@ -66,6 +66,35 @@
             
             
                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../Tutorial-Map">Simple Map</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Marker">Single Marker</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Markers">Multiple Markers</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Infowindow">Info Windows</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../Tutorial-Styles">Map Styles</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Snippets <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
@@ -74,7 +103,7 @@
                         </li>
                     
                         <li >
-                            <a href="../Glocation-Snippet">Glocation</a>
+                            <a href="../Geocoding-Snippet">Glocation</a>
                         </li>
                     
                     </ul>
@@ -137,6 +166,9 @@
         
     
         <li class="main "><a href="#gmarkerlng_tv">gmarker.lng_tv</a></li>
+        
+    
+        <li class="main "><a href="#gmarkerzoom">gmarker.zoom</a></li>
         
     
         <li class="main "><a href="#gmarkersecure">gmarker.secure</a></li>
@@ -211,6 +243,8 @@ The gmarker.bounds parameter defines the latitude/longitude coordinates of the s
 <p>This is the name of a Template Variable where Gmarker will store longitude information. E.g.</p>
 <p>latitude_tv</p>
 <p>Affects: <a href="../Geocoding-Plugin">Geocoding Plugin</a></p>
+<h2 id="gmarkerzoom">gmarker.zoom</h2>
+<p>Zoom setting.  Default: 8.</p>
 <h2 id="gmarkersecure">gmarker.secure</h2>
 <p>The default here is "Yes": the Google Maps API will be accessed using an HTTPS connection.</p>
 <p>If secure is "No", the standard HTTP URLs are used:</p>
