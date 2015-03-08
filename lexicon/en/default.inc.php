@@ -98,8 +98,8 @@ $_lang['setting_gmarker.lat_tv_desc'] = 'The name of the Template Variable where
 $_lang['setting_gmarker.lng_tv'] = 'Longitude TV';
 $_lang['setting_gmarker.lng_tv_desc'] = 'The name of the Template Variable where longitude information will be automatically stored. All templates listed in the gmaps.templates Setting should have this TV assigned to them.';
 
-$_lang['setting_gmarker.pin_img_tv'] = 'Pin Image TV';
-$_lang['setting_gmarker.pin_img_desc'] = 'Optionally, you can use a custom image for the pin drawn on the map.  Specify the TV name here.';
+$_lang['setting_gmarker.zoom'] = 'Zoom';
+$_lang['setting_gmarker.zoom_desc'] = 'Zoom setting. Default: 8.';
 
 $_lang['setting_gmarker.secure'] = 'Geocoding Secure';
 $_lang['setting_gmarker.secure_desc'] = "This controls the protocol used when accessing the Google Geocoding API.  No = HTTP, Yes = HTTPS. HTTPS is recommended for applications that include sensitive user data, such as a user's location, in requests.";
@@ -147,4 +147,11 @@ $_lang['gmarker.formatting_string_unknown_fields'] = 'References unknown fields.
 $_lang['gmarker.style_invalid'] = 'Invalid style data.';
 
 $_lang['raw_json_response'] = 'Raw JSON Response';
+
+// TVs
+$_lang['latitude'] = 'Latitude';
+$_lang['longitude'] = 'Longitude';
+$_lang['latlng_desc'] = 'Populated automatically by the Geocoding plugin. Delete these values to force another lookup of this address.';
+
+
 /*EOF*/

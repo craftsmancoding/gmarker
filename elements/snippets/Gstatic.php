@@ -1,7 +1,7 @@
 <?php
 /**
  * @name Gstatic
- * @description Draws a Google Map of the area indicated by &address or &latlng.
+ * @description Display a static map image of the area indicated by &address or &latlng.
  *
  * @no_import TODO
  *

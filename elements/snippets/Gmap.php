@@ -100,7 +100,7 @@ $props['width'] = $modx->getOption('width', $scriptProperties, $modx->getOption(
 $props['style'] = $modx->getOption('style', $scriptProperties, $modx->getOption('gmarker.style'));
 $props['id'] = $modx->getOption('id', $scriptProperties, 'map-canvas');
 $props['class'] = $modx->getOption('class', $scriptProperties);
-$props['zoom'] = (int) $modx->getOption('zoom', $scriptProperties, 8);
+$props['zoom'] = (int) $modx->getOption('zoom', $scriptProperties, $modx->getOption('gmarker.zoom'));
 $props['type'] = $modx->getOption('type', $scriptProperties, 'ROADMAP');
 
 if (empty($props['style'])) {

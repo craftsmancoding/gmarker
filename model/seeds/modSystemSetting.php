@@ -51,14 +51,14 @@ return array(
     ),
     array(
         'key'  		=>     'gmarker.lat_tv',
-        'value'		=>     '',
+        'value'		=>     'lat',
         'xtype'		=>     'textfield',
         'namespace' =>     'gmarker',
         'area' 		=>     'gmarker:default'
     ),
     array(
         'key'  		=>     'gmarker.lng_tv',
-        'value'		=>     '',
+        'value'		=>     'lng',
         'xtype'		=>     'textfield',
         'namespace' =>     'gmarker',
         'area' 		=>     'gmarker:default'

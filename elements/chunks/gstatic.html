@@ -1,0 +1,11 @@
+<!--
+@name gstatic
+@description Simple image output for displaying a static map
+
+@param string $id - CSS id of div containing the map (Set by the Gmap Snippet)
+@param string $lat - latitude coordinate. (Set by the Gmap Snippet)
+@param string $lng - longitude coordinate. (Set by the Gmap Snippet)
+@param string markers_src - URL of page generating JSON data with location and title info for our markers.
+-->
+<img width="[[+width]]" height="[[+height]]" src="https://www.google.com/maps/static/v1/place?q=[[+center]]&key=[[++gmarker.apikey]]" alt=""/>
+TODO
