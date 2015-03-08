@@ -59,7 +59,9 @@ The components that can be filtered include:
 
 For example, to restrict Geocoding to results within New Zealand, you might do something like this:
 
- country:NZL
+````
+country:NZL
+````
 
 [More info...](https://developers.google.com/maps/documentation/geocoding/#ComponentFiltering)
 

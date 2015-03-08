@@ -1,4 +1,4 @@
-The Glocation Snippet is a geocoding/reverse-geocoding utility script used to lookup latitude/longitude from a given address. This script can be called either as a Snippet or a Hook (e.g. a Formit or Register hook). See https://github.com/craftsmancoding/gmarker/wiki/Glocation-Hook[Glocation Hook] for how to use this as a hook.
+The Geocoding Snippet is a geocoding/reverse-geocoding utility script used to lookup latitude/longitude from a given address or vice-versa. This script can be called either as a Snippet or a Hook (e.g. a Formit or Register hook). See https://github.com/craftsmancoding/gmarker/wiki/Glocation-Hook[Glocation Hook] for how to use this as a hook.
 
 When used as a Snippet, the lookup will set a series of placeholders (e.g. [[+location.lat]]).  When used as a hook, form fields representing address information will be parsed and 2 additional form parameters will be added for the latitude and the longitude.
 
@@ -22,7 +22,7 @@ See [https://developers.google.com/maps/documentation/geocoding/](Google's Geoco
 
 ## Placeholders
 
-The Glocation Snippet will set the following placeholders.  Put these placeholders anywhere on your page containing the Snippet call.
+The Geocoding Snippet will set the following placeholders.  Put these placeholders anywhere on your page containing the Snippet call.
 
 * *[[+formatted_address]]* : The nicely formatted address, e.g. "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA"
 * *[[+location.lat]]* : The pinpoint latitude, e.g. "37.42291810"
@@ -42,7 +42,7 @@ The Glocation Snippet will set the following placeholders.  Put these placeholde
 This Snippet should always be called uncached.  If the address has been looked up previously, then the results in the geocoding cache will be used so the Geocoding API will not be queried.
 
 ```
-[[!Glocation? &address=`1600 Amphitheatre Parkway,Mountain View,CA`]]
+[[!Geolocation? &address=`1600 Amphitheatre Parkway,Mountain View,CA`]]
 ```
 
 Then somewhere on your page:
