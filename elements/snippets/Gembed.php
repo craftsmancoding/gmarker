@@ -62,28 +62,6 @@ if (empty($center)) {
     return sprintf('<script type="text/javascript"> alert(%s);</script>',json_encode('[Gmap] '.$modx->lexicon('missing_center')));
 }
 
-// Hit the API only if we need to geocode an address
-if (!$Gmarker->isLatLng($center))
-{
-    $apiParams['address'] = $center;
-    $apiParams['bounds'] = $modx->getOption('bounds', $scriptProperties, $modx->getOption('gmarker.bounds'));
-    $apiParams['components'] = $modx->getOption('components', $scriptProperties, $modx->getOption('gmarker.components'));
-    $apiParams['region'] = $modx->getOption('region', $scriptProperties, $modx->getOption('gmarker.region'));
-    $apiParams['language'] = $modx->getOption('language', $scriptProperties, $modx->getOption('gmarker.language'));
-
-    // Look up the map center -- will pull address coordinates from cache if avail.
-    $json = $Gmarker->lookup($apiParams, $secure);
-
-    // Pull the coordinates out of the response
-    $props['lat'] = number_format($Gmarker->get('location.lat'), 8);
-    $props['lng'] = number_format($Gmarker->get('location.lng'), 8);
-}
-else
-{
-    list($lat, $lng) = explode(',', $center);
-    $props['lat'] = number_format($lat, 8);
-    $props['lng'] = number_format($lng, 8);
-}
 
 // Props used in the headerTpl or outTpl
 
@@ -103,17 +81,17 @@ if (empty($props['style'])) {
 // Make sure we have viable dimensions
 if (strpos($props['height'],'%') === false && strpos($props['height'],'px') === false)
 {
-    $modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmap] '. $modx->lexicon('invalid_height'));
+    $modx->log(xPDO::LOG_LEVEL_ERROR, '[Gembed] '. $modx->lexicon('invalid_height'));
     return sprintf('<script type="text/javascript"> alert(%s);</script>',json_encode('[Gmap] '.$modx->lexicon('invalid_height')));
 }
 if (strpos($props['width'],'%') === false && strpos($props['width'],'px') === false)
 {
-    $modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmap] '. $modx->lexicon('invalid_width'));
+    $modx->log(xPDO::LOG_LEVEL_ERROR, '[Gembed] '. $modx->lexicon('invalid_width'));
     return sprintf('<script type="text/javascript"> alert(%s);</script>',json_encode('[Gmap] '.$modx->lexicon('invalid_width')));
 }
 if (strpos($props['height'],'%') !== false && strpos($props['width'],'%') !== false)
 {
-    $modx->log(xPDO::LOG_LEVEL_ERROR, '[Gmap] '. $modx->lexicon('missing_center'));
+    $modx->log(xPDO::LOG_LEVEL_ERROR, '[Gembed] '. $modx->lexicon('missing_center'));
     return sprintf('<script type="text/javascript"> alert(%s);</script>',json_encode('[Gmap] '.$modx->lexicon('invalid_dimensions')));
 }
 
